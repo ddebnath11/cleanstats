@@ -1013,5 +1013,6 @@ button {
     font-weight: 700;
 }
 
-
-
+#download-btn {
+    margin-bottom: 10px;
+  }

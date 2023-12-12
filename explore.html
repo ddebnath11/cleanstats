@@ -10,33 +10,37 @@
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
     </style>
     <title>CleanStats</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="explore.js"></script>
+    <script src="static/js/main.js"></script>
+    <script src="loaded.js"></script>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
 </head>
 
 <body>
     <div class="container">
+        <div class="loading-screen" id="loadingScreen">
+            <div class="spinner"></div>
+            
+            </div>
         <nav id="navbar">
             <ul>
-                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
-                <li><a href="home"> HOME</a></li>
-                <li class="active"><a href="data">EXPLORE</a></li>
+                <li style="font-weight: 100;"><a href="home.html">C L E A N S T A T S</a></li>
+                <li ><a href="home.html"> HOME</a></li>
+                <li class="active"><a href="explore.html">EXPLORE</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">CHARTS</a>
                     <div class="dropdown-content">
-                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
-                        <a href="pie">PIE CHART <i class="fi fi-ss-chart-pie-alt"></i></a>
-                        <a href="bar">BAR GRAPH <i class="fi fi-ss-stats"></i></a>
+                        <a href="line.html">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie.html">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar.html">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
                         <!-- Add more chart types as needed -->
                     </div>
                 </li>
-                <li><a href="maps">MAPS</a></li>
-                <li><a href="live">LIVE</a></li>
-                <li><a href="about">ABOUT</a></li>
+                <li><a href="maps.html">MAPS</a></li>
+                <li><a href="live.html">LIVE</a></li>
+                <li><a href="about.html">ABOUT</a></li>
             </ul>
         </nav>
         <div class="content" id="content">
@@ -72,16 +76,10 @@
                     fdprocessedid="00wbidm" style="font-weight: 700;">
             </div>
 
-            <div class="allchart-container">
-                {% for chart in charts %}
-                <div class="achart">
-                    <h1>{{ chart.title }}</h1>
-                    <p>{{ chart.cat }}</p>
-                    <canvas id="{{ chart.id }}" width="400" height="400"></canvas>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+            <div id="dynamicChartContainer" class="allchart-container">
+                <button id="download-btn" onclick="downloadCurrentChart()">Download Current Chart</button>
+              </div>
+
     
         
 
@@ -100,7 +98,7 @@ function getRandomColor() {
 function createChart(canvasId, data) {
   const ctx = document.getElementById(canvasId).getContext('2d');
   return new Chart(ctx, {
-      type: 'line',
+      type: 'line', 
       data: data,
       options: {
           responsive: false, // Adjust as needed
@@ -194,7 +192,39 @@ function createChart(canvasId, data) {
 
 
 
-
+    <script>
+        const dynamicChartContainer = document.getElementById('dynamicChartContainer');
+    
+        const charts = [
+            { title: 'Most Populated Countries', cat: 'Demographics', id: 'worldPop' },
+            { title: 'Music Evolution', cat: 'Entertainment', id: 'musicGenreChart' },
+            { title: 'Social Media Trends', cat: 'Internet', id: 'smlastmonth' }
+            // Add more charts as needed
+        ];
+    
+        charts.forEach(chart => {
+            const chartContainer = document.createElement('div');
+            chartContainer.className = 'achart';
+    
+            const titleElement = document.createElement('h1');
+            titleElement.textContent = chart.title;
+    
+            const catElement = document.createElement('p');
+            catElement.textContent = chart.cat;
+    
+            const canvasElement = document.createElement('canvas');
+            canvasElement.id = chart.id;
+            canvasElement.width = 400;
+            canvasElement.height = 400;
+    
+            chartContainer.appendChild(titleElement);
+            chartContainer.appendChild(catElement);
+            chartContainer.appendChild(canvasElement);
+    
+            dynamicChartContainer.appendChild(chartContainer);
+        });
+    </script>
+    
 
 
 
@@ -202,166 +232,91 @@ function createChart(canvasId, data) {
 
 
     <script>
-        
+        function createLineChart(labels, datasets) {
+            return {
+                labels: labels,
+                datasets: datasets.map(dataset => ({
+                    label: dataset.label,
+                    data: dataset.data,
+                    borderColor: getRandomColor(),
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                })),
+                elements: {
+                    line: {
+                        tension: 0.4,
+                    },
+                },
+            };
+        }
+    
         const linechartData = {
-          musicGenreChart: {
-            labels: ['1970s', '1980s', '1990s', '2000s', '2010s'],
-            datasets: [
-                {
-                    label: 'Rock',
-                    data: [500, 600, 400, 300, 200],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Pop',
-                    data: [200, 300, 500, 700, 600],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Hip Hop',
-                    data: [100, 200, 400, 800, 1000],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Country',
-                    data: [50, 100, 150, 200, 250],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Electronic',
-                    data: [300, 400, 300, 200, 100],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'R&B',
-                    data: [120, 150, 180, 200, 250],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                // Add more genres and their data as needed
-            ],
-            elements: {
-            line: {
-                tension: 0.4,
-            },
-        },
-        },
-        
-        worldPop: {
-            labels: ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
-
-        
-            datasets: [
-                {
-                    label: 'India',
-                    data: [1117415123, 1136264583, 1154638713, 1172373788, 1189691809, 1206734806, 1223640160, 1240613620, 1257621191, 1274487215, 1291132063, 1307246509, 1322866505, 1338636340, 1354195680, 1369003306, 1383112050, 1396387127, 1407563842, 1417173173, 1428627663],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'China',
-                    data: [1288873367, 1296816711, 1348887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1425893465, 1425887337, 1425671352],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'USA',
-                    data: [291109820, 293947885, 296842670, 299753098, 302743399, 305694910, 308512035, 311182845, 313876608, 316651321, 319375166, 322033964, 324607776, 327210198, 329791231, 332140037, 334319671, 335942003, 336997624, 338289857, 339996563],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Indonesia',
-                    data: [223080121, 225938595, 228805144, 231797427, 234858289, 237936543, 240981299, 244016173, 247099697, 250222695, 253275918, 256229761, 259091970, 261850182, 264498852, 267066843, 269582878, 271857970, 273753191, 275501339, 277534122],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                
-        
-            ],
-            elements: {
-            line: {
-                tension: 0.4,
-            },
-        },
-        },
-        smlastmonth : {
-            labels: [
-                '2023-11-11', '2023-11-12', '2023-11-13', '2023-11-14', '2023-11-15',
-                '2023-11-16', '2023-11-17', '2023-11-18', '2023-11-19', '2023-11-20',
-                '2023-11-21', '2023-11-22', '2023-11-23', '2023-11-24', '2023-11-25',
-                '2023-11-26', '2023-11-27', '2023-11-28', '2023-11-29', '2023-11-30',
-                '2023-12-01', '2023-12-02', '2023-12-03', '2023-12-04', '2023-12-05',
-                '2023-12-06', '2023-12-07'
-            ],
-            datasets: [
-                {
-                    label: 'Instagram',
-                    data: [66, 70, 64, 62, 63, 60, 62, 66, 63, 60, 59, 60, 60, 60, 64, 64, 61, 60, 60, 59, 57, 67, 64, 59, 59, 60, 62],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'TikTok',
-                    data: [28, 27, 25, 24, 24, 25, 25, 29, 27, 24, 24, 25, 26, 25, 27, 26, 24, 24, 24, 24, 26, 27, 27, 23, 24, 25, 24],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Facebook',
-                    data: [98, 96, 94, 91, 93, 93, 98, 96, 95, 93, 92, 95, 89, 100, 90, 93, 83, 87, 91, 93, 92, 96, 96, 90, 94, 97, 89],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-                {
-                    label: 'Twitter',
-                    data: [32, 31, 29, 29, 28, 29, 29, 32, 32, 29, 28, 29, 28, 28, 30, 30, 28, 28, 29, 29, 29, 32, 32, 28, 28, 26, 28],
-                    borderColor: getRandomColor(),
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4,
-                },
-            ],
-        },
-        
-        
-        
-        
-        
+            musicGenreChart: createLineChart(
+                ['1970s', '1980s', '1990s', '2000s', '2010s'],
+                [
+                    { label: 'Rock', data: [500, 600, 400, 300, 200] },
+                    { label: 'Pop', data: [200, 300, 500, 700, 600] },
+                    { label: 'Hip Hop', data: [100, 200, 400, 800, 1000] },
+                    { label: 'Country', data: [50, 100, 150, 200, 250] },
+                    { label: 'Electronic', data: [300, 400, 300, 200, 100] },
+                    { label: 'R&B', data: [120, 150, 180, 200, 250] }
+                    // Add more genres and their data as needed
+                ]
+            ),
+    
+            worldPop: createLineChart(
+                ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                [
+                    { label: 'India', data:  [1117415123, 1136264583, 1154638713, 1172373788, 1189691809, 1206734806, 1223640160, 1240613620, 1257621191, 1274487215, 1291132063, 1307246509, 1322866505, 1338636340, 1354195680, 1369003306, 1383112050, 1396387127, 1407563842, 1417173173, 1428627663] },
+                    { label: 'China', data:  [1288873367, 1296816711, 1348887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1425893465, 1425887337, 1425671352] },
+                    { label: 'USA', data:  [291109820, 293947885, 296842670, 299753098, 302743399, 305694910, 308512035, 311182845, 313876608, 316651321, 319375166, 322033964, 324607776, 327210198, 329791231, 332140037, 334319671, 335942003, 336997624, 338289857, 339996563] },
+                    { label: 'Indonesia', data:  [223080121, 225938595, 228805144, 231797427, 234858289, 237936543, 240981299, 244016173, 247099697, 250222695, 253275918, 256229761, 259091970, 261850182, 264498852, 267066843, 269582878, 271857970, 273753191, 275501339, 277534122] }
+                ]
+            ),
+    
+            smlastmonth: createLineChart(
+                /*y axis*/ [
+                    '2023-11-11', '2023-11-12', '2023-11-13', '2023-11-14', '2023-11-15',
+                    '2023-11-16', '2023-11-17', '2023-11-18', '2023-11-19', '2023-11-20',
+                    '2023-11-21', '2023-11-22', '2023-11-23', '2023-11-24', '2023-11-25',
+                    '2023-11-26', '2023-11-27', '2023-11-28', '2023-11-29', '2023-11-30',
+                    '2023-12-01', '2023-12-02', '2023-12-03', '2023-12-04', '2023-12-05',
+                    '2023-12-06', '2023-12-07'
+                ],
+                /*x axis*/[
+                    { label: 'Instagram', data:  [66, 70, 64, 62, 63, 60, 62, 66, 63, 60, 59, 60, 60, 60, 64, 64, 61, 60, 60, 59, 57, 67, 64, 59, 59, 60, 62], },
+                    { label: 'TikTok', data: [28, 27, 25, 24, 24, 25, 25, 29, 27, 24, 24, 25, 26, 25, 27, 26, 24, 24, 24, 24, 26, 27, 27, 23, 24, 25, 24], },
+                    { label: 'Facebook', data: [98, 96, 94, 91, 93, 93, 98, 96, 95, 93, 92, 95, 89, 100, 90, 93, 83, 87, 91, 93, 92, 96, 96, 90, 94, 97, 89],},
+                    { label: 'Twitter', data:  [32, 31, 29, 29, 28, 29, 29, 32, 32, 29, 28, 29, 28, 28, 30, 30, 28, 28, 29, 29, 29, 32, 32, 28, 28, 26, 28], }
+                ]
+            ),
         };
+    </script>
+    
         
             </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 </body>
 
 </html>
