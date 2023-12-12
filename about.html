@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>CleanStats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+
+    <div class="container">
+
+
+
+
+      <nav id="navbar">
+        <ul>
+            <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+            <li><a href="home"> HOME</a></li>
+            <li><a href="data">EXPLORE</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">CHARTS</a>
+                <div class="dropdown-content">
+                    <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                    <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                    <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                    <!-- Add more chart types as needed -->
+                </div>
+            </li>
+            <li><a href="maps">MAPS</a></li>
+            <li><a href="live">LIVE</a></li>
+            <li  class="active"><a href="about">ABOUT</a></li>
+        </ul>
+    </nav>
+         <div class="content" id="content">
+            <div class="fab" onclick="window.location.href='/'">Back to site</div>
+            
+
+         
+          <h2>Data should <br>be <span id="role">data</span>●</h2>
+
+          <script>
+
+
+
+            const roles = ['beautiful','accessible', 'useful', 'sleek', 'uncluttered']; // Define the roles
+
+let index = 0;
+let letterIndex = 0;
+let direction = 'forward';
+let interval;
+
+function updateRole() {
+  const roleSpan = document.getElementById('role');
+  const currentRole = roles[index];
+  
+  if (direction === 'forward') {
+    roleSpan.textContent = currentRole.substring(0, letterIndex);
+    letterIndex++;
+
+    if (letterIndex > currentRole.length) {
+      direction = 'backward';
+      setTimeout(() => {
+        clearInterval(interval);
+        interval = setInterval(updateRole, 100); // Change text every 1 second
+      }, 2000); // Wait for 2 seconds before starting the backward animation
+    }
+  } else {
+    roleSpan.textContent = currentRole.substring(0, letterIndex);
+    letterIndex--;
+
+    if (letterIndex === 0) {
+      direction = 'forward';
+      index = (index + 1) % roles.length; // Move to the next role
+    }
+  }
+}
+
+interval = setInterval(updateRole, 100); // Typing speed
+</script>
+
+<p>Data runs our world. Nearly every field of study, research, economics and science requires the analysis of data. It's a crucial part of all of our lives.</p>
+<p>This website aims to provide useful data visualizations in a minimalistic and concise way. Cut the clutter and get the information you need. Explore and analyze beautiful charts, graphs, numbers and maps like never before. You can also make your own visualizations effortlessly with just a few clicks.</p>
+

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>CleanStats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+
+    <div class="container">
+
+
+
+
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+                <li class="active"><a href="home"> HOME</a></li>
+                <li><a href="data">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="maps">MAPS</a></li>
+                <li><a href="live">LIVE</a></li>
+                <li><a href="about">ABOUT</a></li>
+            </ul>
+        </nav>
+         <div class="content" id="content">
+            <div class="fab" onclick="window.location.href='create'">
+                + Create A Chart
+               
+            </div>
+
+          
+            
+            
+
+          
+          <h2>Exploring the beauty<br>of <span id="role">data</span>●</h2>
+
+          <canvas id="myChart" width="1360px" height="350px"></canvas>
+
+
+
+  <script>
+    function getRandomData() {
+        // Generate an array of 5 random numbers between 1 and 50
+        return Array.from({ length: 5 }, () => Math.floor(Math.random() * 50) + 1);
+    }
+
+    function updateChart(chart, data) {
+        chart.data.datasets[0].data = data;
+        chart.update();
+    }
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: Array.from({ length: 5 }, (_, i) => ''),
+                datasets: [{
+                    data: [10, 20, 15, 25, 18],
+                    borderColor: '#f5f5d3',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#f5f5d3',
+                    pointRadius: 6,
+                    fill: false,
+                }],
+            },
+            options: {
+                responsive: false, // Disable responsiveness
+                maintainAspectRatio: false, // Disable aspect ratio
+                scales: {
+                    x: {
+                        display: false, // Hide x-axis
+                    },
+                    y: {
+                        display: false, // Hide y-axis
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false, // Hide legend
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.4, // Adjust the tension for the curve
+                    }
+                }
+            },
+        });
+
+    // Update the chart every 4 seconds
+    setInterval(() => {
+        updateChart(myChart, getRandomData());
+    }, 4000);
+</script>
+
+
+
+<script>
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function createLineChart(canvasId, data) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        const datasets = data.datasets.map(dataset => ({
+            ...dataset,
+            borderColor: getRandomColor(),
+        }));
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                ...data,
+                datasets,
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                elements: {
+                    line: {
+                        tension: 0.4,
+                    },
+                },
+                // other chart options...
+            },
+        });
+    }
+</script>
+
+<p> Elevate your data experience with our minimalist and elegant data visualization platform. Discover a myriad of charts, effortlessly analyze trends, and create customized visualizations. Immerse yourself in the seamless blend of aesthetics and insights, making data exploration an elegant and refined experience with CleanStats.</p>
+<hr class="divider">
+<div class="featured-content" style="text-align: left; margin-top: 35px;">
+    <p style="opacity: 70%; font-size: 20px;">F E A T U R E D </p>
+    <h2 style="font-size: 80px;">Evolution of Music</h2>
+    <p>This line chart illustrates the changing landscape of genres over five decades, revealing the ebb and flow of popularity. From the resounding echoes of Rock in the 1970s to the rhythmic beats of Hip Hop in the 2000s, witness the dynamic shifts in musical preferences.</p>
+
+    <canvas id="musicGenreChart" width="1360" height="650" style="margin-top: 30px;"></canvas>
+
+    <script src="linechart.js" style="margin-top: 20px;"></script>
+    <button onclick="" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more in "music"</button>
+    <button onclick="" style="background-color: #111111; color: #f5f5d3; border: 4px solid #f5f5d3; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more data</button>
+
+    <script>
+        // Call the function to create a line chart
+        const lineChartData = {
+            labels: ['1970s', '1980s', '1990s', '2000s', '2010s'],
+            datasets: [
+                {
+                    label: 'Rock',
+                    data: [500, 600, 400, 300, 200],
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Pop',
+                    data: [200, 300, 500, 700, 600],
+                    borderColor: 'blue',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Hip Hop',
+                    data: [100, 200, 400, 800, 1000],
+                    borderColor: 'green',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Country',
+                    data: [50, 100, 150, 200, 250],
+                    borderColor: 'orange',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'Electronic',
+                    data: [300, 400, 300, 200, 100],
+                    borderColor: 'purple',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                {
+                    label: 'R&B',
+                    data: [120, 150, 180, 200, 250],
+                    borderColor: 'brown',
+                    borderWidth: 2,
+                    fill: false,
+                },
+                // Add more genres and their data as needed
+            ],
+        };
+
+        createLineChart('musicGenreChart', lineChartData);
+    </script>
+</div>
+
+ 
+<hr class="divider">
+<h2>Explore different types of charts and create your own.</h2>
+        <div class="card-container">
+        
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/linegraph.png') }}" alt="Image 1">
+              <div class="card-content">
+                  <h3>Beautiful line graphs.</h3>
+                  <p>LINE GRAPHS</p>
+              </div>
+          </div>
+      
+          
+      
+          
+      
+          <div class="card">
+            <img src="{{ url_for('static', filename='images/pie.png') }}" alt="Image 1">
+              <div class="card-content">
+                  <h3>Have some pie!</h3>
+                  <p>PIE CHARTS</p>
+              </div>
+          </div>
+
+          
+
+    
+
+      
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/bargraph.png') }}" alt="Image 1">
+            <div class="card-content">
+                <h3>Who's taller?</h3>
+                <p>BAR GRAPHS</p>
+            </div>
+        </div>
+    
+      
+
+        </div>
+        <hr class="divider">
+
+
+        <div class="featured-content" style="text-align: left; margin-top: 35px;">
+            <p>Live world population</p>
+            <h2 id="worldPopulation" style="font-size: 150px;"></h2>
+
+            <p>Births since you opened this page:</p>
+            <h2 id="birthCounter" style="font-size: 150px;">0</h2>
+        
+            <script>
+                // Initial world population count
+                let worldPopulation = 8077972111;
+                let birthCounter = 0;
+        
+                // Function to update world population
+                function updateWorldPopulation() {
+                    // Simulate changes (add new births and subtract deaths)
+                    worldPopulation += Math.floor(Math.random() * 100) - 50;
+        
+                    // Update the HTML content
+                    document.getElementById('worldPopulation').textContent = `${worldPopulation}`;
+                }
+        
+                // Update world population every second (for demonstration purposes)
+                setInterval(updateWorldPopulation, 500);
+        
+                // Display the initial population
+                updateWorldPopulation();
+
+
+                function updateBirthCounter() {
+        // Update birth counter
+        birthCounter += 2;
+
+        // Display updated value
+        document.getElementById('birthCounter').textContent = birthCounter.toLocaleString();
+
+        // Repeat the update every half a second
+        setTimeout(updateBirthCounter, 500);
+    }
+
+    // Start updating birth counter
+    updateBirthCounter();
+            </script>
+
+<p>Deaths since you opened this page:</p>
+<h2 id="deathCounter" style="font-size: 150px;">0</h2>
+
+
+
+<script>
+    // Initial value
+    let deathCounter = 0;
+
+    // Function to update death counter
+    function updateDeathCounter() {
+        // Update death counter
+        deathCounter += 1;
+
+        // Display updated value
+        document.getElementById('deathCounter').textContent = deathCounter.toLocaleString();
+
+        // Repeat the update every half a second
+        setTimeout(updateDeathCounter, 500);
+    }
+
+    // Start updating death counter
+    updateDeathCounter();
+</script>
+
+<button onclick="" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more live counters</button>
+
+        
+        </div>
+
+        <!-- Add this where you want the divider to appear -->
+<hr class="divider">
+
+
+
+<!-- Place this code at the end of each HTML page, just before the closing </body> tag -->
+<footer>
+
+
+        <p>C L E A N S T A T S</p>
+            <h3>&copy; 2023 CleanStats. All rights reserved.</h3>
+
+</footer>
+
+
+       
+    
+        
+
+     
+
+     
+      
+          
+
+      
+
+      
+
+
+   
+
+       
+          
+          
+          
+
+        
+
+        
+
+
+
+
+        
+
+          
+            
+        
+
+        
+
+
+
+        
+
+        
+
+        
+        
+
+
+        <script>
+
+
+
+            const roles = ['data','graphs', 'statistics', 'analyses']; // Define the roles
+
+let index = 0;
+let letterIndex = 0;
+let direction = 'forward';
+let interval;
+
+function updateRole() {
+  const roleSpan = document.getElementById('role');
+  const currentRole = roles[index];
+  
+  if (direction === 'forward') {
+    roleSpan.textContent = currentRole.substring(0, letterIndex);
+    letterIndex++;
+
+    if (letterIndex > currentRole.length) {
+      direction = 'backward';
+      setTimeout(() => {
+        clearInterval(interval);
+        interval = setInterval(updateRole, 100); // Change text every 1 second
+      }, 2000); // Wait for 2 seconds before starting the backward animation
+    }
+  } else {
+    roleSpan.textContent = currentRole.substring(0, letterIndex);
+    letterIndex--;
+
+    if (letterIndex === 0) {
+      direction = 'forward';
+      index = (index + 1) % roles.length; // Move to the next role
+    }
+  }
+}
+
+interval = setInterval(updateRole, 100); // Typing speed
+
+
+           
+
+
+
+
+
+            // NAV BAR HIDE
+            let lastScrollTop = 0;
+        
+            document.addEventListener('scroll', handleNavbarScroll);
+        
+            function handleNavbarScroll() {
+                const navbar = document.getElementById('navbar');
+                const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        
+                if (scrollPosition > lastScrollTop) {
+                    navbar.style.top = '-80px'; // Scroll down, hide the navbar
+                } else {
+                    navbar.style.top = '60px'; // Scroll up, show the navbar
+                }
+        
+                lastScrollTop = scrollPosition;
+            }
+
+        </script>
+
+
+        

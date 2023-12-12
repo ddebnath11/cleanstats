@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+    
+    #user-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #user-data-table th, #user-data-table td {
+        border: 1px solid #f5f5d3;
+        padding: 8px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    #user-data-table th {
+        background-color: #111111;
+    }
+
+    #user-data-table td {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:nth-child(even) {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:hover {
+        background-color: rgb(40, 40, 40);
+    }
+
+    #user-data-table th, #user-data-table td[contenteditable="true"] {
+        min-width: 50px; /* Adjust as needed */
+    }
+
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>CleanStats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+</head>
+
+
+    <div class="container">
+
+
+
+
+       
+      <nav id="navbar">
+        <ul>
+            <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+            <li><a href="home"> HOME</a></li>
+            <li><a href="data">EXPLORE</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">CHARTS</a>
+                <div class="dropdown-content">
+                    <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                    <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                    <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                    <!-- Add more chart types as needed -->
+                </div>
+            </li>
+            <li><a href="maps">MAPS</a></li>
+            <li><a href="live">LIVE</a></li>
+            <li><a href="about">ABOUT</a></li>
+        </ul>
+    </nav>
+         <div class="content" id="content">
+            <div class="fab" onclick="scrollToSection('create')">+ Create A Pie Chart</div>
+
+        
+
+
+        <div class="wide-button">
+            <button onclick="scrollToSection('intro')" >Introduction &#9679;</button>
+            <button onclick="scrollToSection('datasets')" >Analyze &#9679;</button>
+            <button onclick="scrollToSection('create')" >Create &#9679;</button>
+            </div>
+          
+            <div id="intro-section">
+                <h2>PIE CHARTS</h2>
+
+                <p>A pie chart is a circular statistical graphic that is divided into slices to represent proportional parts of a whole. Each segment's size corresponds to its percentage share of the total, making it a visual tool for displaying relative proportions and aiding in the comprehension of data distribution.</p>
+                
+                <canvas id="displayChart" width="1360px" height="550px" style="margin-top: 30px;"></canvas>
+
+
+                <script>
+                       function getRandomColors(count) {
+          const colors = [];
+          for (let i = 0; i < count; i++) {
+            colors.push(getRandomColor());
+          }
+          return colors;
+        }
+  
+        function getRandomColor() {
+          const letters = '89ABCDEF';
+          let color = '#';
+          for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 8)];
+          }
+          return color;
+        }
+                    function getRandomData() {
+                      // Generate an array of 5 random numbers that add up to 100
+                      const data = Array.from({ length: 4 }, () => Math.floor(Math.random() * 25) + 1);
+                      const remaining = 100 - data.reduce((acc, curr) => acc + curr, 0);
+                      data.push(remaining);
+                      return data;
+                    }
+                
+                    function updateChart(chart, data) {
+                      chart.data.datasets[0].data = data;
+                      chart.update();
+                    }
+                
+                    const ctx = document.getElementById('displayChart').getContext('2d');
+                    const displayChart = new Chart(ctx, {
+                      type: 'pie',
+                      data: {
+                        labels: Array.from({ length: 5 }, (_, i) => ''),
+                        datasets: [{
+                          data: getRandomData(),
+                          borderColor: '#111111',
+                          borderWidth: 2,
+                          backgroundColor: ['#f5f5d3', '#d2d2a0', '#b0af77', '#87875f', '#56563d'],
+
+                        }],
+                      },
+                      options: {
+                        responsive: false,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: {
+                            display: false,
+                          }
+                        },
+                      },
+                    });
+                
+                    // Update the chart every 4 seconds
+                    setInterval(() => {
+                      updateChart(displayChart, getRandomData());
+                    }, 4000);
+                  </script>
+
+<h2>Examples</h2>
+<p>Here are some great examples of how pie charts should be used.</p>
+<div class="dropdown" onclick="toggleDescription(this)">
+    <h1 class="dropdown-heading">Relative portions or fractions &#9679;</h1>
+    <p>Represent fractions or a part of a whole.</p>
+    <div class="dropdown-description">
+      <p>
+        Pie charts are suitable for illustrating the proportional distribution of a whole into its individual parts. They are commonly used to represent categorical data where the emphasis is on showcasing the relative proportions of different categories, as exemplified below.
+      </p>
+      <canvas id="exChart" width="1360" height="550" style="margin-top: 20px;"></canvas>
+  
+      <script>
+        // Sample data
+        const data = {
+          labels: ['A part', 'Whole'],
+          datasets: [{
+            data: [20, 80], // Adjust these values according to your data
+            backgroundColor: getRandomColors(2), // Customize the colors
+            borderWidth: 1,
+            borderColor: '#111111',
+          }],
+        };
+  
+        const exctx = document.getElementById('exChart').getContext('2d');
+        const exChart = new Chart(exctx, {
+          type: 'pie',
+          data: data,
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+          },
+        });
+      </script>
+    </div>
+  </div>
+  
+  <div class="dropdown" onclick="toggleDescription(this)">
+    <h1 class="dropdown-heading">Visualizing market share &#9679;</h1>
+    <p>Bigger the sector, larger the share.</p>
+    <div class="dropdown-description">
+      <p>
+        Businesses use pie charts to depict the market share of different products or companies within a specific industry.
+      </p>
+      <canvas id="ex2Chart" width="1360" height="550" style="margin-top: 20px;"></canvas>
+  
+      <script>
+        // Sample data
+        const marketShareData = {
+          labels: ['Tech Corp', 'Global Solutions', 'Innovate Co.', 'XYZ Industries', 'Others'],
+          datasets: [{
+            data: [30, 25, 20, 15, 10], // Adjust these values according to your market share data
+            backgroundColor: getRandomColors(5), // Customize the colors
+            borderWidth: 1,
+            borderColor: '#111111',
+          }],
+        };
+  
+        const ex2ctx = document.getElementById('ex2Chart').getContext('2d');
+        const ex2Chart = new Chart(ex2ctx, {
+            type: 'pie',
+  data: marketShareData,
+  options: {
+    responsive: false,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          fontColor: 'white', // Change the color to your desired value
+        },
+      },
+    },
+  },
+});
+</script>
+  
+  <div class="dropdown" onclick="toggleDescription(this)">
+    <h1 class="dropdown-heading">Visualizing Budget Allocation &#9679;</h1>
+    <p>See how the budget is distributed across different expense categories.</p>
+    <div class="dropdown-description">
+      <p>
+        Pie charts are effective for illustrating how a budget is allocated among different expense categories, providing a clear visual representation of spending proportions.
+      </p>
+      <canvas id="budgetChart" width="1360" height="550" style="margin-top: 20px;"></canvas>
+  
+      <script>
+        // Sample data for budget allocation
+        const budgetData = {
+          labels: ['Housing', 'Transportation', 'Food', 'Entertainment', 'Other'],
+          datasets: [{
+            data: [30, 20, 15, 10, 25], // Adjust these values according to your budget data
+            backgroundColor: getRandomColors(5), // Customize the colors
+            borderWidth: 1,
+            borderColor: '#111111',
+          }],
+        };
+  
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        const budgetChart = new Chart(budgetCtx, {
+          type: 'pie',
+          data: budgetData,
+          options: {
+            responsive: false,
+            maintainAspectRatio: false,
+          },
+        });
+  
+     
+      </script>
+    </div>
+  </div>
+
+  <div id="create-section">
+    <h2>Create your own pie chart.</h2>
+    <p>Create your own minimalistic yet insightful pie chart! Get started with changing the values in the table and generate a beautiful pie.</p>
+
+    <table id="user-data-table" style="margin-bottom: 35px;">
+        <!-- Header Row -->
+        <tr class="headerc" style="color: #f5f5d3; font-weight: 800;">
+            <th contenteditable="true">Labels</th>
+            <th contenteditable="true">Values</th>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Actors</td>
+            <td contenteditable="true">20</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Crew</td>
+            <td contenteditable="true">30</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Production</td>
+            <td contenteditable="true">50</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+        </tr>
+    </table>
+
+    <div class="pie-buttons">
+    <button onclick="addSector()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;" >+ Add Sector</button>
+
+    <!-- Generate Chart Button -->
+    <button onclick="generateUserPieChart()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;" >Generate Chart</button>
+    <div class="pie-buttons">
+        <div class="userChart" style="display: none;">
+            <canvas id="userChart" width="1360" height="650"></canvas>
+        </div>
+        <div class="postpie" style="align-items: center; justify-content: center; margin: 0; display: none;">
+            <a id="downloadPie" download="userPie.png">
+                <button onclick="downloadUserGraph()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">&#x2193; Download Graph</button>
+            </a>
+            <!-- Change Theme Button -->
+            <button onclick="changeTheme()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">🖌️ Change Theme</button>
+        </div>
+        
+        <script>
+            // Function to show the userChart div and buttons
+            function showUserChart() {
+                document.querySelector('.userChart').style.display = 'block';
+
+            
+            }
+
+            function showPostPie() {
+                document.querySelector('.postpie').style.display = 'block';
+            }
+        </script>
+<script>
+    let seriesCount = 1; // Initial series count
+    let userGraph; // Variable to store the user graph
+
+    // Function to add a new series row to the table
+    function addSector() {
+        const table = document.getElementById('user-data-table');
+
+        if (seriesCount < 8) {
+            seriesCount++;
+
+            // Create a new row
+            const newRow = table.insertRow(-1);
+
+            // Add a new data cell for each existing column
+            for (let i = 0; i < table.rows[0].cells.length; i++) {
+                const newDataCell = newRow.insertCell(-1);
+                newDataCell.setAttribute('contenteditable', 'true');
+                newDataCell.textContent = '';
+            }
+        } else {
+            alert('Maximum series limit reached (8 series).');
+        }
+    }
+
+    
+</script>
+
+<!-- Function to generate pie chart based on user input -->
+<script>
+    // Function to generate pie chart based on user input
+    function generateUserPieChart() {
+        const table = document.getElementById('user-data-table');
+        const labels = Array.from(table.rows).slice(1).map(row => row.cells[0].textContent.trim());
+        const data = Array.from(table.rows).slice(1).map(row => {
+            const cellValue = parseFloat(row.cells[1].textContent.trim());
+            return isNaN(cellValue) ? null : cellValue;
+        });
+
+        // Filter out empty labels and invalid numeric values
+        const validData = labels.reduce((acc, label, index) => {
+            if (label !== '' && data[index] !== null) {
+                acc.labels.push(label);
+                acc.data.push(data[index]);
+            }
+            return acc;
+        }, { labels: [], data: [] });
+
+        if (validData.labels.length > 0) {
+            const existingChartCanvas = document.getElementById('userChart');
+            const existingChart = userGraph;
+
+            if (existingChart) {
+                existingChart.data.labels = validData.labels;
+                existingChart.data.datasets[0].data = validData.data;
+                existingChart.data.datasets[0].backgroundColor = getRandomColors(validData.labels.length);
+
+                existingChart.update(); // Update the chart
+            } else {
+                const userChartCanvas = existingChartCanvas;
+
+                userGraph = new Chart(userChartCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: validData.labels,
+                        datasets: [{
+                            data: validData.data,
+                            backgroundColor: getRandomColors(validData.labels.length),
+                            borderColor: '#111111',
+                            borderWidth: 2,
+                        }],
+                    },
+                    options: {
+                        responsive: false,
+                        maintainAspectRatio: false,
+                    },
+                });
+            }
+
+            showUserChart();
+            showPostPie();
+        } // <-- Add this closing brace
+    }
+
+    // Function to get an array of random colors for pie chart
+    function getRandomColors(count) {
+        const colors = [];
+        for (let i = 0; i < count; i++) {
+            colors.push(getRandomColor());
+        }
+        return colors;
+    }
+</script>
+
+<script>
+    // Function to change the theme (update graph colors)
+    function changeTheme() {
+        const existingChart = userGraph;
+
+        if (existingChart) {
+            const dataLength = existingChart.data.labels.length;
+
+            // Update the dataset colors with new random colors
+            existingChart.data.datasets[0].backgroundColor = getRandomColors(dataLength);
+
+            // Update the chart
+            existingChart.update();
+        } else {
+            alert('Generate a graph before changing the theme.');
+        }
+    }
+</script>
+<script>
+                      
+            
+    function showSection(section) {
+        document.getElementById(`${section}-section`).style.display = 'block';
+    }
+
+    function scrollToSection(section) {
+        const sectionElement = document.getElementById(`${section}-section`);
+        if (sectionElement) {
+            sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
+<script>
+function toggleDescription(element) {
+element.classList.toggle("active");
+}
+
+function showSection(section) {
+document.getElementById(`${section}-section`).style.display = 'block';
+}
+
+function scrollToSection(section) {
+const sectionElement = document.getElementById(`${section}-section`);
+if (sectionElement) {
+sectionElement.scrollIntoView({ behavior: 'smooth' });
+}
+}
+</script>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+    
+    #user-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #user-data-table th, #user-data-table td {
+        border: 1px solid #f5f5d3;
+        padding: 8px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    #user-data-table th {
+        background-color: #111111;
+    }
+
+    #user-data-table td {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:nth-child(even) {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:hover {
+        background-color: rgb(40, 40, 40);
+    }
+
+    #user-data-table th, #user-data-table td[contenteditable="true"] {
+        min-width: 50px; /* Adjust as needed */
+    }
+
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>MathMania</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+</head>
+
+
+    <div class="container">
+
+
+
+
+        
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+                <li><a href="home"> HOME</a></li>
+                <li><a href="data">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="maps">MAPS</a></li>
+                <li><a href="live">LIVE</a></li>
+                <li><a href="about">ABOUT</a></li>
+            </ul>
+        </nav>
+         <div class="content" id="content">
+            <div class="fab" onclick="scrollToSection('create')">+ Create A Bar Chart</div>
+
+        
+
+
+        <div class="wide-button">
+            <button onclick="scrollToSection('intro')" >Introduction &#9679;</button>
+            <button onclick="scrollToSection('datasets')" >Datasets &#9679;</button>
+            <button onclick="scrollToSection('create')" >Create &#9679;</button>
+            </div>
+          
+            <div id="intro-section">
+                <h2>BAR GRAPHS</h2>
+
+                <p>
+                    Bar graphs provide a visual representation of categorical data through rectangular bars of varying lengths. Each bar corresponds to a specific category, and the length of the bar reflects the quantity or value associated with that category. These graphs are effective for comparing and contrasting discrete data points, making it straightforward to discern relative sizes or proportions between different categories. Bar graphs offer a clear and intuitive way to communicate information about individual categories within a dataset, aiding in easy interpretation and analysis.</p>
+
+            </div>
+            
+            <div id="create-section">
+                <!-- Bar Chart Section -->
+    <h2>Create your own bar chart.</h2>
+    <p>Create your own minimalistic yet insightful bar chart! Get started with changing the values in the table and generate a beautiful bar graph.</p>
+
+    <input type="text" id="legendInput" value="Favourite genre of film" class="dest-input">
+    <table id="user-data-table" style="margin-bottom: 35px;">
+        <!-- Header Row -->
+        <tr class="headerc" style="color: #f5f5d3; font-weight: 800;">
+            <th contenteditable="true">Categories</th>
+            <th contenteditable="true">Values</th>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Action</td>
+            <td contenteditable="true">200</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Comedy</td>
+            <td contenteditable="true">300</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Drama</td>
+            <td contenteditable="true">150</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Sci-fi</td>
+            <td contenteditable="true">100</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Thriller</td>
+            <td contenteditable="true">120</td>
+        </tr>
+
+        <tr>
+            <td contenteditable="true">Horror</td>
+            <td contenteditable="true">130</td>
+        </tr>
+
+        <!-- Add more rows as needed -->
+
+    </table>
+
+    <div class="bar-buttons">
+        <button onclick="addCategory()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">+ Add Category</button>
+
+        <!-- Generate Chart Button -->
+        <button onclick="generateUserBarChart()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">Generate Chart</button>
+    </div>
+
+    <div class="bar-chart">
+        <canvas id="userBarChart" width="1360" height="650"></canvas>
+    </div>
+
+    <div class="postbar" style="align-items: center; justify-content: center; margin: 0; display: none;">
+        <a id="downloadBar" download="userBarChart.png">
+            <button onclick="downloadUserBarGraph()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">&#x2193; Download Graph</button>
+        </a>
+        <!-- Change Theme Button -->
+        <button onclick="changeBarTheme()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">🖌️ Change Theme</button>
+    </div>
+</div>
+
+<!-- Function to add a new category row to the bar chart table -->
+<script>
+    let categoryCount = 6; // Initial category count
+    let userBarGraph;
+
+    function addCategory() {
+        const table = document.getElementById('user-data-table');
+
+        if (categoryCount < 20) {
+            categoryCount++;
+
+            // Create a new row
+            const newRow = table.insertRow(-1);
+
+            // Add a new data cell for each existing column
+            for (let i = 0; i < table.rows[0].cells.length; i++) {
+                const newDataCell = newRow.insertCell(-1);
+                newDataCell.setAttribute('contenteditable', 'true');
+                newDataCell.textContent = '';
+            }
+        } else {
+            alert('Maximum category limit reached (8 categories).');
+        }
+    }
+</script>
+
+<!-- Function to generate bar chart based on user input -->
+
+   <script>
+          function getRandomLightColor() {
+    // Generate random values for red, green, and blue components
+    const r = Math.floor(Math.random() * 156) + 100; // 100 to 255
+    const g = Math.floor(Math.random() * 156) + 100; // 100 to 255
+    const b = Math.floor(Math.random() * 156) + 100; // 100 to 255
+
+    // Convert RGB to hexadecimal and return the color string
+    const color = '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    return color;
+}
+
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+}
+
+function generateUserBarChart() {
+    const table = document.getElementById('user-data-table');
+    const legendInput = document.getElementById('legendInput');
+    const categories = Array.from(table.rows).slice(1).map(row => row.cells[0].textContent.trim());
+    const values = Array.from(table.rows).slice(1).map(row => {
+        const cellValue = parseFloat(row.cells[1].textContent.trim());
+        return isNaN(cellValue) ? null : cellValue;
+    });
+
+    // Filter out empty categories and invalid numeric values
+    const validData = categories.reduce((acc, category, index) => {
+        if (category !== '' && values[index] !== null) {
+            acc.categories.push(category);
+            acc.values.push(values[index]);
+        }
+        return acc;
+    }, { categories: [], values: [] });
+
+    if (validData.categories.length > 0) {
+        const userBarChartCanvas = document.getElementById('userBarChart');
+        const existingBarChart = userBarGraph;
+
+        if (existingBarChart) {
+            // Update legend label if provided, otherwise use a default value
+            existingBarChart.data.datasets[0].label = legendInput.value || 'Default Legend';
+
+            // Update chart data
+            existingBarChart.data.labels = validData.categories;
+            existingBarChart.data.datasets[0].data = validData.values;
+            existingBarChart.data.datasets[0].backgroundColor = getRandomLightColor();
+
+            existingBarChart.update(); // Update the chart
+        } else {
+            userBarGraph = new Chart(userBarChartCanvas, {
+                type: 'bar',
+                data: {
+                    labels: validData.categories,
+                    datasets: [{
+                        label: legendInput.value || 'Default Legend',
+                        data: validData.values,
+                        backgroundColor: getRandomLightColor(),
+                        borderColor: '#111111',
+                        borderWidth: 2,
+                        borderRadius: 60,
+                    }],
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                },
+            });
+        }
+
+
+        showPostBar();
+    }
+}
+
+   
+
+</script>
+
+
+<!-- Function to change the theme (update graph colors) for the bar chart -->
+<script>
+    function showPostBar() {
+    const postBar = document.querySelector('.postbar');
+    postBar.style.display = 'flex';
+}
+
+function downloadUserBarGraph() {
+    const canvas = document.getElementById('userBarChart');
+    
+    if (canvas) {
+        // Convert the canvas to a blob
+        canvas.toBlob((blob) => {
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'userBarChart.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    } else {
+        alert('Generate a graph before downloading.');
+    }
+}
+
+
+
+    function changeBarTheme() {
+        const existingBarChart = userBarGraph;
+
+        if (existingBarChart) {
+            const dataLength = existingBarChart.data.labels.length;
+
+            // Update the dataset colors with new random colors
+            existingBarChart.data.datasets[0].backgroundColor = getRandomLightColor();
+
+            // Update the chart
+            existingBarChart.update();
+        } else {
+            alert('Generate a bar graph before changing the theme.');
+        }
+    }
+
+
+</script>
+
+            </div>
+
+
+            <script>
+                      
+            
+                function showSection(section) {
+                    document.getElementById(`${section}-section`).style.display = 'block';
+                }
+    
+                function scrollToSection(section) {
+                    const sectionElement = document.getElementById(`${section}-section`);
+                    if (sectionElement) {
+                        sectionElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            </script>
+
+<script>
+function toggleDescription(element) {
+element.classList.toggle("active");
+}
+
+function showSection(section) {
+document.getElementById(`${section}-section`).style.display = 'block';
+}
+
+function scrollToSection(section) {
+const sectionElement = document.getElementById(`${section}-section`);
+if (sectionElement) {
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
+}
+}
+</script>

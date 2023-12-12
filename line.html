@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+    
+    #user-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #user-data-table th, #user-data-table td {
+        border: 1px solid #f5f5d3;
+        padding: 8px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    #user-data-table th {
+        background-color: #111111;
+    }
+
+    #user-data-table td {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:nth-child(even) {
+        background-color: #111111;
+    }
+
+    #user-data-table tr:hover {
+        background-color: rgb(40, 40, 40);
+    }
+
+    #user-data-table th, #user-data-table td[contenteditable="true"] {
+        min-width: 50px; /* Adjust as needed */
+    }
+
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>MathMania</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+</head>
+
+
+    <div class="container">
+
+
+
+
+       
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+                <li><a href="home"> HOME</a></li>
+                <li><a href="data">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="maps">MAPS</a></li>
+                <li><a href="live">LIVE</a></li>
+                <li><a href="about">ABOUT</a></li>
+            </ul>
+        </nav>
+         <div class="content" id="content">
+            <div class="fab" onclick="scrollToSection('create')">+ Create A Line Chart</div>
+
+        
+
+
+        <div class="wide-button">
+            <button onclick="scrollToSection('intro')" >Introduction &#9679;</button>
+            <button onclick="scrollToSection('datasets')" >Datasets &#9679;</button>
+            <button onclick="scrollToSection('create')" >Create &#9679;</button>
+            </div>
+          
+            <div id="intro-section">
+                <h2>LINE GRAPHS</h2>
+
+                <p>Line graphs visually represent data points with connected lines, illustrating trends over a continuous dataset. They are useful for showing changes or patterns over time, making it easy to identify fluctuations, trends, and relationships within the data. Line graphs are essential for tracking and analyzing time-dependent data in a clear and concise manner.</p>
+                
+                <canvas id="displayChart" width="1360px" height="350px"></canvas>
+
+
+
+                <script>
+                  function getRandomData() {
+                      // Generate an array of 5 random numbers between 1 and 50
+                      return Array.from({ length: 5 }, () => Math.floor(Math.random() * 50) + 1);
+                  }
+              
+                  function updateChart(chart, data) {
+                      chart.data.datasets[0].data = data;
+                      chart.update();
+                  }
+              
+                  const ctx = document.getElementById('displayChart').getContext('2d');
+                      const displayChart = new Chart(ctx, {
+                          type: 'line',
+                          data: {
+                              labels: Array.from({ length: 5 }, (_, i) => ''),
+                              datasets: [{
+          data: [10, 20, 15, 25, 18],
+          borderColor: '#f5f5d3',
+          borderWidth: 4,
+          pointBackgroundColor: '#f5f5d3',
+          pointRadius: 6,
+          fill: false,
+                              }],
+                          },
+                          options: {
+                              responsive: false, // Disable responsiveness
+                              maintainAspectRatio: false, // Disable aspect ratio
+                              scales: {
+          x: {
+              display: false, // Hide x-axis
+          },
+          y: {
+              display: false, // Hide y-axis
+          }
+                              },
+                              plugins: {
+          legend: {
+              display: false, // Hide legend
+          }
+                              },
+                              elements: {
+          line: {
+              tension: 0.4, // Adjust the tension for the curve
+          }
+                              }
+                          },
+                      });
+              
+                  // Update the chart every 4 seconds
+                  setInterval(() => {
+                      updateChart(displayChart, getRandomData());
+                  }, 4000);
+              </script>
+
+              <h2>Examples</h2>
+              <p>Here are some great examples of how line charts should be used.</p>
+              <div class="dropdown" onclick="toggleDescription(this)">
+                <h1 class="dropdown-heading">Time driven data analysis &#9679;</h1>
+                <p>Data that changes over time.</p>
+                <div class="dropdown-description">
+                <p>Line charts can be used to visualize data that fluctuates or changes over time. They are widely used in stock market analysis, as shown below.</p>
+                <canvas id="exChart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+                <p style="text-align: center;">Google's stock prices over time.</p>
+                <script>
+                    // Fetch historical stock data from Alpha Vantage
+                    const apiKey = 'blocked';
+                    const symbol = 'GOOGL'; // Google's stock symbol
+                
+                    fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbol}&apikey=${apiKey}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Check if 'Monthly Adjusted Time Series' property exists in the API response
+                            const timeSeries = data['Monthly Adjusted Time Series'];
+                            if (!timeSeries) {
+                                console.error('Error fetching stock data: Monthly Adjusted Time Series not found in API response.');
+                                return;
+                            }
+                
+                            // Extract closing prices from the API response
+                            const closingPrices = Object.values(timeSeries).map(entry => parseFloat(entry['5. adjusted close']));
+                
+                            // Create the chart with the fetched data
+                            closingPrices.reverse();
+                            const exCtx = document.getElementById('exChart').getContext('2d');
+                            new Chart(exCtx, {
+                                type: 'line',
+                                data: {
+                                    labels: Array.from({ length: closingPrices.length }, (_, i) => (i + 1).toString()),
+                                    datasets: [{
+                                        data: closingPrices,
+                                        borderColor: '#f5f5d3',
+                                        borderWidth: 3,
+                                        pointBackgroundColor: '#f5f5d3',
+                                        pointRadius: 2,
+                                        fill: false,
+                                    }],
+                                },
+                                options: {
+                                    responsive: false,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        x: {
+                                            display: true,
+                                        },
+                                        y: {
+                                            display: true,
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            display: false,
+                                        }
+                                    },
+                                    elements: {
+                                        line: {
+                                            tension: 0.4,
+                                        }
+                                    }
+                                },
+                            });
+                        })
+                        .catch(error => console.error('Error fetching stock data:', error));
+                </script>
+
+<canvas id="ex2Chart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+<p style="text-align: center;">Apple's stock prices over time.</p>
+<script>
+    // Fetch historical stock data from Alpha Vantage
+
+    const symbolApple = 'AAPL'; // Google's stock symbol
+
+    fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=${symbolApple}&apikey=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+        // Extract closing prices from the API response
+        const timeSeries = data['Monthly Adjusted Time Series'];
+        const closingPrices = Object.values(timeSeries).map(entry => parseFloat(entry['5. adjusted close']));
+
+        // Create the chart with the fetched data
+        closingPrices.reverse();
+        const ex2Ctx = document.getElementById('ex2Chart').getContext('2d');
+        new Chart(ex2Ctx, {
+            type: 'line',
+        data: {
+            labels: Array.from({ length: closingPrices.length }, (_, i) => ''),
+            datasets: [{
+                data: closingPrices,
+                borderColor: '#f5f5d3',
+                borderWidth: 3,
+                pointBackgroundColor: '#f5f5d3',
+                pointRadius: 2,
+                fill: false,
+            }],
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    display: true,
+                },
+                y: {
+                    display: true,
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            elements: {
+                line: {
+                    tension: 0.4,
+                }
+            }
+        },
+                            });
+                        })
+                        .catch(error => console.error('Error fetching stock data:', error));
+</script>
+                
+                </div>
+               </div>
+
+               <div class="dropdown" onclick="toggleDescription(this)">
+                <h1 class="dropdown-heading">Trend Analysis and Forecasting &#9679;</h1>
+                <p>Analyzing trends in business and predicting future trends.</p>
+                <div class="dropdown-description">
+                <p>These charts can also be used to present sales data and trends, helping businesses decide what's next.</p>
+                <canvas id="ex3Chart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+                <p style="text-align: center;">Sales of various Apple products.</p>
+                <script>
+                    const sampleSalesData = {
+                        iPhone: [500, 800, 1200, 1000, 1500], // Sample iPhone sales data
+                        MacBook: [200, 400, 600, 800, 1000],  // Sample MacBook sales data
+                        AppleWatch: [100, 150, 200, 250, 300], // Sample Apple Watch sales data
+                        iPad: [300, 500, 700, 900, 1100]        // Sample iPad sales data
+                    };
+                
+                    const productLabels = Array.from({ length: 5 }, (_, i) => ''); // Placeholder labels
+                
+                    const ex3Ctx = document.getElementById('ex3Chart').getContext('2d');
+                    new Chart(ex3Ctx, {
+                        type: 'line',
+                        data: {
+                            labels: productLabels,
+                            datasets: [
+                                {
+                                    label: 'iPhone',
+                                    data: sampleSalesData.iPhone,
+                                    borderColor: '#f5f5d3',
+                                    borderWidth: 3,
+                                    pointBackgroundColor: '#f5f5d3',
+                                    pointRadius: 2,
+                                    fill: false,
+                                },
+                                {
+                                    label: 'MacBook',
+                                    data: sampleSalesData.MacBook,
+                                    borderColor: '#3498db',
+                                    borderWidth: 3,
+                                    pointBackgroundColor: '#3498db',
+                                    pointRadius: 2,
+                                    fill: false,
+                                },
+                                {
+                                    label: 'Apple Watch',
+                                    data: sampleSalesData.AppleWatch,
+                                    borderColor: '#e74c3c',
+                                    borderWidth: 3,
+                                    pointBackgroundColor: '#e74c3c',
+                                    pointRadius: 2,
+                                    fill: false,
+                                },
+                                {
+                                    label: 'iPad',
+                                    data: sampleSalesData.iPad,
+                                    borderColor: '#2ecc71',
+                                    borderWidth: 3,
+                                    pointBackgroundColor: '#2ecc71',
+                                    pointRadius: 2,
+                                    fill: false,
+                                }
+                            ],
+                        },
+                        options: {
+                            responsive: false,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    display: true,
+                                },
+                                y: {
+                                    display: true,
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                }
+                            },
+                            elements: {
+                                line: {
+                                    tension: 0.4,
+                                }
+                            }
+                        },
+                    });
+                </script>
+
+                
+                </div>
+               </div>
+
+               <div class="dropdown" onclick="toggleDescription(this)">
+                <h1 class="dropdown-heading">Scientific Data Visualization &#9679;</h1>
+                <p>Presenting scientific real world data.</p>
+                <div class="dropdown-description">
+                <p>These charts are also used by scientists, researchers and experts to present scientific data from their studies.</p>
+                <canvas id="ex4Chart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+                <p style="text-align: center;"> Environmental CO2 Levels.</p>
+                <script>
+                   const co2Levels = [400, 410, 420, 430, 440]; // Example monthly average CO2 levels in parts per million (ppm)
+
+const scientificLabels = Array.from({ length: co2Levels.length }, (_, i) => `Month ${i + 1}`);
+
+const scientificCtx = document.getElementById('ex4Chart').getContext('2d');
+new Chart(scientificCtx, {
+    type: 'line',
+    data: {
+        labels: scientificLabels,
+        datasets: [
+            {
+                label: 'CO2 Levels (ppm)',
+                data: co2Levels,
+                borderColor: '#f5f5d3',
+                borderWidth: 3,
+                pointBackgroundColor: '#f5f5d3',
+                pointRadius: 2,
+                fill: false,
+            }
+        ],
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                display: true,
+            },
+            y: {
+                display: true,
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top'
+            }
+        },
+        elements: {
+            line: {
+                tension: 0.4,
+            }
+        }
+    },
+});
+
+                </script>
+                </div>
+                </div>
+              
+
+
+
+
+               
+             
+           
+
+                <div id="datasets-section">
+                    <h2>Analyze line graphs</h2>
+                    
+
+                    <h1 class="dropdown-heading">Population &#9679;</h1>
+                    <canvas id="popChart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+                    <p style="text-align: center;">Population of the most populated countries 2003-2023</p>
+                    
+                    <script>
+                        const worldPopData = {
+                            India: [1117415123, 1136264583, 1154638713, 1172373788, 1189691809, 1206734806, 1223640160, 1240613620, 1257621191, 1274487215, 1291132063, 1307246509, 1322866505, 1338636340, 1354195680, 1369003306, 1383112050, 1396387127, 1407563842, 1417173173, 1428627663],
+                            China: [1288873367, 1296816711, 1348887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1425893465, 1425887337, 1425671352
+],
+                    
+                            USA: [291109820, 293947885, 296842670, 299753098, 302743399, 305694910, 308512035, 311182845, 313876608, 316651321, 319375166, 322033964, 324607776, 327210198, 329791231, 332140037, 334319671, 335942003, 336997624, 338289857, 339996563],
+                            Indonesia: [223080121, 225938595, 228805144, 231797427, 234858289, 237936543, 240981299, 244016173, 247099697, 250222695, 253275918, 256229761, 259091970, 261850182, 264498852, 267066843, 269582878, 271857970, 273753191, 275501339, 277534122],
+                            Pakistan: [166876680, 170648620, 174372098, 178069984, 181924521, 185931955, 190123222, 194454498, 198602738, 202205861, 205337562, 208251628, 210969298, 213524840, 216379655, 219731479, 223293280, 227196741, 231402117, 235824862, 240485658]
+                        };
+                    
+                        const popDataCtx = document.getElementById('popChart').getContext('2d');
+                        new Chart(popDataCtx, {
+                            type: 'line',
+                            data: {
+                                labels: Array.from({ length: 22 }, (_, i) => (2003 + i).toString()),
+                                datasets: [
+                                    {
+                                        label: 'India',
+                                        data: worldPopData.India,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 3,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 2,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'China',
+                                        data: worldPopData.China,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 3,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 2,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'USA',
+                                        data: worldPopData.USA,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 3,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 2,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'Indonesia',
+                                        data: worldPopData.Indonesia,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 3,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 2,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: 'Pakistan',
+                                        data: worldPopData.Pakistan,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 3,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 2,
+                                        fill: false,
+                                    }
+                    
+                                ],
+                            },
+                            options: {
+                                responsive: false,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    x: {
+                                        display: true,
+                                    },
+                                    y: {
+                                        display: true,
+                                    }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: true,
+                                        position: 'top'
+                                    }
+                                },
+                                elements: {
+                                    line: {
+                                        tension: 0.4,
+                                    }
+                                }
+                            },
+                        });
+                    
+                        function getRandomColor() {
+                            const letters = '0123456789ABCDEF';
+                            let color = '#';
+                            for (let i = 0; i < 6; i++) {
+                                color += letters[Math.floor(Math.random() * 16)];
+                            }
+                            return color;
+                        }
+                    </script>
+
+<h1 class="dropdown-heading">Gross Domestic Product &#9679;</h1>
+<canvas id="gdpChart" width="1360" height="350" style="margin-top: 20px;"></canvas>
+<p style="text-align: center;">GDP of the most populated countries 2018-2022</p>
+
+<script>
+    const worldGdpData = {
+        USA: [20533057312000, 21380976119000, 21060473613000, 23315080560000, 25462700000000],
+China: [13894907485399, 14279968485748, 14687743556970, 17820459342451, 17963170521080],
+Japan: [5040888093925, 5117993853017, 5048789595589, 5005536736792, 4231141201863],
+Germany: [3974443355020, 3888226035921, 3889668895300, 4259934911822, 4072191736090],
+India: [2702929639862, 2835606242052, 2671595389576, 3150306834280, 3385089881935],
+UK: [2878152147316, 2857057847953, 2704609160088, 3122480345925, 3070667732359],
+France: [2790956878747, 2728870246706, 2639008701648, 2957879759264, 2782905325625],
+Russia: [1657328764646, 1693114993990, 1493075887460, 1836892075548, 2240422438363],
+Canada: [1725297938436, 1743725183673, 1647598402303, 2001486745424, 2139840023674],
+Italy: [2091932426267, 2011302198827, 1897210466668, 2114355756914, 2010431598465]
+
+    };
+
+    const gdpDataCtx = document.getElementById('gdpChart').getContext('2d');
+    const countries = Object.keys(worldGdpData);
+const datasets = [];
+
+countries.forEach(country => {
+    const dataset = {
+        label: country,
+        data: worldGdpData[country],
+        borderColor: getRandomColor(),
+        borderWidth: 3,
+        pointBackgroundColor: getRandomColor(),
+        pointRadius: 2,
+        fill: false,
+    };
+
+    datasets.push(dataset);
+});
+
+
+new Chart(gdpDataCtx, {
+    type: 'line',
+    data: {
+        labels: Array.from({ length: worldGdpData[countries[0]].length }, (_, i) => (2018 + i).toString()),
+        datasets: datasets,
+    },
+    options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                display: true,
+            },
+            y: {
+                display: true,
+            },
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+            },
+        },
+        elements: {
+            line: {
+                tension: 0.4,
+            },
+        },
+    },
+});
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+
+
+                    </div>
+
+                    <div id="create-section">
+                        <h2>Create your own line graph.</h2>
+                        <p>Create your own minimalistic yet insightful line graph! Get started with changing the values in the table and generate a beautiful graph.</p>
+                       
+                        
+                
+
+                       
+
+                        <table id="user-data-table" style="margin-bottom: 35px;">
+                            <!-- Header Row -->
+                            <tr class="headerc" style="color: #f5f5d3; font-weight: 800;">
+                                <th contenteditable="true">Series</th>
+                                <th contenteditable="true">Data1</th>
+                                <th contenteditable="true">Data2</th>
+                                <td contenteditable="true">Data3</td>
+                                <td contenteditable="true">Data4</td>
+                                <td contenteditable="true">Data5</td>
+                                <td contenteditable="true">Data6</td>
+                                <td contenteditable="true">Data7</td>
+                                <td contenteditable="true">Data8</td>
+                                <td contenteditable="true">Data9</td>
+                                <td contenteditable="true">Data10</td>
+                            </tr>
+                            <!-- Sample Rows (Remove them if not needed) -->
+                            <tr>
+                                <td contenteditable="true">Series 1</td>
+                                <td contenteditable="true">10</td>
+                                <td contenteditable="true">20</td>
+                                <td contenteditable="true">40</td>
+                                <td contenteditable="true">50</td>
+                                <td contenteditable="true">44</td>
+                                <td contenteditable="true">33</td>
+                                <td contenteditable="true">78</td>
+                                <td contenteditable="true">56</td>
+                                <td contenteditable="true">43</td>
+                                <td contenteditable="true">24</td>
+                            </tr>
+                            <!-- Repeat this row structure as needed -->
+                            <tr>
+                                <td contenteditable="true">Series 2</td>
+                                <td contenteditable="true">15</td>
+                                <td contenteditable="true">25</td>
+                                <td contenteditable="true">45</td>
+                                <td contenteditable="true">42</td>
+                                <td contenteditable="true">99</td>
+                                <td contenteditable="true">53</td>
+                                <td contenteditable="true">23</td>
+                                <td contenteditable="true">12</td>
+                                <td contenteditable="true">39</td>
+                                <td contenteditable="true">69</td>
+                            </tr>
+                            <!-- Repeat this row structure as needed -->
+                            <tr>
+                                <td contenteditable="true">Series 3</td>
+                                <td contenteditable="true">20</td>
+                                <td contenteditable="true">37</td>
+                                <td contenteditable="true">100</td>
+                                <td contenteditable="true">44</td>
+                                <td contenteditable="true">122</td>
+                                <td contenteditable="true">121</td>
+                                <td contenteditable="true">98</td>
+                                <td contenteditable="true">89</td>
+                                <td contenteditable="true">87</td>
+                                <td contenteditable="true">78</td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+
+                            <tr>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                                <td contenteditable="true"></td>
+                            </tr>
+                        </table>
+        
+                        <!-- Add Series Button -->
+                       
+        
+                        <!-- Generate Chart Button -->
+                        <button onclick="generateUserChart()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;" >Generate Chart</button>
+        
+                        <div class="userChart">
+                            <canvas id="userChart" width="800" height="400"></canvas>
+                            <!-- Download Graph Button -->
+                            <a id="downloadGraph" download="userGraph.png" style="display: none;">
+                                <button onclick="downloadUserGraph()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">&#x2193; Download Graph</button>
+                            </a>
+                        </div>
+                        </div>
+                        
+                        <script>
+                        let seriesCount = 10; // Initial series count
+                        let userGraph; // Variable to store the user graph
+                        
+                        // Function to add a new series column to the table
+                        function addSeries() {
+                            const table = document.getElementById('user-data-table');
+                            const headerRow = table.rows[0];
+                        
+                            if (seriesCount < 20) {
+                                seriesCount++;
+                                const newSeriesName = `Data${seriesCount}`;
+                        
+                                // Add a new header cell for the series
+                                const newHeaderCell = document.createElement('th');
+                                newHeaderCell.setAttribute('contenteditable', 'true');
+                                newHeaderCell.textContent = newSeriesName;
+                                headerRow.appendChild(newHeaderCell);
+                        
+                                // Add a new data cell for each existing row
+                                for (let i = 1; i < table.rows.length; i++) {
+                                    const newDataCell = document.createElement('td');
+                                    newDataCell.setAttribute('contenteditable', 'true');
+                                    newDataCell.textContent = '';
+                                    table.rows[i].appendChild(newDataCell);
+                                }
+                            } else {
+                                alert('Maximum series limit reached (8 series).');
+                            }
+                        }
+                        
+                        // Function to generate chart based on user input
+                        function generateUserChart() {
+                            const table = document.getElementById('user-data-table');
+                            const seriesData = Array.from(table.rows).slice(1)
+                                .map(row => ({
+                                    label: row.cells[0].textContent || '',
+                                    data: Array.from(row.cells).slice(1).map(cell => {
+                                        const cellValue = parseFloat(cell.textContent.trim());
+                                        return isNaN(cellValue) ? null : cellValue;
+                                    }),
+                                }));
+                        
+                            // Filter out empty series and invalid numeric values
+                            const validSeriesData = seriesData.filter(series =>
+                                series.label.trim() !== '' && series.data.some(value => value !== null)
+                            );
+                        
+                            if (validSeriesData.length > 0) {
+                                const existingChartCanvas = document.getElementById('userChart');
+                                const existingChart = userGraph;
+                        
+                                if (existingChart) {
+                                    existingChart.data.labels = Array.from({ length: Math.max(...validSeriesData.map(series => series.data.length)) }, (_, i) => (i + 1).toString());
+                                    existingChart.data.datasets = validSeriesData.map((series, index) => ({
+                                        label: series.label,
+                                        data: series.data,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 2,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 3,
+                                        fill: false,
+                                        spanGaps: true,
+                                    }));
+                        
+                                    existingChart.update(); // Update the chart
+                                } else {
+                                    const userChartCanvas = existingChartCanvas;
+                                    const datasets = validSeriesData.map((series, index) => ({
+                                        label: series.label,
+                                        data: series.data,
+                                        borderColor: getRandomColor(),
+                                        borderWidth: 2,
+                                        pointBackgroundColor: getRandomColor(),
+                                        pointRadius: 3,
+                                        fill: false,
+                                        spanGaps: true,
+                                    }));
+                        
+                                    const allLabels = Array.from({ length: Math.max(...datasets.map(ds => ds.data.length)) }, (_, i) => (i + 1).toString());
+                        
+                                    userGraph = new Chart(userChartCanvas, {
+                                        type: 'line',
+                                        data: {
+                                            labels: allLabels,
+                                            datasets: datasets,
+                                        },
+                                        options: {
+                                            scales: {
+                                                x: {
+                                                    
+                                                    type: 'linear',
+                                                    position: 'bottom',
+                                                    display: false,
+                                                    max: Math.max(...datasets.map(ds => ds.data.length)), // Set max to the total number of data points
+                                                },
+                                                y: {
+                                                    beginAtZero: true,
+                                                    display: true,
+                                                },
+                                            },
+                                            elements: {
+                                                line: {
+                                                    tension: 0.4,
+                                                },
+                                            },
+                                        },
+                                    });
+                                }
+                        
+                                // Show the download button
+                                document.getElementById('downloadGraph').style.display = 'inline';
+                            } else {
+                                alert('No valid data to generate a chart.');
+                            }
+                        }
+                        
+                        // Function to get a random color for chart lines
+                        function getRandomColor() {
+                            const letters = '89ABCDEF'; // Lighter color range
+                            let color = '#';
+                            for (let i = 0; i < 6; i++) {
+                                color += letters[Math.floor(Math.random() * letters.length)];
+                            }
+                            return color;
+                        }
+                        
+                        // Function to download the graph
+                        function downloadUserGraph() {
+                            if (userGraph) {
+                                // Convert the canvas to a blob
+                                userGraph.canvas.toBlob((blob) => {
+                                    // Create a download link
+                                    const link = document.getElementById('downloadGraph');
+                                    link.href = URL.createObjectURL(blob);
+                                });
+                            } else {
+                                alert('Generate a graph before downloading.');
+                            }
+                        }
+            
+                    <!-- Additional script or functions can be added as needed -->
+            </script>
+                    <script>
+                      
+            
+                        function showSection(section) {
+                            document.getElementById(`${section}-section`).style.display = 'block';
+                        }
+            
+                        function scrollToSection(section) {
+                            const sectionElement = document.getElementById(`${section}-section`);
+                            if (sectionElement) {
+                                sectionElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }
+                    </script>
+
+<script>
+    function toggleDescription(element) {
+        element.classList.toggle("active");
+    }
+
+    function showSection(section) {
+        document.getElementById(`${section}-section`).style.display = 'block';
+    }
+
+    function scrollToSection(section) {
+        const sectionElement = document.getElementById(`${section}-section`);
+        if (sectionElement) {
+            sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>

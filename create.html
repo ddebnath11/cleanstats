@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>CleanStats</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+
+    <div class="container">
+
+
+
+
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+                <li class="active"><a href="home"> HOME</a></li>
+                <li><a href="data">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="maps">MAPS</a></li>
+                <li><a href="live">LIVE</a></li>
+                <li><a href="about">ABOUT</a></li>
+            </ul>
+        </nav>
+         <div class="content" id="content">
+            
+
+          
+            
+            
+
+          
+          <h2>Select the type of chart you want to create.</h2>
+
+          <div class="card-container">
+            <div class="card" onclick="scrollToSection('linegraph')">
+                <img src="{{ url_for('static', filename='images/linegraph.png') }}" alt="Image 1">
+                  <div class="card-content">
+
+                      <p>LINE GRAPHS</p>
+                  </div>
+              </div>
+          
+              
+          
+              
+          
+              <div class="card" onclick="scrollToSection('pie')">
+                <img src="{{ url_for('static', filename='images/pie.png') }}" alt="Image 1">
+                  <div class="card-content">
+
+                      <p>PIE CHARTS</p>
+                  </div>
+              </div>
+    
+              
+    
+        
+    
+          
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/bargraph.png') }}" alt="Image 1">
+                <div class="card-content">
+
+                    <p>BAR GRAPHS</p>
+                </div>
+            </div>
+            </div>
+
+            
+    
+            </div>
+
+            <div class="linegraph-section" id="linegraph-section">
+                <h2>Create a line graph.</h2>
+                <p>Create your own minimalistic yet insightful line graph! Get started with changing the values in the table and generate a beautiful graph.</p>
+               
+                
+        
+
+               
+
+                <table id="user-data-table" style="margin-bottom: 35px;">
+                    <!-- Header Row -->
+                    <tr class="headerc" style="color: #f5f5d3; font-weight: 800;">
+                        <th contenteditable="true">Series</th>
+                        <th contenteditable="true">Data1</th>
+                        <th contenteditable="true">Data2</th>
+                        <td contenteditable="true">Data3</td>
+                        <td contenteditable="true">Data4</td>
+                        <td contenteditable="true">Data5</td>
+                        <td contenteditable="true">Data6</td>
+                        <td contenteditable="true">Data7</td>
+                        <td contenteditable="true">Data8</td>
+                        <td contenteditable="true">Data9</td>
+                        <td contenteditable="true">Data10</td>
+                    </tr>
+                    <!-- Sample Rows (Remove them if not needed) -->
+                    <tr>
+                        <td contenteditable="true">Series 1</td>
+                        <td contenteditable="true">10</td>
+                        <td contenteditable="true">20</td>
+                        <td contenteditable="true">40</td>
+                        <td contenteditable="true">50</td>
+                        <td contenteditable="true">44</td>
+                        <td contenteditable="true">33</td>
+                        <td contenteditable="true">78</td>
+                        <td contenteditable="true">56</td>
+                        <td contenteditable="true">43</td>
+                        <td contenteditable="true">24</td>
+                    </tr>
+                    <!-- Repeat this row structure as needed -->
+                    <tr>
+                        <td contenteditable="true">Series 2</td>
+                        <td contenteditable="true">15</td>
+                        <td contenteditable="true">25</td>
+                        <td contenteditable="true">45</td>
+                        <td contenteditable="true">42</td>
+                        <td contenteditable="true">99</td>
+                        <td contenteditable="true">53</td>
+                        <td contenteditable="true">23</td>
+                        <td contenteditable="true">12</td>
+                        <td contenteditable="true">39</td>
+                        <td contenteditable="true">69</td>
+                    </tr>
+                    <!-- Repeat this row structure as needed -->
+                    <tr>
+                        <td contenteditable="true">Series 3</td>
+                        <td contenteditable="true">20</td>
+                        <td contenteditable="true">37</td>
+                        <td contenteditable="true">100</td>
+                        <td contenteditable="true">44</td>
+                        <td contenteditable="true">122</td>
+                        <td contenteditable="true">121</td>
+                        <td contenteditable="true">98</td>
+                        <td contenteditable="true">89</td>
+                        <td contenteditable="true">87</td>
+                        <td contenteditable="true">78</td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </table>
+
+                <!-- Add Series Button -->
+                <button onclick="addSeries()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;" >+ Add Series</button>
+
+                <!-- Generate Chart Button -->
+                <button onclick="generateUserChart()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;" >Generate Chart</button>
+
+                <div class="userChart">
+                    <canvas id="userChart" width="800" height="400"></canvas>
+                    <!-- Download Graph Button -->
+                    <a id="downloadGraph" download="userGraph.png" style="display: none;">
+                        <button onclick="downloadUserGraph()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">Download Graph</button>
+                    </a>
+                </div>
+              
+                
+                <script>
+                let seriesCount = 10; // Initial series count
+                let userGraph; // Variable to store the user graph
+                
+                // Function to add a new series column to the table
+                function addSeries() {
+                    const table = document.getElementById('user-data-table');
+                    const headerRow = table.rows[0];
+                
+                    if (seriesCount < 20) {
+                        seriesCount++;
+                        const newSeriesName = `Data${seriesCount}`;
+                
+                        // Add a new header cell for the series
+                        const newHeaderCell = document.createElement('th');
+                        newHeaderCell.setAttribute('contenteditable', 'true');
+                        newHeaderCell.textContent = newSeriesName;
+                        headerRow.appendChild(newHeaderCell);
+                
+                        // Add a new data cell for each existing row
+                        for (let i = 1; i < table.rows.length; i++) {
+                            const newDataCell = document.createElement('td');
+                            newDataCell.setAttribute('contenteditable', 'true');
+                            newDataCell.textContent = '';
+                            table.rows[i].appendChild(newDataCell);
+                        }
+                    } else {
+                        alert('Maximum series limit reached (8 series).');
+                    }
+                }
+                
+                // Function to generate chart based on user input
+                function generateUserChart() {
+                    const table = document.getElementById('user-data-table');
+                    const seriesData = Array.from(table.rows).slice(1)
+                        .map(row => ({
+                            label: row.cells[0].textContent || '',
+                            data: Array.from(row.cells).slice(1).map(cell => {
+                                const cellValue = parseFloat(cell.textContent.trim());
+                                return isNaN(cellValue) ? null : cellValue;
+                            }),
+                        }));
+                
+                    // Filter out empty series and invalid numeric values
+                    const validSeriesData = seriesData.filter(series =>
+                        series.label.trim() !== '' && series.data.some(value => value !== null)
+                    );
+                
+                    if (validSeriesData.length > 0) {
+                        const existingChartCanvas = document.getElementById('userChart');
+                        const existingChart = userGraph;
+                
+                        if (existingChart) {
+                            existingChart.data.labels = Array.from({ length: Math.max(...validSeriesData.map(series => series.data.length)) }, (_, i) => (i + 1).toString());
+                            existingChart.data.datasets = validSeriesData.map((series, index) => ({
+                                label: series.label,
+                                data: series.data,
+                                borderColor: getRandomColor(),
+                                borderWidth: 2,
+                                pointBackgroundColor: getRandomColor(),
+                                pointRadius: 3,
+                                fill: false,
+                                spanGaps: true,
+                            }));
+                
+                            existingChart.update(); // Update the chart
+                        } else {
+                            const userChartCanvas = existingChartCanvas;
+                            const datasets = validSeriesData.map((series, index) => ({
+                                label: series.label,
+                                data: series.data,
+                                borderColor: getRandomColor(),
+                                borderWidth: 2,
+                                pointBackgroundColor: getRandomColor(),
+                                pointRadius: 3,
+                                fill: false,
+                                spanGaps: true,
+                            }));
+                
+                            const allLabels = Array.from({ length: Math.max(...datasets.map(ds => ds.data.length)) }, (_, i) => (i + 1).toString());
+                
+                            userGraph = new Chart(userChartCanvas, {
+                                type: 'line',
+                                data: {
+                                    labels: allLabels,
+                                    datasets: datasets,
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            
+                                            type: 'linear',
+                                            position: 'bottom',
+                                            display: false,
+                                            max: Math.max(...datasets.map(ds => ds.data.length)), // Set max to the total number of data points
+                                        },
+                                        y: {
+                                            beginAtZero: true,
+                                            display: true,
+                                        },
+                                    },
+                                    elements: {
+                                        line: {
+                                            tension: 0.4,
+                                        },
+                                    },
+                                },
+                            });
+                        }
+                
+                        // Show the download button
+                        document.getElementById('downloadGraph').style.display = 'inline';
+                    } else {
+                        alert('No valid data to generate a chart.');
+                    }
+                }
+                
+                // Function to get a random color for chart lines
+                function getRandomColor() {
+                    const letters = '89ABCDEF'; // Lighter color range
+                    let color = '#';
+                    for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * letters.length)];
+                    }
+                    return color;
+                }
+                
+                // Function to download the graph
+                function downloadUserGraph() {
+                    if (userGraph) {
+                        // Convert the canvas to a blob
+                        userGraph.canvas.toBlob((blob) => {
+                            // Create a download link
+                            const link = document.getElementById('downloadGraph');
+                            link.href = URL.createObjectURL(blob);
+                        });
+                    } else {
+                        alert('Generate a graph before downloading.');
+                    }
+                }
+    
+            <!-- Additional script or functions can be added as needed -->
+    </script>
+    </div>
+
+    <div class="pie-section" id="pie-section">
+        <h2>Create your own pie chart.</h2>
+        <p>Create your own minimalistic yet insightful pie chart! Get started with changing the values in the table and generate a beautiful pie.</p>
+    
+        <table id="user-pie-table" style="margin-bottom: 35px;">
+            <!-- Header Row -->
+            <tr class="headerc" style="color: #f5f5d3; font-weight: 800;">
+                <th contenteditable="true">Labels</th>
+                <th contenteditable="true">Values</th>
+            </tr>
+    
+            <tr>
+                <td contenteditable="true">Actors</td>
+                <td contenteditable="true">20</td>
+            </tr>
+    
+            <tr>
+                <td contenteditable="true">Crew</td>
+                <td contenteditable="true">30</td>
+            </tr>
+    
+            <tr>
+                <td contenteditable="true">Production</td>
+                <td contenteditable="true">50</td>
+            </tr>
+    
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+    
+            <tr>
+                <td contenteditable="true"></td>
+                <td contenteditable="true"></td>
+            </tr>
+        </table>
+    
+        <div class="pie-buttons">
+            <button onclick="addSector()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">+ Add Sector</button>
+    
+            <!-- Generate Chart Button -->
+            <button onclick="generateUserPieChart()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">Generate Chart</button>
+        </div>
+    
+        <div class="userChart" style="display: block;">
+            <canvas id="userPieChart" width="1360" height="650"></canvas>
+        </div>
+    
+        <div class="postpie" style=" display: none;">
+            <a id="downloadPie" download="userPie.png">
+                <button onclick="downloadUserGraph()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">Download Graph</button>
+            </a>
+            <!-- Change Theme Button -->
+            <button onclick="changeTheme()" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px;">Change Theme</button>
+        </div>
+    
+        <script>
+            // Function to show the userChart div and buttons
+            function showUserChart() {
+                document.querySelector('.userChart').style.display = 'block';
+            }
+    
+            function showPostPie() {
+                document.querySelector('.postpie').style.display = 'flex';
+            }
+        </script>
+    
+        <!-- Function to add a new series row to the table -->
+        <script>
+            let cCount = 1; // Initial series count
+            let pieGraph; // Variable to store the user graph
+    
+            function addSector() {
+                const table = document.getElementById('user-pie-table');
+    
+                if (cCount < 8) {
+                    cCount++;
+    
+                    // Create a new row
+                    const newRow = table.insertRow(-1);
+    
+                    // Add a new data cell for each existing column
+                    for (let i = 0; i < table.rows[0].cells.length; i++) {
+                        const newDataCell = newRow.insertCell(-1);
+                        newDataCell.setAttribute('contenteditable', 'true');
+                        newDataCell.textContent = '';
+                    }
+                } else {
+                    alert('Maximum series limit reached (8 series).');
+                }
+            }
+        </script>
+    
+        <!-- Function to generate pie chart based on user input -->
+        <script>
+           function generateUserPieChart() {
+    const table = document.getElementById('user-pie-table');
+    const labels = Array.from(table.rows).slice(1).map(row => row.cells[0].textContent.trim());
+    const data = Array.from(table.rows).slice(1).map(row => {
+        const cellValue = parseFloat(row.cells[1].textContent.trim());
+        return isNaN(cellValue) ? null : cellValue;
+    });
+
+    // Filter out empty labels and invalid numeric values
+    const validData = labels.reduce((acc, label, index) => {
+        if (label !== '' && data[index] !== null) {
+            acc.labels.push(label);
+            acc.data.push(data[index]);
+        }
+        return acc;
+    }, { labels: [], data: [] });
+
+    if (validData.labels.length > 0) {
+        const existingChartCanvas = document.getElementById('userPieChart');
+        const existingChart = pieGraph;
+
+        if (existingChart) {
+            existingChart.data.labels = validData.labels;
+            existingChart.data.datasets[0].data = validData.data;
+            existingChart.data.datasets[0].backgroundColor = getRandomColors(validData.labels.length);
+
+            existingChart.update(); // Update the chart
+        } else {
+            const userChartCanvas = existingChartCanvas;
+
+            pieGraph = new Chart(userChartCanvas, {
+                type: 'pie',
+                data: {
+                    labels: validData.labels,
+                    datasets: [{
+                        data: validData.data,
+                        backgroundColor: getRandomColors(validData.labels.length),
+                        borderColor: '#111111',
+                        borderWidth: 2,
+                    }],
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                },
+            });
+        }
+
+        showUserChart();
+        showPostPie();
+    }
+}
+    
+            // Function to get an array of random colors for pie chart
+            function getRandomColors(count) {
+                const colors = [];
+                for (let i = 0; i < count; i++) {
+                    colors.push(getRandomColor());
+                }
+                return colors;
+            }
+        </script>
+    
+        <script>
+            // Function to change the theme (update graph colors)
+            function changeTheme() {
+                const existingChart = pieGraph;
+    
+                if (existingChart) {
+                    const dataLength = existingChart.data.labels.length;
+    
+                    // Update the dataset colors with new random colors
+                    existingChart.data.datasets[0].backgroundColor = getRandomColors(dataLength);
+    
+                    // Update the chart
+                    existingChart.update();
+                } else {
+                    alert('Generate a graph before changing the theme.');
+                }
+            }
+        </script>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <script>
+              
+    
+           
+
+                
+    
+                function scrollToSection(section) {
+                    const sectionElement = document.getElementById(`${section}-section`);
+                    if (sectionElement) {
+                        sectionElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            </script>
+
+<script>
+function toggleDescription(element) {
+element.classList.toggle("active");
+}
+
+function showSection(section) {
+document.getElementById(`${section}-section`).style.display = 'block';
+}
+
+function scrollToSection(section) {
+const sectionElement = document.getElementById(`${section}-section`);
+if (sectionElement) {
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
+}
+}
+</script>
+            </div>

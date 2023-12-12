@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>CleanStats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+
+    <div class="container">
+
+
+
+
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="/">C L E A N S T A T S</a></li>
+                <li><a href="home"> HOME</a></li>
+                <li><a href="data">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="maps">MAPS</a></li>
+                <li  class="active"><a href="live">LIVE</a></li>
+                <li><a href="about">ABOUT</a></li>
+            </ul>
+        </nav>
+         <div class="content" id="content">
+           
+
+          
+            
+            
+
+          
+
+          <p style="text-align: center; margin-bottom: 40px;">Since you opened this page...</p>
+          <div class="live-data-container">
+            <!-- First row -->
+            <div class="livecounter" style="background-color: 'getRandomColor()'; color: 'getRandomColor()';">
+                <p>World population 🌍</p>
+                <h1 id="worldPopulation">0</h1>
+                
+                <script>
+                    // Initial world population count
+                    let worldPopulation = 8077972111;
+  
+            
+                    // Function to update world population
+                    function updateWorldPopulation() {
+                        // Simulate changes (add new births and subtract deaths)
+                        worldPopulation += Math.floor(Math.random() * 100) - 50;
+            
+                        // Update the HTML content
+                        document.getElementById('worldPopulation').textContent = `${worldPopulation}`;
+                    }
+            
+                    // Update world population every second (for demonstration purposes)
+                    setInterval(updateWorldPopulation, 500);
+            
+                    // Display the initial population
+                    updateWorldPopulation();
+                    </script>
+            </div>
+
+            <div class="livecounter" style="background-color: #111111; color: #f5f5d3;">
+                <p>Babies born 👶</p>
+                <h1 id="birthCounter">0</h1>
+                
+                <script>
+
+                    let birthCounter = 0;
+  
+            
+                    function updateBirthCounter() {
+        // Update birth counter
+        birthCounter += 2;
+
+        // Display updated value
+        document.getElementById('birthCounter').textContent = birthCounter.toLocaleString();
+
+        // Repeat the update every half a second
+        setTimeout(updateBirthCounter, 500);
+    }
+
+    // Start updating birth counter
+    updateBirthCounter();
+            </script>
+            </div>
+
+            <div class="livecounter" style="background-color: #111111; color: #f5f5d3;">
+                <p>Deaths 🪦</p>
+                <h1 id="deathCounter">0</h1>
+                
+                <script>
+                    let deathCounter = 0;
+            
+                    function updateDeathCounter() {
+                        // Update death counter
+                        deathCounter += 1;
+            
+                        // Display updated value
+                        document.getElementById('deathCounter').textContent = deathCounter.toLocaleString();
+            
+                        // Repeat the update every half a second
+                        setTimeout(updateDeathCounter, 500);
+                    }
+            
+                    // Start updating death counter
+                    updateDeathCounter();
+                </script>
+            </div>
+            
+    
+            
+            <div class="livecounter" style="background-color: #111111; color: #f5f5d3;">
+                <p>Trees Planted 🌳</p>
+                <h1 id="treesPlantedCounter">0</h1>
+            
+                <script>
+                    let treesPlantedCounter = 0;
+            
+                    function updateTreesPlantedCounter() {
+                        // Update trees planted counter
+                        treesPlantedCounter += 30; // Increment by 30
+            
+                        // Display updated value
+                        document.getElementById('treesPlantedCounter').textContent = treesPlantedCounter.toLocaleString();
+            
+                        // Repeat the update every half a second
+                        setTimeout(updateTreesPlantedCounter, 500);
+                    }
+            
+                    // Start updating trees planted counter
+                    updateTreesPlantedCounter();
+                </script>
+            </div>
+            
+            <div class="livecounter" style="background-color: #111111; color: #f5f5d3;">
+                <p>CO2 Emissions (tonnes) ⚠️</p>
+                <h1 id="co2Counter">0</h1>
+            
+                <script>
+                    let co2Counter = 0;
+            
+                    function updateCO2Counter() {
+                        // Update CO2 counter
+                        co2Counter += 668; // Increment by 5 tonnes
+            
+                        // Display updated value
+                        document.getElementById('co2Counter').textContent = co2Counter.toLocaleString();
+            
+                        // Repeat the update every half a second
+                        setTimeout(updateCO2Counter, 500);
+                    }
+            
+                    // Start updating CO2 counter
+                    updateCO2Counter();
+                </script>
+            </div>
+            
+            <div class="livecounter" id="counter6">0</div>
+            
+            <!-- Add more rows as needed -->
+        </div>
+
+
+
+
+
+
+        <script>
+
+       
+
+                
+            
+
+            function getRandomColor() {
+                // Generate a random number between 0 and 1
+                const random = Math.random();
+
+                // Use the random number to decide between the two colors
+                return random < 0.5 ? '#f5f5d3' : '#111111';
+            }
+        
+    </script>
