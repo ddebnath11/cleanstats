@@ -52,18 +52,21 @@
     
                
                 <div class="categories">
-                    <span class="category">Demographics</span>
-                    <span class="category">Economy</span>
-                    <span class="category">Environment</span>
-                    <span class="category">Business</span>
-                    <span class="category">Technology</span>
-                    <span class="category">Science</span>
-                    <span class="category">Health</span>
-                    <span class="category">Education</span>
-                    <span class="category">Social</span>
-                    <span class="category">Politics</span>
-                    <span class="category">Entertainment</span>
+                    <span class="category" data-cat="All">All</span>
+                    <span class="category" data-cat="Demographics">Demographics</span>
+                    <span class="category" data-cat="Economy">Economy</span>
+                    <span class="category" data-cat="Environment">Environment</span>
+                    <span class="category" data-cat="Business">Business</span>
+                    <span class="category" data-cat="Technology">Technology</span>
+                    <span class="category" data-cat="Science">Science</span>
+                    <span class="category" data-cat="Health">Health</span>
+                    <span class="category" data-cat="Education">Education</span>
+                    <span class="category" data-cat="Social">Social</span>
+                    <span class="category" data-cat="Politics">Politics</span>
+                    <span class="category" data-cat="Entertainment">Entertainment</span>
+                    <span class="category" data-cat="Internet">Internet</span>
                 </div>
+                
 
                 
             </div>
@@ -72,12 +75,48 @@
             
             <div class="wide-container">
                 <p id="chartCount" style="font-size: 25px; font-weight: 600;"></p>
-                <input type="text" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
+                <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
+
                     fdprocessedid="00wbidm" style="font-weight: 700;">
             </div>
 
+            <script>
+       document.addEventListener('DOMContentLoaded', function () {
+    // ... (your existing code)
+
+    // Add event listener to the search input
+    const chartSearchInput = document.getElementById('chartSearchInput');
+    if (chartSearchInput) {
+        chartSearchInput.addEventListener('input', function () {
+            const searchTerm = chartSearchInput.value.toLowerCase();
+
+            // Loop through the charts and hide/show based on the search term
+            charts.forEach(function (chart) {
+                const chartTitle = chart.title.toLowerCase();
+                const chartContainer = document.querySelector(`#dynamicChartContainer .achart[id='${chart.id}']`);
+
+                // Check if the chartContainer exists before accessing its style property
+                if (chartContainer) {
+                    if (chartTitle.includes(searchTerm)) {
+                        // If the chart title includes the search term, show the entire container
+                        chartContainer.style.display = 'block';
+                    } else {
+                        // Otherwise, hide the entire container
+                        chartContainer.style.display = 'none';
+                    }
+                }
+            });
+        });
+    }
+
+    // ... (your existing code)
+});
+
+
+            </script>
+
             <div id="dynamicChartContainer" class="allchart-container">
-  
+
               </div>
 
     
@@ -113,13 +152,17 @@ function createChart(canvasId, data) {
         },
   });
 }
-            document.addEventListener('DOMContentLoaded', function () {
-                // Call the function to create a line chart
-                createChart('musicGenreChart', linechartData.musicGenreChart);
-                createChart('worldPop', linechartData.worldPop);
-                createChart('smlastmonth', linechartData.smlastmonth);
-                updateChartCount(); // Initial count update
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    // Loop through the linechartData object
+    for (const chartId in linechartData) {
+        if (linechartData.hasOwnProperty(chartId)) {
+            createChart(chartId, linechartData[chartId]);
+        }
+    }
+
+    updateChartCount(); // Initial count update
+});
+
         </script>
 
         <script>
@@ -196,9 +239,24 @@ function createChart(canvasId, data) {
         const dynamicChartContainer = document.getElementById('dynamicChartContainer');
     
         const charts = [
-            { title: 'Most Populated Countries', cat: 'Demographics', id: 'worldPop' },
-            { title: 'Music Evolution', cat: 'Entertainment', id: 'musicGenreChart' },
-            { title: 'Social Media Trends', cat: 'Internet', id: 'smlastmonth' }
+        { title: 'Most Populated Countries', cat: 'Demographics', type: 'Line Chart', id: 'worldPop' },
+        { title: 'Music Evolution', cat: 'Entertainment', type: 'Line Chart', id: 'musicGenreChart' },
+        { title: 'Social Media Trends', cat: 'Internet', type: 'Line Chart', id: 'smlastmonth' },
+        { title: 'Population Growth Over the Decades', cat: 'Demographics', type: 'Line Chart', id: 'popGrowthChart' },
+        { title: 'Gross Domestic Product', cat: 'Economy', type: 'Line Chart', id: 'worldGDPChart' },
+        { title: 'Environmental Pollution Levels', cat: 'Environment', type: 'Line Chart', id: 'pollutionLevelsChart' },
+        { title: 'Business Revenue Over Years', cat: 'Business', type: 'Line Chart', id: 'revenueTrendsChart' },
+        { title: 'Technology Adoption Rates', cat: 'Technology', type: 'Line Chart', id: 'techAdoptionChart' },
+        { title: 'Science Research Funding', cat: 'Science', type: 'Bar Chart', id: 'researchFundingChart' },
+        { title: 'Healthcare Expenditure', cat: 'Health', type: 'Bar Chart', id: 'healthExpenditureChart' },
+        { title: 'Education Enrollment Rates', cat: 'Education', type: 'Bar Chart', id: 'enrollmentRatesChart' },
+        { title: 'Social Media Users by Platform', cat: 'Social', type: 'Bar Chart', id: 'socialMediaUsersChart' },
+        { title: 'Political Party Representation', cat: 'Politics', type: 'Bar Chart', id: 'partyRepresentationChart' },
+        { title: 'Entertainment Genre Market Share', cat: 'Entertainment', type: 'Pie Chart', id: 'entertainmentGenreShare' },
+        { title: 'Internet Usage by Age Group', cat: 'Internet', type: 'Pie Chart', id: 'ageGroupInternetUsage' },
+        { title: 'Demographic Distribution in India', cat: 'Demographics', type: 'Pie Chart', id: 'indiaDemographicDistribution' },
+        { title: 'Top Environmental Issues', cat: 'Environment', type: 'Pie Chart', id: 'topEnvironmentalIssues' },
+        { title: 'Business Sector Distribution', cat: 'Business', type: 'Pie Chart', id: 'businessSectorDistribution' }
             // Add more charts as needed
         ];
     
@@ -223,7 +281,63 @@ function createChart(canvasId, data) {
     
             dynamicChartContainer.appendChild(chartContainer);
         });
+    
+        // Get all category elements
+        var categories = document.querySelectorAll('.category');
+    
+        categories.forEach(function(category) {
+            category.addEventListener('click', function() {
+                var selectedCategory = this.getAttribute('data-cat');
+    
+                // Remove bold style from all categories
+                categories.forEach(function(cat) {
+                    cat.style.fontWeight = 'normal';
+                });
+    
+                // Bold the selected category
+                this.style.fontWeight = '800';
+    
+                // Hide all charts
+                hideAllCharts();
+    
+                // Show charts for the selected category
+                if (selectedCategory === 'All') {
+                    showAllCharts();
+                } else {
+                    showChartsByCategory(selectedCategory);
+                }
+            });
+        });
+    
+        // Function to hide all charts
+        function hideAllCharts() {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                chart.style.display = 'none';
+            });
+        }
+    
+        // Function to show charts for a specific category
+        function showChartsByCategory(category) {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                const chartCat = chart.querySelector('p').textContent;
+                if (chartCat === category) {
+                    chart.style.display = 'block';
+                }
+            });
+        }
+    
+        // Function to show all charts
+        function showAllCharts() {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                chart.style.display = 'block';
+            });
+        }
     </script>
+    
+    
     
 
 
@@ -251,51 +365,13 @@ function createChart(canvasId, data) {
             };
         }
     
-        const linechartData = {
-            musicGenreChart: createLineChart(
-                ['1970s', '1980s', '1990s', '2000s', '2010s'],
-                [
-                    { label: 'Rock', data: [500, 600, 400, 300, 200] },
-                    { label: 'Pop', data: [200, 300, 500, 700, 600] },
-                    { label: 'Hip Hop', data: [100, 200, 400, 800, 1000] },
-                    { label: 'Country', data: [50, 100, 150, 200, 250] },
-                    { label: 'Electronic', data: [300, 400, 300, 200, 100] },
-                    { label: 'R&B', data: [120, 150, 180, 200, 250] }
-                    // Add more genres and their data as needed
-                ]
-            ),
-    
-            worldPop: createLineChart(
-                ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
-                [
-                    { label: 'India', data:  [1117415123, 1136264583, 1154638713, 1172373788, 1189691809, 1206734806, 1223640160, 1240613620, 1257621191, 1274487215, 1291132063, 1307246509, 1322866505, 1338636340, 1354195680, 1369003306, 1383112050, 1396387127, 1407563842, 1417173173, 1428627663] },
-                    { label: 'China', data:  [1288873367, 1296816711, 1348887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1425893465, 1425887337, 1425671352] },
-                    { label: 'USA', data:  [291109820, 293947885, 296842670, 299753098, 302743399, 305694910, 308512035, 311182845, 313876608, 316651321, 319375166, 322033964, 324607776, 327210198, 329791231, 332140037, 334319671, 335942003, 336997624, 338289857, 339996563] },
-                    { label: 'Indonesia', data:  [223080121, 225938595, 228805144, 231797427, 234858289, 237936543, 240981299, 244016173, 247099697, 250222695, 253275918, 256229761, 259091970, 261850182, 264498852, 267066843, 269582878, 271857970, 273753191, 275501339, 277534122] }
-                ]
-            ),
-    
-            smlastmonth: createLineChart(
-                /*y axis*/ [
-                    '2023-11-11', '2023-11-12', '2023-11-13', '2023-11-14', '2023-11-15',
-                    '2023-11-16', '2023-11-17', '2023-11-18', '2023-11-19', '2023-11-20',
-                    '2023-11-21', '2023-11-22', '2023-11-23', '2023-11-24', '2023-11-25',
-                    '2023-11-26', '2023-11-27', '2023-11-28', '2023-11-29', '2023-11-30',
-                    '2023-12-01', '2023-12-02', '2023-12-03', '2023-12-04', '2023-12-05',
-                    '2023-12-06', '2023-12-07'
-                ],
-                /*x axis*/[
-                    { label: 'Instagram', data:  [66, 70, 64, 62, 63, 60, 62, 66, 63, 60, 59, 60, 60, 60, 64, 64, 61, 60, 60, 59, 57, 67, 64, 59, 59, 60, 62], },
-                    { label: 'TikTok', data: [28, 27, 25, 24, 24, 25, 25, 29, 27, 24, 24, 25, 26, 25, 27, 26, 24, 24, 24, 24, 26, 27, 27, 23, 24, 25, 24], },
-                    { label: 'Facebook', data: [98, 96, 94, 91, 93, 93, 98, 96, 95, 93, 92, 95, 89, 100, 90, 93, 83, 87, 91, 93, 92, 96, 96, 90, 94, 97, 89],},
-                    { label: 'Twitter', data:  [32, 31, 29, 29, 28, 29, 29, 32, 32, 29, 28, 29, 28, 28, 30, 30, 28, 28, 29, 29, 29, 32, 32, 28, 28, 26, 28], }
-                ]
-            ),
-        };
-    </script>
-    
         
-            </script>
+
+        </script>
+
+        <script src="explore.js"></script>
+        
+
 
 
 
@@ -318,5 +394,6 @@ function createChart(canvasId, data) {
 
             
 </body>
-
 </html>
+
+        
