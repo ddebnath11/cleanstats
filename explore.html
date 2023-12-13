@@ -160,6 +160,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Rendering bar charts
+for (const chartId in barChartData) {
+    if (barChartData.hasOwnProperty(chartId)) {
+        createBarChart(chartId, barChartData[chartId].labels, barChartData[chartId].datasets);
+    }
+}
+
+// Rendering pie charts
+for (const chartId in pieChartData) {
+    if (pieChartData.hasOwnProperty(chartId)) {
+        createPieChart(chartId, pieChartData[chartId].labels, pieChartData[chartId].data);
+    }
+}
+
     updateChartCount(); // Initial count update
 });
 
@@ -239,25 +253,46 @@ document.addEventListener('DOMContentLoaded', function () {
         const dynamicChartContainer = document.getElementById('dynamicChartContainer');
     
         const charts = [
+            /*general*/
         { title: 'Most Populated Countries', cat: 'Demographics', type: 'Line Chart', id: 'worldPop' },
         { title: 'Music Evolution', cat: 'Entertainment', type: 'Line Chart', id: 'musicGenreChart' },
         { title: 'Social Media Trends', cat: 'Internet', type: 'Line Chart', id: 'smlastmonth' },
         { title: 'Population Growth Over the Decades', cat: 'Demographics', type: 'Line Chart', id: 'popGrowthChart' },
         { title: 'Gross Domestic Product', cat: 'Economy', type: 'Line Chart', id: 'worldGDPChart' },
-        { title: 'Environmental Pollution Levels', cat: 'Environment', type: 'Line Chart', id: 'pollutionLevelsChart' },
-        { title: 'Business Revenue Over Years', cat: 'Business', type: 'Line Chart', id: 'revenueTrendsChart' },
-        { title: 'Technology Adoption Rates', cat: 'Technology', type: 'Line Chart', id: 'techAdoptionChart' },
-        { title: 'Science Research Funding', cat: 'Science', type: 'Bar Chart', id: 'researchFundingChart' },
-        { title: 'Healthcare Expenditure', cat: 'Health', type: 'Bar Chart', id: 'healthExpenditureChart' },
-        { title: 'Education Enrollment Rates', cat: 'Education', type: 'Bar Chart', id: 'enrollmentRatesChart' },
-        { title: 'Social Media Users by Platform', cat: 'Social', type: 'Bar Chart', id: 'socialMediaUsersChart' },
-        { title: 'Political Party Representation', cat: 'Politics', type: 'Bar Chart', id: 'partyRepresentationChart' },
-        { title: 'Entertainment Genre Market Share', cat: 'Entertainment', type: 'Pie Chart', id: 'entertainmentGenreShare' },
-        { title: 'Internet Usage by Age Group', cat: 'Internet', type: 'Pie Chart', id: 'ageGroupInternetUsage' },
-        { title: 'Demographic Distribution in India', cat: 'Demographics', type: 'Pie Chart', id: 'indiaDemographicDistribution' },
-        { title: 'Top Environmental Issues', cat: 'Environment', type: 'Pie Chart', id: 'topEnvironmentalIssues' },
-        { title: 'Business Sector Distribution', cat: 'Business', type: 'Pie Chart', id: 'businessSectorDistribution' }
-            // Add more charts as needed
+       
+            // demographics
+
+        // India-specific line charts - Demographics
+
+// Population Trends in Top Indian States Over the Decades
+{ title: 'Population Trends in Top Indian States', cat: 'Demographics', type: 'Line Chart', id: 'indStatePopChart' },
+
+
+
+
+// Changes in Literacy Rates Across Indian States
+{ title: 'Literacy Rate Changes Across Indian States', cat: 'Demographics', type: 'Line Chart', id: 'literacyratesInd' },
+
+// Migration Patterns in India Over the Decades
+{ title: 'Religions in India', cat: 'Demographics', type: 'Pie Chart', id: 'religionIndiaChart' },
+
+// Household Size Trends in Rural and Urban Areas
+{ title: 'Household Size Trends in Rural and Urban Areas', cat: 'Demographics', type: 'Line Chart', id: 'householdSizeChart' },
+
+// Gender Ratio Changes in Different States
+{ title: 'Gender Ratio Changes in Different States', cat: 'Demographics', type: 'Line Chart', id: 'genderRatioChart' },
+
+// Employment Trends Across Different Age Groups
+{ title: 'Employment Trends Across Different Age Groups', cat: 'Demographics', type: 'Line Chart', id: 'employmentTrendsChart' },
+
+// Birth and Fertility Rates in India Over the Years
+{ title: 'Birth and Fertility Rates in India', cat: 'Demographics', type: 'Line Chart', id: 'birthFertilityRatesChart' },
+
+// Life Expectancy Changes in India Over Time
+{ title: 'Life Expectancy Changes in India', cat: 'Demographics', type: 'Line Chart', id: 'lifeExpectancyChart' },
+   
+        
+
         ];
     
         charts.forEach(chart => {
@@ -365,7 +400,66 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
     
-        
+        function createBarChart(canvasId, labels, data) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const chartData = {
+        labels: labels,
+        datasets: data.map(dataset => ({
+            label: dataset.label,
+            data: dataset.data,
+            backgroundColor: getRandomColor(),
+            borderWidth: 1,
+            borderRadius: 60,
+            borderColor: '#111111',
+
+        })),
+    };
+    return new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            responsive: false, // Adjust as needed
+            maintainAspectRatio: false,
+            // Add more chart options here
+        },
+    });
+}
+
+function createPieChart(canvasId, labels, data) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const chartData = {
+        labels: labels,
+        datasets: [{
+            data: data,
+            backgroundColor: getRandomColors(data.length),
+            borderWidth: 1,
+            borderColor: '#111111',
+        }],
+    };
+    return new Chart(ctx, {
+        type: 'pie',
+        data: chartData,
+        options: {
+            responsive: false, // Adjust as needed
+            maintainAspectRatio: false,
+            // Add more chart options here
+        },
+    });
+}
+
+    function getRandomColor() {
+        // Return a random color in hexadecimal format
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+
+    function getRandomColors(count) {
+        // Return an array of random colors in hexadecimal format
+        const colors = [];
+        for (let i = 0; i < count; i++) {
+            colors.push(getRandomColor());
+        }
+        return colors;
+    }
 
         </script>
 
