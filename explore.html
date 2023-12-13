@@ -448,9 +448,24 @@ function createPieChart(canvasId, labels, data) {
 }
 
     function getRandomColor() {
-        // Return a random color in hexadecimal format
-        return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    }
+    const minBrightness = 150; // Adjust as needed for lighter colors
+    const maxBrightness = 255; // Maximum brightness for lighter colors
+
+    const r = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+    const g = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+    const b = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+
+    return '#' + rgbToHex(r, g, b);
+}
+
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
     function getRandomColors(count) {
         // Return an array of random colors in hexadecimal format
