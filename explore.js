@@ -66,4 +66,47 @@ worldGDPChart: createLineChart(
 ]
 ),
 
+indStatePopChart: createLineChart(
+    ['1951', '1961', '1971', '1981', '1991', '2001', '2011'],
+    [
+      { label: 'Uttar Pradesh', data: [60274800, 70144160, 83849775, 105113300, 132062800, 166053600, 199581477] },
+      { label: 'Maharashtra', data: [32002500, 39554900, 50412240, 62782820, 78937190, 96752500, 112372972] },
+      { label: 'Bihar', data: [29085900, 34841490, 42126800, 52303000, 64531200, 82879910, 103804630] },
+      { label: 'West Bengal', data: [26300670, 34926000, 44312017, 54580650, 68077970, 80221300, 91347736] },
+      { label: 'Madhya Pradesh', data: [18615700, 23218950, 30017180, 38169500, 48566800, 60385090, 72597565] },
+      { label: 'Tamil Nadu', data: [30119680, 33687100, 41199170, 48408080, 55859300, 62111390, 72138958] },
+      { label: 'Rajasthan', data: [15971130, 20156540, 25765810, 34361860, 44005990, 56473300, 68621012] },
+      { label: 'Karnataka', data: [19402500, 23587910, 29299015, 37135710, 44977200, 52734986, 61130704] },
+      { label: 'Gujarat', data: [16263700, 20633305, 26697488, 34085800, 41309580, 50597200, 60383628] },
+      { label: 'Andhra Pradesh', data: [31115000, 35983480, 43502710, 53551030, 66508170, 75728400, 49386799] }
+    ]
+  ),
+
+
 }
+
+
+
+
+
+const barChartData = {
+        literacyratesInd: {
+            labels: ['Category A', 'Category B'],
+            datasets: [
+                { label: 'Data A', data: [50, 75] },
+                { label: 'Data B', data: [60, 80] },
+            ]
+        },
+
+
+    }
+
+    const pieChartData = {
+        religionIndiaChart: {
+            labels: ['Hinduism', 'Islam'],
+            data: [70, 30]
+        }
+    };
+
+    createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
+    createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
