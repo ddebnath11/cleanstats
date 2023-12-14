@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/9ca22fae96.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
@@ -44,9 +45,7 @@
             </ul>
         </nav>
         <div class="content" id="content">
-            <div class="fab" onclick="window.location.href='create'">
-                + Add A Chart
-            </div>
+            
 
             <div class="wide-container">
     
@@ -81,36 +80,33 @@
             </div>
 
             <script>
-       document.addEventListener('DOMContentLoaded', function () {
-    // ... (your existing code)
 
-    // Add event listener to the search input
+
+        document.addEventListener('DOMContentLoaded', function () {
     const chartSearchInput = document.getElementById('chartSearchInput');
+    const chartContainers = document.querySelectorAll('.achart');
+
     if (chartSearchInput) {
         chartSearchInput.addEventListener('input', function () {
-            const searchTerm = chartSearchInput.value.toLowerCase();
+            const searchTerm = chartSearchInput.value.trim().toLowerCase();
 
-            // Loop through the charts and hide/show based on the search term
-            charts.forEach(function (chart) {
-                const chartTitle = chart.title.toLowerCase();
-                const chartContainer = document.querySelector(`#dynamicChartContainer .achart[id='${chart.id}']`);
+            chartContainers.forEach(function (chartContainer) {
+                const chartTitle = chartContainer.querySelector('h1').textContent.toLowerCase();
 
-                // Check if the chartContainer exists before accessing its style property
-                if (chartContainer) {
-                    if (chartTitle.includes(searchTerm)) {
-                        // If the chart title includes the search term, show the entire container
-                        chartContainer.style.display = 'block';
-                    } else {
-                        // Otherwise, hide the entire container
-                        chartContainer.style.display = 'none';
-                    }
+                if (chartTitle.includes(searchTerm)) {
+                    chartContainer.style.display = 'block';
+                } else {
+                    chartContainer.style.display = 'none';
                 }
             });
         });
     }
+});
+
+
 
     // ... (your existing code)
-});
+
 
 
             </script>
@@ -174,22 +170,25 @@ for (const chartId in pieChartData) {
     }
 }
 
-    updateChartCount(); // Initial count update
+function updateChartCount() {
+        const chartCountElement = document.getElementById('chartCount');
+        const chartContainer = document.querySelector('.allchart-container');
+
+        if (chartCountElement && chartContainer) {
+            const chartCount = chartContainer.querySelectorAll('.achart').length;
+            chartCountElement.textContent = `Total Charts: ${chartCount}`;
+        }
+    }
+
 });
 
+updateChartCount();
+
         </script>
 
-        <script>
-            function updateChartCount() {
-                const chartCountElement = document.getElementById('chartCount');
-                const chartContainer = document.querySelector('.allchart-container');
 
-                if (chartCountElement && chartContainer) {
-                    const chartCount = chartContainer.querySelectorAll('.achart').length;
-                    chartCountElement.textContent = chartCount;
-                }
-            }
-        </script>
+         
+        
     </div>
 
 
@@ -250,69 +249,215 @@ for (const chartId in pieChartData) {
 
 
     <script>
+
+function shortenURL(url, maxLength) {
+            if (url.length > maxLength) {
+                return url.substring(0, maxLength - 3) + "...";
+            }
+            return url;
+        }
+
         const dynamicChartContainer = document.getElementById('dynamicChartContainer');
-    
-        const charts = [
-            /*general*/
-        { title: 'Most Populated Countries', cat: 'Demographics', type: 'Line Chart', id: 'worldPop' },
-        { title: 'Music Evolution', cat: 'Entertainment', type: 'Line Chart', id: 'musicGenreChart' },
-        { title: 'Social Media Trends', cat: 'Internet', type: 'Line Chart', id: 'smlastmonth' },
-        { title: 'Population Growth Over the Decades', cat: 'Demographics', type: 'Line Chart', id: 'popGrowthChart' },
-        { title: 'Gross Domestic Product', cat: 'Economy', type: 'Line Chart', id: 'worldGDPChart' },
-       
-            // demographics
 
-        // India-specific line charts - Demographics
-
-// Population Trends in Top Indian States Over the Decades
-{ title: 'Population Trends in Top Indian States', cat: 'Demographics', type: 'Line Chart', id: 'indStatePopChart' },
-
-
-
-
-// Changes in Literacy Rates Across Indian States
-{ title: 'Literacy Rate Changes Across Indian States', cat: 'Demographics', type: 'Line Chart', id: 'literacyratesInd' },
-
-// Migration Patterns in India Over the Decades
-{ title: 'Religions in India', cat: 'Demographics', type: 'Pie Chart', id: 'religionIndiaChart' },
-
-// Household Size Trends in Rural and Urban Areas
-{ title: 'Household Size Trends in Rural and Urban Areas', cat: 'Demographics', type: 'Line Chart', id: 'householdSizeChart' },
-
-// Gender Ratio Changes in Different States
-{ title: 'Gender Ratio Changes in Different States', cat: 'Demographics', type: 'Line Chart', id: 'genderRatioChart' },
-
-// Employment Trends Across Different Age Groups
-{ title: 'Employment Trends Across Different Age Groups', cat: 'Demographics', type: 'Line Chart', id: 'employmentTrendsChart' },
-
-// Birth and Fertility Rates in India Over the Years
-{ title: 'Birth and Fertility Rates in India', cat: 'Demographics', type: 'Line Chart', id: 'birthFertilityRatesChart' },
-
-// Life Expectancy Changes in India Over Time
-{ title: 'Life Expectancy Changes in India', cat: 'Demographics', type: 'Line Chart', id: 'lifeExpectancyChart' },
-   
         
 
-        ];
-    
-        charts.forEach(chart => {
+
+        const charts = [
+    /*general*/
+    {
+title: 'Most Populated Countries',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'worldPop',
+src: 'https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population',
+},
+
+
+{
+title: 'Social Media Trends',
+cat: 'Internet',
+type: 'Line Chart',
+id: 'smlastmonth',
+src:'https://trends.google.com/trends/explore?date=today%201-m&q=Instagram,TikTok,Facebook,Twitter&hl=en'
+},
+{
+title: 'Population Growth Over the Decades',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'popGrowthChart',
+src:'https://ourworldindata.org/population-growth-over-time'
+},
+{
+title: 'Gross Domestic Product',
+cat: 'Economy',
+type: 'Line Chart',
+id: 'worldGDPChart',
+src:'https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)'
+},
+{
+title: 'Population Trends in Top Indian States',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'indStatePopChart',
+src:'https://en.wikipedia.org/wiki/List_of_states_in_India_by_past_population'
+},
+{
+title: 'Literacy Rate Across Indian States',
+cat: 'Demographics',
+type: 'Bar Chart',
+id: 'literacyratesInd',
+src:'https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_literacy_rate'
+},
+{
+title: 'Religions in India',
+cat: 'Demographics',
+type: 'Pie Chart',
+id: 'religionIndiaChart',
+src:'https://en.wikipedia.org/wiki/Religion_in_India'
+},
+
+
+{
+    title: 'Population Density Trends',
+    cat: 'Demographics',
+    type: 'Line Chart',
+    id: 'populationDensity',
+    src:''
+},
+{
+    title: 'Age Distribution Over Time',
+    cat: 'Demographics',
+    type: 'Bar Chart',
+    id: 'ageDistribution',
+src:''
+},
+{
+    title: 'Ethnicity Breakdown',
+    cat: 'Demographics',
+    type: 'Pie Chart',
+    id: 'ethnicityBreakdown',
+src:''
+},
+{
+    title: 'Birth Rates Across Regions',
+    cat: 'Demographics',
+    type: 'Line Chart',
+    id: 'birthRates',
+src:''
+},
+{
+    title: 'Mortality Rates by Causes',
+    cat: 'Demographics',
+    type: 'Bar Chart',
+    id: 'mortalityCauses',
+src:''
+},
+{
+    title: 'Migration Patterns Over Decades',
+    cat: 'Demographics',
+    type: 'Line Chart',
+    id: 'migrationPatterns',
+src:''
+},
+{
+    title: 'Gender Ratio Across Age Groups',
+    cat: 'Demographics',
+    type: 'Pie Chart',
+    id: 'genderRatio',
+src:''
+},
+{
+    title: 'Household Composition Changes',
+    cat: 'Demographics',
+    type: 'Bar Chart',
+    id: 'householdComposition',
+src:''
+},
+{
+    title: 'Urbanization Trends',
+    cat: 'Demographics',
+    type: 'Line Chart',
+    id: 'urbanizationTrends',
+src:''
+},
+{
+    title: 'Life Expectancy Across Regions',
+    cat: 'Demographics',
+    type: 'Bar Chart',
+    id: 'lifeExpectancy',
+src:''
+},
+
+
+
+
+
+
+];
+ 
+charts.forEach(chart => {
             const chartContainer = document.createElement('div');
             chartContainer.className = 'achart';
-    
+
             const titleElement = document.createElement('h1');
             titleElement.textContent = chart.title;
-    
+
             const catElement = document.createElement('p');
             catElement.textContent = chart.cat;
-    
+
+            const srcElement = document.createElement('p');
+            const shortenedSrc = shortenURL(chart.src, 30); // Adjust the length as needed
+            srcElement.textContent = shortenedSrc;
+            srcElement.style.cursor = 'pointer'; // Change cursor to pointer
+
             const canvasElement = document.createElement('canvas');
             canvasElement.id = chart.id;
             canvasElement.width = 400;
             canvasElement.height = 400;
-    
+
             chartContainer.appendChild(titleElement);
             chartContainer.appendChild(catElement);
+            chartContainer.appendChild(srcElement);
             chartContainer.appendChild(canvasElement);
+
+            srcElement.addEventListener('click', function() {
+                window.open(chart.src, '_blank'); // Open link in a new tab
+            });
+
+         
+
+// Create a download icon element
+const downloadIcon = document.createElement('i');
+downloadIcon.className = 'fas fa-download';
+downloadIcon.style.color = '#f4f4d5'; // Change color or add styles as needed
+downloadIcon.style.marginBottom = '10px'; // Adjust margin from bottom
+downloadIcon.style.marginLeft = '20px'; // Adjust spacing or add styles as needed
+
+
+        // Append the icons to the chart container
+
+        chartContainer.appendChild(downloadIcon);
+
+        downloadIcon.addEventListener('click', function () {
+            // Get the canvas element of the specific chart
+            const canvas = document.getElementById(chart.id);
+
+            // Create an anchor element to trigger the download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png'); // Convert the canvas to PNG image data
+            downloadLink.download = `${chart.title}.png`; // Set the filename for the downloaded image
+            downloadLink.click(); // Simulate a click to trigger the download
+        });
+
+        // Attach click event listeners for the icons
+      
+
+        downloadIcon.addEventListener('click', function() {
+            // Implement download functionality here
+            // Example: Trigger a download action for the chart
+            console.log('Downloading...');
+        });
+        
     
             dynamicChartContainer.appendChild(chartContainer);
         });
@@ -432,7 +577,7 @@ function createPieChart(canvasId, labels, data) {
         datasets: [{
             data: data,
             backgroundColor: getRandomColors(data.length),
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: '#111111',
         }],
     };
@@ -447,7 +592,7 @@ function createPieChart(canvasId, labels, data) {
     });
 }
 
-    function getRandomColor() {
+function getRandomColor() {
     const minBrightness = 150; // Adjust as needed for lighter colors
     const maxBrightness = 255; // Maximum brightness for lighter colors
 
@@ -466,6 +611,7 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
 
     function getRandomColors(count) {
         // Return an array of random colors in hexadecimal format
@@ -504,5 +650,7 @@ function rgbToHex(r, g, b) {
             
 </body>
 </html>
+
+        
 
         
