@@ -1,17 +1,5 @@
 const linechartData = {
-    musicGenreChart: createLineChart(
-        ['1970s', '1980s', '1990s', '2000s', '2010s'],
-        [
-            { label: 'Rock', data: [500, 600, 400, 300, 200] },
-            { label: 'Pop', data: [200, 300, 500, 700, 600] },
-            { label: 'Hip Hop', data: [100, 200, 400, 800, 1000] },
-            { label: 'Country', data: [50, 100, 150, 200, 250] },
-            { label: 'Electronic', data: [300, 400, 300, 200, 100] },
-            { label: 'R&B', data: [120, 150, 180, 200, 250] }
-            // Add more genres and their data as needed
-        ]
-    ),
-
+   
     worldPop: createLineChart(
         ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
         [
@@ -90,23 +78,34 @@ indStatePopChart: createLineChart(
 
 
 const barChartData = {
-        literacyratesInd: {
-            labels: ['Category A', 'Category B'],
+        
+
+        literacyratesInd : {
+            labels: [
+                'Kerala', 'Delhi', 'Uttarakhand', 'Himachal Pradesh', 'Assam',
+                'Maharashtra', 'Punjab', 'Tamil Nadu', 'Gujarat', 'West Bengal'
+            ],
             datasets: [
-                { label: 'Data A', data: [50, 75] },
-                { label: 'Data B', data: [60, 80] },
+                { label: 'Literacy Rates', data: [96.2, 88.7, 87.6, 86.6, 85.9, 84.8, 83.7, 82.9, 82.4, 80.5] }
             ]
-        },
 
 
     }
+}
 
     const pieChartData = {
         religionIndiaChart: {
-            labels: ['Hinduism', 'Islam'],
-            data: [70, 30]
-        }
-    };
+            labels: ['Hinduism', 'Islam', 'Christian', 'Sikh', 'Others'],
+            data: [79.8, 14.2, 2.3, 1.7, 2]
+        },
 
+        
+    };
+    createLineChart('worldPop', linechartData.worldPop.labels, linechartData.worldPop.datasets);
+    createLineChart('smlastmonth', linechartData.smlastmonth.labels, linechartData.smlastmonth.datasets);
+    // Call other chart creation functions here
+
+    createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
+    createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
     createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
     createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
