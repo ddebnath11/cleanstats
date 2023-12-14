@@ -82,26 +82,58 @@
             <script>
 
 
-        document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     const chartSearchInput = document.getElementById('chartSearchInput');
     const chartContainers = document.querySelectorAll('.achart');
+    const notFoundMessage = document.createElement('p');
+    notFoundMessage.textContent = 'Sorry. We could not find that chart. ';
+    const contributeLink = document.createElement('a');
+const updatepageLink = document.createElement('a');
+contributeLink.textContent = 'Contribute a chart';
+updatepageLink.textContent = 'Reset search results';
+contributeLink.href = 'contribution.html'; // Replace 'contribution.html' with the appropriate link
+updatepageLink.href = 'explore.html';
+contributeLink.style.color = 'blue';
+updatepageLink.style.color = 'blue';
+contributeLink.style.textDecoration = 'underline';
+
+notFoundMessage.appendChild(contributeLink);
+notFoundMessage.appendChild(document.createElement('br')); // Add a line break
+notFoundMessage.appendChild(updatepageLink);
+
+    let invalidSearchTerm = false; // Flag to track invalid search term
 
     if (chartSearchInput) {
         chartSearchInput.addEventListener('input', function () {
             const searchTerm = chartSearchInput.value.trim().toLowerCase();
+            let found = false;
 
             chartContainers.forEach(function (chartContainer) {
                 const chartTitle = chartContainer.querySelector('h1').textContent.toLowerCase();
 
                 if (chartTitle.includes(searchTerm)) {
                     chartContainer.style.display = 'block';
+                    found = true;
                 } else {
                     chartContainer.style.display = 'none';
                 }
             });
+
+            if (!found) {
+                if (!invalidSearchTerm) {
+                    // Update only if the previous search term was valid
+                    const dynamicChartContainer = document.getElementById('dynamicChartContainer');
+                    dynamicChartContainer.innerHTML = ''; // Clear existing charts
+                    dynamicChartContainer.appendChild(notFoundMessage);
+                }
+                invalidSearchTerm = true;
+            } else {
+                invalidSearchTerm = false;
+            }
         });
     }
 });
+
 
 
 
@@ -651,6 +683,7 @@ function rgbToHex(r, g, b) {
 </body>
 </html>
 
+        
         
 
         
