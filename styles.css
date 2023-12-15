@@ -983,20 +983,48 @@ button {
     gap: 10px;
 }
 
+.search-filters {
+    display: flex;
+    gap: 10px;
+}
+
 .types {
     display: flex;
     gap: 10px;
 }
 
 .category {
-    padding: 8px;
+    padding: 10px;
     color: var(--slateful);
     cursor: pointer;
-    font-weight: 300; /* Add the initial font-weight value */
+    font-weight: 300;
     transition: font-weight 0.3s ease, color 0.3s ease;
+
+
+    background-color: transparent; /* No background color */
+
 }
 
+
+.search-filter {
+    padding: 10px;
+    color: var(--slateful);
+    cursor: pointer;
+    font-weight: 500;
+    transition: font-weight 0.3s ease, color 0.3s ease;
+    border-radius: 50px; /* Adjust the value to control the roundness */
+    display: inline-block; /* Ensure it only takes the necessary width */
+    background-color: #f4f4d5; /* Background color for the pill shape */
+    color:#111111;
+}
+
+
 .category:hover {
+    font-weight: 700;
+    
+}
+
+.search-filter:hover {
     font-weight: 700;
     
 }
