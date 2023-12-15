@@ -1,3 +1,5 @@
+
+
 const linechartData = {
    
     worldPop: createLineChart(
@@ -39,7 +41,7 @@ const linechartData = {
 ),
 
 worldGDPChart: createLineChart(
-['2018', '2019', '2020', '2021', '2022', '2023'],
+['2018', '2019', '2020', '2021', '2022'],
 [
 { label: 'USA', data: [20533057312000, 21380976119000, 21060473613000, 23315080560000, 25462700000000] },
 { label: 'China', data: [13894907485399, 14279968485748, 14687743556970, 17820459342451, 17963170521080] },
@@ -90,7 +92,31 @@ const barChartData = {
             ]
 
 
-    }
+    },
+
+    populationDensity : {
+        labels: [
+            'Bihar', 'West Bengal', 'Kerala', 'UP', 'Haryana',
+            'Punjab', 'Tamil Nadu', 'Jharkhand', 'Assam', 'Maharashtra'
+        ],
+        datasets: [
+            { label: 'Population Density', data: [1102, 1029, 859, 828, 573, 550, 555, 414, 397, 365] },
+        ]
+        
+
+
+},
+indstateGDP: {
+    labels: [
+        'Maharashtra', 'Tamil Nadu', 'Gujarat', 'Karnataka', 'Uttar Pradesh',
+        'West Bengal', 'Rajasthan', 'Andhra Pradesh', 'Telangana', 'Madhya Pradesh'
+    ],
+    datasets: [
+        { label: 'State GDP  (Rs Lakh Crore)', data: [38.79, 28.3, 25.62, 25, 24.39, 17.19, 15.7, 14.49, 14, 13.87] },
+    ]
+}
+
+
 }
 
     const pieChartData = {
@@ -99,13 +125,28 @@ const barChartData = {
             data: [79.8, 14.2, 2.3, 1.7, 2]
         },
 
+        sampleIndiaChart: {
+            labels: ['Hinduism', 'Islam', 'Christian', 'Sikh', 'Others'],
+            data: [79.8, 14.2, 2.3, 1.7, 2]
+        },
+
+
+
         
     };
     createLineChart('worldPop', linechartData.worldPop.labels, linechartData.worldPop.datasets);
     createLineChart('smlastmonth', linechartData.smlastmonth.labels, linechartData.smlastmonth.datasets);
-    // Call other chart creation functions here
 
+
+   
+   
+   
     createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
+    createBarChart('populationDensity', barChartData.populationDensity.labels, barChartData.populationDensity.datasets);
+    createBarChart('indstateGDP', barChartData.indstateGDP.labels, barChartData.indstateGDP.datasets);
+   
+   
+   
+   
     createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
-    createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
-    createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
+    createPieChart('sampleIndiaChart', pieChartData.sampleIndiaChart.labels, pieChartData.sampleIndiaChart.data);
