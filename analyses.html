@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/9ca22fae96.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>StatGram</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="static/js/main.js"></script>
+    <script src="loaded.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loading-screen" id="loadingScreen">
+            <div class="spinner"></div>
+            
+            </div>
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="home.html">S T A T G R A M</a></li>
+                <li ><a href="home.html"> HOME</a></li>
+                <li class="active"><a href="explore.html">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line.html">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie.html">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar.html">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li><a href="analyses.html">ANALYSES</a></li>
+                <li><a href="live.html">LIVE</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+            </ul>
+        </nav>
+        <div class="content" id="content">
+            <div class="grid-container">
+                <div class="grid-item" data-analysis-id="analysis-1">
+                    <h2>Analysis 1 Title</h2>
+                    <p>Starting paragraph...</p>
+                </div>
+                <div class="grid-item" data-analysis-id="analysis-2">
+                    <h2>Analysis 2 Title</h2>
+                    <p>Starting paragraph...</p>
+                </div>
+                <!-- Add more grid items as needed -->
+            </div>
+        
+            <div id="analysisWindow">
+                <span id="closeButton">✖</span>
+                <div id="analysisContent"></div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    const gridItems = document.querySelectorAll('.grid-item');
+    const analysisWindow = document.getElementById('analysisWindow');
+    const closeButton = document.getElementById('closeButton');
+    const analysisContent = document.getElementById('analysisContent');
+    const analyses = {
+        'analysis-1': {
+            title: 'Analysis 1 Title',
+            content: 'Full content for Analysis 1...'
+        },
+        'analysis-2': {
+            title: 'Analysis 2 Title',
+            content: 'Full content for Analysis 2...'
+        },
+        // Add more analyses data as needed
+    };
+
+    gridItems.forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            const analysisId = event.currentTarget.dataset.analysisId;
+            displayAnalysisWindow(analysisId);
+        });
+    });
+
+    closeButton.addEventListener('click', closeAnalysisWindow);
+
+    function displayAnalysisWindow(analysisId) {
+        const analysis = analyses[analysisId];
+        if (analysis) {
+            const title = analysis.title;
+            const content = analysis.content;
+
+            analysisContent.innerHTML = `
+                <h2>${title}</h2>
+                <p>${content}</p>
+            `;
+
+            analysisWindow.style.right = '0';
+        }
+    }
+
+    function closeAnalysisWindow() {
+        analysisWindow.style.right = '-100%';
+    }
+});
+
+        </script>
