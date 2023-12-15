@@ -10,7 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
     </style>
-    <title>CleanStats</title>
+    <title>StatGram</title>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="static/js/main.js"></script>
@@ -27,7 +27,7 @@
             </div>
         <nav id="navbar">
             <ul>
-                <li style="font-weight: 100;"><a href="home.html">C L E A N S T A T S</a></li>
+                <li style="font-weight: 100;"><a href="home.html">S T A T G R A M</a></li>
                 <li ><a href="home.html"> HOME</a></li>
                 <li class="active"><a href="explore.html">EXPLORE</a></li>
                 <li class="dropdown">
@@ -39,7 +39,7 @@
                         <!-- Add more chart types as needed -->
                     </div>
                 </li>
-                <li><a href="maps.html">MAPS</a></li>
+                <li><a href="analyses.html">ANALYSES</a></li>
                 <li><a href="live.html">LIVE</a></li>
                 <li><a href="about.html">ABOUT</a></li>
             </ul>
@@ -65,6 +65,31 @@
                     <span class="category" data-cat="Entertainment">Entertainment</span>
                     <span class="category" data-cat="Internet">Internet</span>
                 </div>
+
+
+
+                  
+                    
+                    
+                </div>
+
+                <div class="wide-container">
+    
+               
+                    <div class="search-filters">
+                        <span class="search-filter" >"Global"</span>
+                        <span class="search-filter" >"India"</span>
+                        <span class="search-filter" >"GDP"</span>
+                        <span class="search-filter" >"Top 10"</span>
+                        
+                    </div>
+    
+    
+    
+                      
+                        
+                        
+                    </div>
                 
 
                 
@@ -74,10 +99,38 @@
             
             <div class="wide-container">
                 <p id="chartCount" style="font-size: 25px; font-weight: 600;"></p>
-                <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
 
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+    updateChartCount(); // Call the function once the DOM is loaded
+});
+
+function updateChartCount() {
+    const chartCountElement = document.getElementById('chartCount');
+    const chartContainer = document.querySelector('.allchart-container');
+
+    if (chartCountElement && chartContainer) {
+        const chartCount = chartContainer.querySelectorAll('.achart').length;
+        chartCountElement.textContent = `${chartCount}`;
+    }
+}
+                </script>
+                <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
+                
                     fdprocessedid="00wbidm" style="font-weight: 700;">
+                    <button class="button" style="width:30%; background-color: #f4f4d5; font-weight: 700;" id="compareButton">+ Create A Chart</button>
             </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+    const compareButton = document.getElementById('compareButton');
+
+    compareButton.addEventListener('click', function () {
+        window.open('compare.html', '_blank');
+    });
+});
+
+            </script>
 
             <script>
 
@@ -114,8 +167,13 @@ notFoundMessage.appendChild(updatepageLink);
                 if (chartTitle.includes(searchTerm)) {
                     chartContainer.style.display = 'block';
                     found = true;
+
                 } else {
                     chartContainer.style.display = 'none';
+                    
+
+                   
+
                 }
             });
 
@@ -123,12 +181,12 @@ notFoundMessage.appendChild(updatepageLink);
                 if (!invalidSearchTerm) {
                     // Update only if the previous search term was valid
                     const dynamicChartContainer = document.getElementById('dynamicChartContainer');
-                    dynamicChartContainer.innerHTML = ''; // Clear existing charts
                     dynamicChartContainer.appendChild(notFoundMessage);
                 }
                 invalidSearchTerm = true;
             } else {
                 invalidSearchTerm = false;
+                notFoundMessage.style.display = 'none';
             }
         });
     }
@@ -139,13 +197,157 @@ notFoundMessage.appendChild(updatepageLink);
 
     // ... (your existing code)
 
+    const searchFilters = document.querySelectorAll('.search-filter');
+
+if (searchFilters) {
+    searchFilters.forEach(function (filter) {
+        filter.addEventListener('click', function () {
+            const searchTerm = filter.textContent.replace(/"/g, ''); // Remove double quotes if present
+            chartSearchInput.value = searchTerm;
+
+            // Manually trigger the input event on the search input to perform search
+            const event = new Event('input', { bubbles: true });
+            chartSearchInput.dispatchEvent(event);
+        });
+    });
+}
+
+
 
 
             </script>
 
             <div id="dynamicChartContainer" class="allchart-container">
 
+                <div id="full-view" class="full-view">
+                    <div class="close-button">
+                    <span id="closeFullView" class="close">&times;</span>
+                    </div>
+                    <div id="fullChartContainer">
+                        <canvas id="fullChart" width="1360" height="600"></canvas>
+                    </div>
+                    <div class="button-fullview">
+                    <button class="button" style="width: 80%; font-size: 15px;">Download</button>
+                </div>
+                </div>
+
               </div>
+
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const chartData = {};
+                    let activeChart = null; // To keep track of the active chart instance
+        
+                    const charts = document.querySelectorAll('.achart');
+                    const fullView = document.getElementById('full-view');
+                    const fullChart = document.getElementById('fullChart');
+                    const closeFullView = document.getElementById('closeFullView');
+        
+                    function disableScroll() {
+                        document.body.style.overflow = 'hidden';
+                    }
+        
+                    // Function to enable scrolling
+                    function enableScroll() {
+                        document.body.style.overflow = '';
+                    }
+        
+                    closeFullView.addEventListener('click', function () {
+                        enableScroll(); // Enable scrolling when the full-view window is closed
+                        fullView.style.right = '-100%';
+                    });
+        
+                    fullView.addEventListener('transitionend', function () {
+                        if (fullView.style.right === '0px') {
+                            disableScroll(); // Disable scrolling when the full-view window is open
+                        }
+                    });
+        
+                    charts.forEach(chart => {
+                        chart.addEventListener('click', function () {
+                            const chartId = chart.querySelector('canvas').id;
+                            const clickedChart = chartData[chartId];
+        
+                            if (clickedChart) {
+    if (activeChart) {
+        activeChart.destroy(); // Destroy the active chart instance
+    }
+
+    const ctx = fullChart.getContext('2d');
+    
+    if (clickedChart.type === 'pie') {
+        fullChart.width = 600;
+        fullChart.height = 600;
+    } else {
+        fullChart.width = 1360;
+        fullChart.height = 600;
+    }
+
+    activeChart = new Chart(ctx, {
+        type: clickedChart.type,
+        data: clickedChart.data,
+        options: clickedChart.options,
+    });
+
+    fullView.style.right = '0';
+}
+
+                        });
+                    });
+        
+                    for (const chartId in linechartData) {
+        if (linechartData.hasOwnProperty(chartId)) {
+            chartData[chartId] = {
+                type: 'line',
+                data: linechartData[chartId],
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            tension: 0.4,
+                        },
+                    },
+                    // Add more chart options here
+                },
+            };
+        }
+    }
+        
+                    for (const chartId in barChartData) {
+                        if (barChartData.hasOwnProperty(chartId)) {
+                            chartData[chartId] = {
+                                type: 'bar',
+                                data: barChartData[chartId],
+                                options: {
+                                    responsive: false,
+                                    maintainAspectRatio: false,
+                                    backgroundColor: getRandomColor(), // Background color (adjust as needed)
+                                    borderRadius: 60, // Border radius (adjust as needed)
+                                    // Add more chart options here
+                                },
+                            };
+                        }
+                    }
+        
+                    for (const chartId in pieChartData) {
+                        if (pieChartData.hasOwnProperty(chartId)) {
+                            chartData[chartId] = {
+                                type: 'pie',
+                                data: pieChartData[chartId],
+                                options: {
+                                    responsive: false,
+                                    maintainAspectRatio: false,
+                                    backgroundColor: getRandomColors(5), // Adjust data.length as needed
+                                    borderWidth: 2,
+            borderColor: '#111111',
+                                    // Add more chart options here
+                                },
+                            };
+                        }
+                    }
+                });
+            </script>
 
     
         
@@ -202,19 +404,10 @@ for (const chartId in pieChartData) {
     }
 }
 
-function updateChartCount() {
-        const chartCountElement = document.getElementById('chartCount');
-        const chartContainer = document.querySelector('.allchart-container');
-
-        if (chartCountElement && chartContainer) {
-            const chartCount = chartContainer.querySelectorAll('.achart').length;
-            chartCountElement.textContent = `Total Charts: ${chartCount}`;
-        }
-    }
 
 });
 
-updateChartCount();
+
 
         </script>
 
@@ -297,7 +490,7 @@ function shortenURL(url, maxLength) {
         const charts = [
     /*general*/
     {
-title: 'Most Populated Countries',
+title: 'Population Growth In The Most Populated Countries',
 cat: 'Demographics',
 type: 'Line Chart',
 id: 'worldPop',
@@ -306,21 +499,21 @@ src: 'https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_popula
 
 
 {
-title: 'Social Media Trends',
+title: 'Social Media Trends Last Month',
 cat: 'Internet',
 type: 'Line Chart',
 id: 'smlastmonth',
 src:'https://trends.google.com/trends/explore?date=today%201-m&q=Instagram,TikTok,Facebook,Twitter&hl=en'
 },
 {
-title: 'Population Growth Over the Decades',
+title: 'Global Population Growth Over the Decades',
 cat: 'Demographics',
 type: 'Line Chart',
 id: 'popGrowthChart',
 src:'https://ourworldindata.org/population-growth-over-time'
 },
 {
-title: 'Gross Domestic Product',
+title: 'GDP Growth Of Top 10 Countries By GDP',
 cat: 'Economy',
 type: 'Line Chart',
 id: 'worldGDPChart',
@@ -341,7 +534,7 @@ id: 'literacyratesInd',
 src:'https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_literacy_rate'
 },
 {
-title: 'Religions in India',
+title: 'Religion Distribution In India',
 cat: 'Demographics',
 type: 'Pie Chart',
 id: 'religionIndiaChart',
@@ -350,82 +543,53 @@ src:'https://en.wikipedia.org/wiki/Religion_in_India'
 
 
 {
-    title: 'Population Density Trends',
+    title: 'Top 10 Population Density In Indian States',
     cat: 'Demographics',
-    type: 'Line Chart',
+    type: 'Bar Chart',
     id: 'populationDensity',
-    src:''
+    src:'https://testbook.com/static-gk/most-populated-state-in-india#:~:text=The%20state%20with%20the%20highest,lowest%20population%20density%20is%20Sikkim.'
 },
 {
-    title: 'Age Distribution Over Time',
-    cat: 'Demographics',
+    title: 'Top 10 Indian States By GDP',
+    cat: 'Economy',
     type: 'Bar Chart',
-    id: 'ageDistribution',
-src:''
+    id: 'indstateGDP',
+src:'https://www.forbesindia.com/article/explainers/gdp-of-indian-states-union-territories/88157/1'
 },
-{
-    title: 'Ethnicity Breakdown',
-    cat: 'Demographics',
-    type: 'Pie Chart',
-    id: 'ethnicityBreakdown',
-src:''
-},
-{
-    title: 'Birth Rates Across Regions',
-    cat: 'Demographics',
-    type: 'Line Chart',
-    id: 'birthRates',
-src:''
-},
-{
-    title: 'Mortality Rates by Causes',
-    cat: 'Demographics',
-    type: 'Bar Chart',
-    id: 'mortalityCauses',
-src:''
-},
-{
-    title: 'Migration Patterns Over Decades',
-    cat: 'Demographics',
-    type: 'Line Chart',
-    id: 'migrationPatterns',
-src:''
-},
-{
-    title: 'Gender Ratio Across Age Groups',
-    cat: 'Demographics',
-    type: 'Pie Chart',
-    id: 'genderRatio',
-src:''
-},
-{
-    title: 'Household Composition Changes',
-    cat: 'Demographics',
-    type: 'Bar Chart',
-    id: 'householdComposition',
-src:''
-},
-{
-    title: 'Urbanization Trends',
-    cat: 'Demographics',
-    type: 'Line Chart',
-    id: 'urbanizationTrends',
-src:''
-},
-{
-    title: 'Life Expectancy Across Regions',
-    cat: 'Demographics',
-    type: 'Bar Chart',
-    id: 'lifeExpectancy',
-src:''
-},
-
-
 
 
 
 
 ];
+
+function shuffleCharts(array) {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // Swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Before shuffling:', charts); // Log the initial order before shuffling
+    shuffleCharts(charts);
+    console.log('After shuffling:', charts); // Log the shuffled order
+
+    // Use the shuffled charts array in your code
+});
+
+
  
 charts.forEach(chart => {
             const chartContainer = document.createElement('div');
@@ -474,7 +638,7 @@ downloadIcon.style.marginLeft = '20px'; // Adjust spacing or add styles as neede
             // Get the canvas element of the specific chart
             const canvas = document.getElementById(chart.id);
 
-            // Create an anchor element to trigger the download
+
             const downloadLink = document.createElement('a');
             downloadLink.href = canvas.toDataURL('image/png'); // Convert the canvas to PNG image data
             downloadLink.download = `${chart.title}.png`; // Set the filename for the downloaded image
@@ -682,8 +846,3 @@ function rgbToHex(r, g, b) {
             
 </body>
 </html>
-
-        
-        
-
-        
