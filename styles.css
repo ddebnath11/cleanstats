@@ -1016,3 +1016,191 @@ button {
 #download-btn {
     margin-bottom: 10px;
   }
+
+.compare-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.compare-split {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.compare-split-left::after,
+.compare-split-right::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #000; /* Divider color */
+}
+
+.compare-split-left::after {
+    right: 0;
+}
+
+.compare-split-right::after {
+    left: 0;
+}
+
+.comp-input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+.subbutton {
+    width: 80%;
+    padding: 15px;
+    margin: 20px;
+    font-size: 18px;
+    cursor: not-allowed;
+}
+
+.subbutton:enabled {
+    cursor: pointer;
+    background-color: var(--slateful);
+    color: black;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Two columns with equal width */
+    gap: 20px; /* Adjust the gap between grid items as needed */
+    width: 100%;
+    margin: 0 auto; /* Center the grid container */
+}
+
+.grid-item {
+    border: 2px solid #333;
+    background-color: none; /* Background color for grid items */
+    padding: 25px;
+    border-radius: 8px;
+}
+
+/* Additional styling for the content inside each grid item */
+.grid-item h2 {
+    color: var(--slateful);
+    font-size: 40px;
+}
+
+.grid-item p {
+    color: var(--slateful);
+    font-size: 20px;
+}
+
+.compare-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Optional: Set a height if needed */
+}
+
+.button {
+    width: 30%;
+    background-color: #f4f4d5;
+    /* Add other button styles as needed */
+}
+
+
+#analysisWindow {
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--slateful);
+    color: #111111;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    box-sizing: border-box; /* Include padding in width and height */
+    overflow-y: auto; /* Enable scrolling if content exceeds window height */
+    border-left: 1px solid #ccc; /* Example border */
+    margin-top: 60px; 
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; 
+    border-radius: 25px 0px;
+}
+
+
+#analysisWindow h2 {
+    color: #111111;
+    font-size: 40px;
+  
+}
+
+#analysisWindow p {
+    color: #111111;
+    font-size: 20px;
+  
+}
+
+#closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.full-view {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Initially hidden outside the viewport */
+    width: 100%;
+    height: 100%;
+    background-color: #111111;
+    color: var(--slateful);
+    transition: right 0.3s ease; /* Smooth animation */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#fullChartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1360px; /* Same as chart width */
+    height: 600px; /* Same as chart height */
+}
+
+#fullChart {
+    width: 100%; /* Full width of its container */
+    height: 100%; /* Full height of its container */
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1;
+    color: white;
+}
+
+
+.full-view.hidden {
+    display: none;
+}
+
+.button-fullview {
+    margin-top: 15px; /* Adjust margin as needed */
+}
+
+  .hidden {
+    display: none;
+}
