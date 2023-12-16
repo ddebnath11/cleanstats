@@ -39,7 +39,7 @@
                         <!-- Add more chart types as needed -->
                     </div>
                 </li>
-                <li><a href="analyses.html">ANALYSES</a></li>
+                <li><a href="maps.html">MAPS</a></li>
                 <li><a href="live.html">LIVE</a></li>
                 <li><a href="about.html">ABOUT</a></li>
             </ul>
@@ -126,7 +126,7 @@ function updateChartCount() {
     const compareButton = document.getElementById('compareButton');
 
     compareButton.addEventListener('click', function () {
-        window.open('compare.html', '_blank');
+        window.open('create.html', '_blank');
     });
 });
 
@@ -226,9 +226,11 @@ if (searchFilters) {
                     <div id="fullChartContainer">
                         <canvas id="fullChart" width="1360" height="600"></canvas>
                     </div>
-                    <div class="button-fullview">
-                    <button class="button" style="width: 80%; font-size: 15px;">Download</button>
-                </div>
+                    <div class="button-fullview" style="display: flex; gap: 10px;">
+                        <button class="button"  id="downloadChart" style="width: 80%; font-size: 15px;">Download</button>
+                        <button class="button" id="changeThemeButton" style="width: 90%; font-size: 15px;">🖌️</button>
+                    </div>
+                    
                 </div>
 
               </div>
@@ -280,7 +282,7 @@ if (searchFilters) {
         fullChart.height = 600;
     } else {
         fullChart.width = 1360;
-        fullChart.height = 550;
+        fullChart.height = 600;
     }
 
     activeChart = new Chart(ctx, {
@@ -347,6 +349,44 @@ if (searchFilters) {
                         }
                     }
                 });
+
+                document.getElementById('downloadChart').addEventListener('click', function () {
+    const canvas = document.getElementById('fullChart');
+    const image = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'full_chart.png';
+    link.click();
+});
+
+document.getElementById('changeThemeButton').addEventListener('click', function () {
+    if (activeChart) {
+        changeChartTheme(activeChart);
+    }
+});
+
+function changeChartTheme(chart) {
+    const datasets = chart.data.datasets;
+    const newColors = generateRandomColors(datasets[0].data.length);
+
+    datasets.forEach((dataset, index) => {
+        dataset.backgroundColor = newColors[index];
+        dataset.borderColor = newColors[index].replace('0.2', '1'); // Adjust alpha for border
+    });
+
+    chart.update(); // Update the chart with new colors
+}
+
+// Function to generate random colors
+function generateRandomColors(count) {
+    const colors = [];
+    for (let i = 0; i < count; i++) {
+        const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Generate random color
+        colors.push(color);
+    }
+    return colors;
+}
             </script>
 
     
@@ -602,9 +642,9 @@ charts.forEach(chart => {
             catElement.textContent = chart.cat;
 
             const srcElement = document.createElement('p');
-            const shortenedSrc = shortenURL(chart.src, 30); // Adjust the length as needed
+            const shortenedSrc = shortenURL(chart.src, 30); 
             srcElement.textContent = shortenedSrc;
-            srcElement.style.cursor = 'pointer'; // Change cursor to pointer
+            srcElement.style.cursor = 'pointer'; 
 
             const canvasElement = document.createElement('canvas');
             canvasElement.id = chart.id;
@@ -846,3 +886,5 @@ function rgbToHex(r, g, b) {
             
 </body>
 </html>
+
+        
