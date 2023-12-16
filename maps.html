@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* Example styling, adjust as needed */
+        .map-title {
+            font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0;
+        }
+    
+        .data-source {
+            font-size: 13px;
+    font-weight: 200;
+    margin: 10px 0;
+        }
+    
+        .map {
+          width: 900px;
+          height: 500px;
+          /* Add other map styling if necessary */
+        }
+      </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/9ca22fae96.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
+    </style>
+    <title>StatGram</title>
+
+
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['geochart']
+        });
+        google.charts.setOnLoadCallback(drawMaps);
+    
+        function drawMaps() {
+            const mapsData = [
+                {
+                    title: 'G20 Members',
+                    dataSource: 'https://en.wikipedia.org/wiki/G20',
+                    mapId: 'g20MembersData',
+                },
+                {
+                    title: 'Global Population Densities',
+                    dataSource: 'DataSource 2',
+                    mapId: ' populationDensityData',
+                    // Add other map data objects
+                },
+            ];
+            function shortenURL(url, maxLength) {
+            if (url.length > maxLength) {
+                return url.substring(0, maxLength - 3) + "...";
+            }
+            return url;
+        }
+            const dynamicMapContainer = document.getElementById('dynamicMapContainer');
+    
+            mapsData.forEach(mapData => {
+                const mapContainer = document.createElement('div');
+                mapContainer.classList.add('map-container');
+    
+                const mapTitle = document.createElement('div');
+                mapTitle.classList.add('map-title');
+                mapTitle.textContent = mapData.title;
+                mapContainer.appendChild(mapTitle);
+    
+                const dataSource = document.createElement('div');
+                dataSource.classList.add('data-source');
+                dataSource.textContent = `${mapData.dataSource}`;
+                mapContainer.appendChild(dataSource);
+    
+                const mapDiv = document.createElement('div');
+                mapDiv.classList.add('map');
+                mapDiv.classList.add('google-geo-chart'); // For Google Charts
+                mapDiv.style.width = '625px';
+                mapDiv.style.height = '300px';
+                mapDiv.id = mapData.mapId; // Assigning the mapId
+                mapContainer.appendChild(mapDiv);
+    
+                dynamicMapContainer.appendChild(mapContainer);
+    
+               
+                const g20MembersData = [
+    ['Country', { role: 'style' }],
+    ['Argentina', '#f4f4d5'],
+    ['Australia', '#f4f4d5'],
+    ['Brazil', '#f4f4d5'],
+    ['Canada', '#f4f4d5'],
+    ['China', '#f4f4d5'],
+    ['France', '#f4f4d5'],
+    ['Germany', '#f4f4d5'],
+    ['India', '#f4f4d5'],
+    ['Indonesia', '#f4f4d5'],
+    ['Italy', '#f4f4d5'],
+    ['Japan', '#f4f4d5'],
+    ['Mexico', '#f4f4d5'],
+    ['Russia', '#f4f4d5'],
+    ['Saudi Arabia', '#f4f4d5'],
+    ['South Africa', '#f4f4d5'],
+    ['South Korea', '#f4f4d5'],
+    ['Turkey', '#f4f4d5'],
+    ['United Kingdom', '#f4f4d5'],
+    ['United States', '#f4f4d5'],
+
+];
+
+const populationDensityData = [
+    ['Country', 'Density (per sq. km)'],
+    ['India', 481],
+    ['China', 151],
+    ['United States', 37],
+    ['Indonesia', 148],
+    ['Pakistan', 312],
+    ['Nigeria', 246],
+    ['Brazil', 26],
+    ['Bangladesh', 1329],
+    ['Russia', 9],
+    ['Mexico', 66],
+    ['Ethiopia', 112],
+    ['Japan', 338],
+    ['Philippines', 394],
+    ['Egypt', 113],
+    ['DR Congo', 45],
+    ['Vietnam', 315],
+    ['Iran', 55],
+    ['Turkey', 110],
+    ['Germany', 238],
+    ['Thailand', 141],
+    ['United Kingdom', 280],
+    ['Tanzania', 76],
+    ['France', 118],
+    ['South Africa', 50],
+    ['Italy', 199],
+    ['Kenya', 97],
+    ['Myanmar', 84],
+    ['Colombia', 47],
+    ['South Korea', 531],
+    ['Uganda', 242],
+    ['Sudan', 26],
+    ['Spain', 95],
+    ['Argentina', 17],
+    ['Algeria', 19],
+    ['Iraq', 105],
+    ['Afghanistan', 65],
+    ['Poland', 134],
+    ['Canada', 4],
+    ['Morocco', 85],
+    ['Saudi Arabia', 17],
+    ['Ukraine', 63],
+    ['Angola', 29],
+    ['Uzbekistan', 80],
+    ['Yemen', 65],
+    ['Peru', 27],
+    ['Malaysia', 104],
+    ['Ghana', 150],
+    ['Mozambique', 43],
+    ['Nepal', 216],
+    ['Madagascar', 52],
+    ['Ivory Coast', 91],
+    ['Venezuela', 33],
+    ['Cameroon', 61],
+    ['Niger', 21],
+    ['Australia', 3],
+    ['North Korea', 217],
+    ['Taiwan', 661],
+    ['Mali', 19],
+    ['Burkina Faso', 85],
+    ['Syria', 126],
+    ['Sri Lanka', 354],
+    ['Malawi', 222],
+    ['Zambia', 28],
+    ['Romania', 86],
+    ['Chile', 26],
+    ['Kazakhstan', 7],
+    ['Chad', 15],
+    ['Ecuador', 73],
+    ['Somalia', 29],
+    ['Guatemala', 169],
+    ['Senegal', 92],
+    ['Netherlands', 523],
+    ['Cambodia', 96],
+    ['Zimbabwe', 43],
+    ['Guinea', 58],
+    ['Rwanda', 571],
+    ['Benin', 122],
+    ['Burundi', 516],
+
+
+ 
+];
+
+let mapSpecificData;
+let mapOptions;
+switch (mapData.mapId) {
+    case 'g20MembersData':
+        mapSpecificData = g20MembersData;
+        break;
+    case ' populationDensityData':
+        mapSpecificData =  populationDensityData;
+        break;
+
+}
+
+const chart = new google.visualization.GeoChart(mapDiv);
+const data = google.visualization.arrayToDataTable(mapSpecificData);
+const options = mapOptions || { backgroundColor: '#111111', defaultColor: '#fafaa7',   colorAxis: {
+                colors: ['#FFFF00', '#FFA500', '#FF0000'], 
+            },}; 
+
+chart.draw(data, options);
+});
+        }
+
+      
+    </script>
+    
+    <script src="static/js/main.js"></script>
+    <script src="loaded.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loading-screen" id="loadingScreen">
+            <div class="spinner"></div>
+            
+            </div>
+        <nav id="navbar">
+            <ul>
+                <li style="font-weight: 100;"><a href="home.html">S T A T G R A M</a></li>
+                <li ><a href="home.html"> HOME</a></li>
+                <li><a href="explore.html">EXPLORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">CHARTS</a>
+                    <div class="dropdown-content">
+                        <a href="line.html">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
+                        <a href="pie.html">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
+                        <a href="bar.html">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
+                        <!-- Add more chart types as needed -->
+                    </div>
+                </li>
+                <li  class="active"><a href="maps.html">MAPS</a></li>
+                <li><a href="live.html">LIVE</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+            </ul>
+        </nav>
+        <div class="content" id="content">
+
+            <div class="wide-container">
+    
+               
+                <div class="categories">
+                    <span class="category" data-cat="All">All</span>
+                    <span class="category" data-cat="Demographics">Demographics</span>
+                    <span class="category" data-cat="Economy">Economy</span>
+                    <span class="category" data-cat="Environment">Environment</span>
+                    
+                </div>
+
+
+
+                  
+                    
+                    
+                </div>
+            
+
+            <div class="wide-container">
+    
+               
+                <div class="search-filters">
+                    <span class="search-filter" >World</span>
+                    <span class="search-filter" >India</span>
+                
+                    
+                </div>
+
+
+
+                  
+                    
+                    
+                </div>
+            
+
+            
+        </div>
+        
+        
+        
+        <div class="wide-container">
+            <p id="chartCount" style="font-size: 25px; font-weight: 600;"></p>
+
+           
+            <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH A MAP..."
+            
+                fdprocessedid="00wbidm" style="font-weight: 700;">
+
+        </div>
+
+        <div id="dynamicMapContainer" class="allchart-container">
+
+
+
+
+
+                    
