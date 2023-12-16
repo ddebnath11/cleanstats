@@ -16,18 +16,43 @@
 
 :root {
     --slateful: #f4f4d5;
+    --peaceful-pink: #f7d3d9;
+--graceful-green: #d6f7d6;
+--cheerful-purple: #d4b7f7;
+--sereneful-sky: #c1e8f5;
   }
 
-html{
-    scroll-behavior: smooth;
-}
-::webkit-scrollbar {
-    width: 12px;
+  .theme-changer {
+    display: flex;
+    gap: 10px; /* Adjust the gap between color circles as needed */
 }
 
-::webkit-scrollbar-thumb {
-    background-color: var(--slateful);
+.color-circle {
+    width: 25px; /* Adjust the size of the color circles */
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
 }
+
+
+
+
+
+/* Customize the scrollbar track */
+body::-webkit-scrollbar {
+    width: 6px; /* Set the width of the scrollbar */
+}
+
+/* Customize the scrollbar thumb (the draggable handle) */
+body::-webkit-scrollbar-thumb {
+    background-color: var(--slateful); /* Set the color of the thumb */
+    border-radius: 6px; /* Set the border radius of the thumb */
+}
+
+/* Customize the scrollbar track when the user hovers over it */
+/* Customize the scrollbar thumb when the user hovers over it */
+
+
 
 body{
     background-color: #111111;
@@ -869,6 +894,15 @@ button {
 
 }
 
+.map-container {
+    border: 2px solid #333;
+    text-align: left;
+    padding: 32px; /* Adjust as needed */
+    background-color: #111111;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
 .livecounter h1 {
     font-size: 55px;
     font-weight: 800;
@@ -881,13 +915,25 @@ button {
     margin: 10px 0;
 }
 
+.map-container h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
 .achart p {
     font-size: 13px;
     font-weight: 200;
     margin: 10px 0;
 }
-/* Add transition for the transform property */
-/* Add transition for the transform property */
+
+.map-container p {
+    font-size: 13px;
+    font-weight: 200;
+    margin: 10px 0;
+}
+
+
 .achart {
     position: relative;
     transition: transform 0.3s ease, border-color 0.3s ease; /* Added transform and border-color transitions */
@@ -922,6 +968,40 @@ button {
     pointer-events: none; /* Ensure the tooltip doesn't interfere with interactions */
 }
 
+.map-container {
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease; /* Added transform and border-color transitions */
+}
+
+.map-container:hover {
+    cursor: pointer;
+    border: 2px solid var(--slateful);
+    transform: scale(0.98); /* Scale the entire element on hover */
+}
+
+.map-container:hover::after {
+
+    position: absolute;
+    bottom: 50%; /* Position the tooltip above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 15px; /* Adjust the font size */
+    background-color: var(--slateful);
+    color: #111111;
+    padding: 10px;
+    border-radius: 50px;
+    white-space: nowrap; /* Prevent tooltip from breaking into multiple lines */
+    opacity: 70%;
+    transition: opacity 0.3s ease; /* Add transition for opacity */
+}
+
+/* Hide the tooltip by default and fade it in on hover */
+.map-container::after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none; /* Ensure the tooltip doesn't interfere with interactions */
+}
+
 
 
 
@@ -938,6 +1018,8 @@ button {
     margin-top: 30px;
 }
 
+
+
 .wide-container {
     display: grid;
     grid-template-columns: repeat(1, 1.5fr);
@@ -948,6 +1030,8 @@ button {
     align-items: left;
     justify-content: space-between;
     padding: 10px;
+    position: sticky;
+
 }
 
 .search-container {
@@ -1045,6 +1129,10 @@ button {
     margin-bottom: 10px;
   }
 
+  .hidden {
+    display: none;
+}
+
 .compare-container {
     display: flex;
     flex-direction: column;
@@ -1100,8 +1188,8 @@ button {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* Two columns with equal width */
-    gap: 20px; /* Adjust the gap between grid items as needed */
+    grid-template-columns: repeat(4, 1fr); /* Four columns with equal width */
+    gap: none;
     width: 100%;
     margin: 0 auto; /* Center the grid container */
 }
@@ -1111,7 +1199,10 @@ button {
     background-color: none; /* Background color for grid items */
     padding: 25px;
     border-radius: 8px;
+    height: 500px;
+    width: 25%;
 }
+
 
 /* Additional styling for the content inside each grid item */
 .grid-item h2 {
@@ -1227,8 +1318,4 @@ button {
 
 .button-fullview {
     margin-top: 15px; /* Adjust margin as needed */
-}
-
-  .hidden {
-    display: none;
 }
