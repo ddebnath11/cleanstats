@@ -627,4 +627,26 @@ sectionElement.scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 
+<div class="phone-message" id="phoneMessage">
+    <p>This site is better experienced on a laptop or desktop.</p>
+    <button id="proceedButton">Proceed</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Check if the site is viewed on a phone
+    if (window.innerWidth <= 768) {
+        // Display the phone message
+        document.getElementById('phoneMessage').style.display = 'block';
+    }
+
+    // Attach a click event to the "Proceed" button
+    document.getElementById('proceedButton').addEventListener('click', function () {
+        // You can customize this part to redirect to the main content or take other actions
+        document.getElementById('phoneMessage').style.display = 'none';
+    });
+});
+
+</script>
+
         
