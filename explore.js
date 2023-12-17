@@ -72,8 +72,53 @@ indStatePopChart: createLineChart(
     ]
   ),
 
+  indInf2022 : createLineChart(
+    /*y axis*/ [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ],
+    /*x axis*/ [
+        { label: 'CPI', data: [6.01, 6.07, 6.95, 7.79, 7.04, 7.01, 6.71, 7.00, 7.41, 6.77, 5.88, 5.72], }
+    ]
+),
+
+
+  indUnemploymentYear: createLineChart(
+    [
+        '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'
+    ],
+    [
+        { label: 'Unemployment Rate', data: [5.56, 5.58, 5.53, 5.64, 5.63, 5.61, 5.60, 5.57, 5.41, 5.54, 5.55, 5.43, 5.41, 5.42, 5.44, 5.44, 5.42, 5.36, 5.33, 5.27, 8.00, 5.98] }
+    ]
+),
+
+indGDPYearly: createLineChart(
+    [
+        2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023
+    ],
+    [
+        { label: 'GDP (Billion)', data: [1675.62, 1823.05, 1827.64, 1856.72, 2039.13, 2103.59, 2294.80, 2651.47, 2702.93, 2835.61, 2671.60, 3150.31, 3385.09, 3737.00] }
+    ]
+),
+
+indFTYearly: createLineChart(
+    [
+        1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023
+    ],
+    [
+        { label: 'Export', data: [36.3, 43.1, 42.5, 44.5, 48.3, 57.24, 69.18, 76.23, 112.0, 176.4, 168.2, 201.1, 299.4, 298.4, 313.2, 318.2, 310.3, 262.3, 275.8, 303.52, 330.07, 314.31, 420, 676.53, 770.18] },
+        { label: 'Import', data: [50.2, 60.8, 54.5, 53.8, 61.6, 74.15, 89.33, 113.1, 100.9, 305.5, 274.3, 327.0, 461.4, 500.4, 467.5, 462.9, 447.9, 381, 384.3, 465.58, 514.07, 467.19, 612, 760.06, 892.18] }
+    ]
+)
+
+
+
+
+
+
+
 
 }
+
 
 
 
@@ -114,10 +159,38 @@ indstateGDP: {
     datasets: [
         { label: 'State GDP  (Rs Lakh Crore)', data: [38.79, 28.3, 25.62, 25, 24.39, 17.19, 15.7, 14.49, 14, 13.87] },
     ]
+},
+
+indStateUnemployment: {
+    labels: [
+        'Andhra Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh',
+        'Jammu & Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Meghalaya', 'Odisha',
+        'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh',
+        'Uttarakhand', 'West Bengal'
+    ],
+    datasets: [
+        { label: 'Unemployment Rate (%)', data: [7.7, 4.7, 19.1, 3.4, 20.8, 9.9, 2.3, 37.4, 7.6, 14.8, 18.0, 2.5, 7.4, 3.2, 3.1, 2.7, 0.9, 4.7, 6.8, 28.5, 13.6, 4.1, 4.1, 14.3, 4.3, 4.2, 5.5] }
+    ]
+},
+
+worldDebts: {
+    labels: [
+        'United States', 'United Kingdom', 'Japan', 'Netherlands', 'France', 'Ireland', 'Italy', 'Germany', 'Canada',
+        'China', 'Switzerland', 'Australia', 'Hong Kong', 'Spain', 'Brazil', 'Sweden', 'Mexico', 'Singapore', 'Norway',
+        'South Korea'
+    ],
+    datasets: [
+        { label: 'External Debt (in billions)', data: [32.9, 8.7, 4.34, 3.79, 3.28, 3.26, 3.1, 2.81, 2.65, 2.45, 2.3, 1.9, 1.82, 1.67, 1.49, 1.03, 0.88, 0.815, 0.738, 0.665] }
+    ]
 }
 
 
+
+
 }
+
+
+
 
     const pieChartData = {
         religionIndiaChart: {
@@ -130,23 +203,45 @@ indstateGDP: {
             data: [79.8, 14.2, 2.3, 1.7, 2]
         },
 
+        continentGDP: {
+            labels: ['Asia', 'North America', 'Europe', 'South America', 'Africa', 'Oceania'],
+            data: [38435, 31603, 25440, 4100, 2858, 1979]
+        }
+        
+
 
 
         
     };
-    createLineChart('worldPop', linechartData.worldPop.labels, linechartData.worldPop.datasets);
-    createLineChart('smlastmonth', linechartData.smlastmonth.labels, linechartData.smlastmonth.datasets);
+   
 
 
    
    
    
-    createBarChart('literacyratesInd', barChartData.literacyratesInd.labels, barChartData.literacyratesInd.datasets);
-    createBarChart('populationDensity', barChartData.populationDensity.labels, barChartData.populationDensity.datasets);
-    createBarChart('indstateGDP', barChartData.indstateGDP.labels, barChartData.indstateGDP.datasets);
+ 
+
+const linechartIDs = ['worldPop', 'smlastmonth', 'indInf2022', 'indUnemploymentYear', 'indGDPYearly', 'indFTYearly'];
+linechartIDs.forEach(initialID => {
+  createLineChart(initialID, linechartData[initialID].labels, linechartData[initialID].datasets);
+});
+
+    
+    
+    
+    
+ 
+const barChartIDs = ['literacyratesInd', 'populationDensity', 'indstateGDP', 'indStateUnemployment', 'worldDebts'];
+barChartIDs.forEach(initialID => {
+  createBarChart(initialID, barChartData[initialID].labels, barChartData[initialID].datasets);
+});
+
+    /*createBarChart('worldDebts', barChartData.worldDebts.labels, barChartData.worldDebts.datasets);*/
    
-   
-   
-   
-    createPieChart('religionIndiaChart', pieChartData.religionIndiaChart.labels, pieChartData.religionIndiaChart.data);
-    createPieChart('sampleIndiaChart', pieChartData.sampleIndiaChart.labels, pieChartData.sampleIndiaChart.data);
+  // Assuming pieChartData is an object with properties for each ID
+const pieChartIDs = ['religionIndiaChart', 'continentGDP'];
+
+// Loop through each ID and create a pie chart
+pieChartIDs.forEach(initialID => {
+  createPieChart(initialID, pieChartData[initialID].labels, pieChartData[initialID].data);
+});
