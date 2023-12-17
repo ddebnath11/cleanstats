@@ -23,7 +23,7 @@
 
 
 
-         <nav id="navbar">
+        <nav id="navbar">
             <ul>
                 <li style="font-weight: 100;"><a href="home.html">S T A T G R A M</a></li>
                 <li class="active"><a href="home.html"> HOME</a></li>
@@ -34,7 +34,7 @@
                         <a href="line.html">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
                         <a href="pie.html">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
                         <a href="bar.html">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
-                        <!-- Add more chart types as needed -->
+                     
                     </div>
                 </li>
                 <li><a href="maps.html">MAPS</a></li>
@@ -43,10 +43,11 @@
             </ul>
         </nav>
          <div class="content" id="content">
-            <div class="fab" onclick="window.location.href='create.html'">
+            <div class="fab" onclick="scrollToSection('create')">
                 + Create A Chart
                
             </div>
+        
 
           
             
@@ -55,13 +56,15 @@
           
           <h2>Exploring the beauty<br>of <span id="role">data</span>●</h2>
 
+          
+
           <canvas id="myChart" width="1360px" height="350px"></canvas>
 
 
 
   <script>
     function getRandomData() {
-        // Generate an array of 5 random numbers between 1 and 50
+ 
         return Array.from({ length: 5 }, () => Math.floor(Math.random() * 50) + 1);
     }
 
@@ -85,30 +88,30 @@
                 }],
             },
             options: {
-                responsive: false, // Disable responsiveness
-                maintainAspectRatio: false, // Disable aspect ratio
+                responsive: false, 
+                maintainAspectRatio: false,
                 scales: {
                     x: {
-                        display: false, // Hide x-axis
+                        display: false, 
                     },
                     y: {
-                        display: false, // Hide y-axis
+                        display: false, 
                     }
                 },
                 plugins: {
                     legend: {
-                        display: false, // Hide legend
+                        display: false, 
                     }
                 },
                 elements: {
                     line: {
-                        tension: 0.4, // Adjust the tension for the curve
+                        tension: 0.4, 
                     }
                 }
             },
         });
 
-    // Update the chart every 4 seconds
+
     setInterval(() => {
         updateChart(myChart, getRandomData());
     }, 4000);
@@ -146,14 +149,16 @@
                         tension: 0.4,
                     },
                 },
-                // other chart options...
+               
             },
         });
     }
 </script>
 
-<p> Elevate your data experience with our minimalist and elegant data visualization platform. Discover a myriad of charts, effortlessly analyze trends, and create customized visualizations. Immerse yourself in the seamless blend of aesthetics and insights, making data exploration an elegant and refined experience with CleanStats.</p>
-<hr class="divider">
+
+
+<p> Elevate your data experience with our minimalist and elegant data visualization platform. Discover a myriad of charts, effortlessly analyze trends, and create customized visualizations. Immerse yourself in the seamless blend of aesthetics and insights, making data exploration an elegant and refined experience with StatGram.</p>
+
 <div class="featured-content" style="text-align: left; margin-top: 35px;">
     <p style="opacity: 70%; font-size: 20px;">F E A T U R E D </p>
     <h2 style="font-size: 80px;">Evolution of Music</h2>
@@ -161,12 +166,12 @@
 
     <canvas id="musicGenreChart" width="1360" height="650" style="margin-top: 30px;"></canvas>
 
-    <script src="linechart.js" style="margin-top: 20px;"></script>
+    <script src="explore.js" style="margin-top: 20px;"></script>
     <button onclick="" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more in "music"</button>
     <button onclick="" style="background-color: #111111; color: #f5f5d3; border: 4px solid #f5f5d3; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more data</button>
 
     <script>
-        // Call the function to create a line chart
+
         const lineChartData = {
             labels: ['1970s', '1980s', '1990s', '2000s', '2010s'],
             datasets: [
@@ -212,7 +217,7 @@
                     borderWidth: 2,
                     fill: false,
                 },
-                // Add more genres and their data as needed
+
             ],
         };
 
@@ -220,12 +225,49 @@
     </script>
 </div>
 
- 
-<hr class="divider">
-<h2>Explore different types of charts and create your own.</h2>
-        <div class="card-container">
+<div class="search-text" style="margin-top: 150px;">
+<h2 style="text-align: left;">A <span class="custom-font">Comprehensive</span> library of data*</h2>
+</div>
+
+<div class="search-container" style="margin-bottom: 150px; align-items: left;">
+
+    <input type="text" class="rounded-search-bar" disabled>
+    <button type="submit" class="search-button" onclick="window.location.href='explore.html'">Explore</button>
+
+  </div>
+
+  <script>
+    const searchInput = document.querySelector('.rounded-search-bar');
+    const terms = ['Global Population Growth Over the Decades', 'Population Trends in Top Indian States', 'GDP Growth Of Top 10 Countries By GDP', 'Religion Distribution In India', 'Top 10 Indian States By GDP'];
+    let termIndex = 0;
+    let letterIndexa = 0;
+    let cursorVisible = true;
+  
+    function updateSearchValue() {
+      const currentTerm = terms[termIndex];
+      const displayedTerm = currentTerm.substring(0, letterIndexa);
+  
+      searchInput.value = displayedTerm + (cursorVisible ? '|' : '');
+  
+      letterIndexa++;
+  
+      if (letterIndexa > currentTerm.length + 1) {
+        termIndex = (termIndex + 1) % terms.length;
+        letterIndexa = 0;
+      }
+  
+      cursorVisible = !cursorVisible;
+    }
+  
+    setInterval(updateSearchValue, 100); 
+  </script>
+  
+  
+  <div class="featured-content" id="create-section" style="text-align: right; margin-top: 35px; margin-bottom: 150px;">
+    <h2><span>Create Your Own</span> Charts.</h2>
+    <div class="card-container" style="text-align: left;">
         
-        <div class="card">
+        <div class="card" onclick="window.location.href='line.html'">
             <img src="linegraph.png" alt="Image 1">
               <div class="card-content">
                   <h3>Beautiful line graphs.</h3>
@@ -237,7 +279,7 @@
       
           
       
-          <div class="card">
+          <div class="card" onclick="window.location.href='pie.html'">
             <img src="pie.png" alt="Image 1">
               <div class="card-content">
                   <h3>Have some pie!</h3>
@@ -245,12 +287,14 @@
               </div>
           </div>
 
+
+
           
 
     
 
       
-        <div class="card">
+        <div class="card" onclick="window.location.href='bar.html'">
             <img src="bargraph.png" alt="Image 1">
             <div class="card-content">
                 <h3>Who's taller?</h3>
@@ -261,10 +305,65 @@
       
 
         </div>
-        <hr class="divider">
+        </div>
+
+        <div class="featured-content"  id="maps-section" style="margin-top: 150px;">
+            <h2>Maps that <span>Tell Stories</span></h2>
+            <p>Dive into our world of color-coded maps, unraveling intricate global data at your fingertips. Explore an array of insights, trends, and statistics encapsulated in vivid cartography. Experience an immersive journey through our collection, decoding the world's complexities with ease.</p>
+            <h2 style="font-size: 80px;">G20 Members</h2>
+            <div id="regions_div" style="width: 1360; height: 900px;"></div>
+            <button onclick="window.location.href='maps.html'" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more maps</button>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+              google.charts.load('current', {
+                'packages':['geochart'],
+                // Note: you don't need to specify a callback to draw the chart as it will be drawn in the script
+              });
+          
+              google.charts.setOnLoadCallback(drawRegionsMap);
+          
+              function drawRegionsMap() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Country', { role: 'style' }],
+                  ['Argentina', '#f4f4d5'],
+                  ['Australia', '#f4f4d5'],
+                  ['Brazil', '#f4f4d5'],
+                  ['Canada', '#f4f4d5'],
+                  ['China', '#f4f4d5'],
+                  ['France', '#f4f4d5'],
+                  ['Germany', '#f4f4d5'],
+                  ['India', '#f4f4d5'],
+                  ['Indonesia', '#f4f4d5'],
+                  ['Italy', '#f4f4d5'],
+                  ['Japan', '#f4f4d5'],
+                  ['Mexico', '#f4f4d5'],
+                  ['Russia', '#f4f4d5'],
+                  ['Saudi Arabia', '#f4f4d5'],
+                  ['South Africa', '#f4f4d5'],
+                  ['South Korea', '#f4f4d5'],
+                  ['Turkey', '#f4f4d5'],
+                  ['United Kingdom', '#f4f4d5'],
+                  ['United States', '#f4f4d5'],
+                ]);
+          
+                var options = {
+        backgroundColor: '#111111', 
+        colorAxis: { colors: ['#f4f4d5'] }, 
+        defaultColor: '#fafaa7',
+      };
+          
+                var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+          
+                chart.draw(data, options);
+              }
+            </script>
+        </div>
 
 
-        <div class="featured-content" style="text-align: left; margin-top: 35px;">
+
+
+        <div class="featured-content" style="text-align: left; margin-top: 150px;">
+            <h2 style="font-size: 35px;"><span>Around The World</span> each second.</h2>
             <p>Live world population</p>
             <h2 id="worldPopulation" style="font-size: 150px;"></h2>
 
@@ -276,34 +375,34 @@
                 let worldPopulation = 8077972111;
                 let birthCounter = 0;
         
-                // Function to update world population
+
                 function updateWorldPopulation() {
-                    // Simulate changes (add new births and subtract deaths)
+
                     worldPopulation += Math.floor(Math.random() * 100) - 50;
         
-                    // Update the HTML content
+
                     document.getElementById('worldPopulation').textContent = `${worldPopulation}`;
                 }
         
-                // Update world population every second (for demonstration purposes)
+
                 setInterval(updateWorldPopulation, 500);
         
-                // Display the initial population
+
                 updateWorldPopulation();
 
 
                 function updateBirthCounter() {
-        // Update birth counter
+
         birthCounter += 2;
 
-        // Display updated value
+
         document.getElementById('birthCounter').textContent = birthCounter.toLocaleString();
 
-        // Repeat the update every half a second
+
         setTimeout(updateBirthCounter, 500);
     }
 
-    // Start updating birth counter
+    
     updateBirthCounter();
             </script>
 
@@ -313,41 +412,72 @@
 
 
 <script>
-    // Initial value
     let deathCounter = 0;
 
-    // Function to update death counter
     function updateDeathCounter() {
-        // Update death counter
+
         deathCounter += 1;
 
-        // Display updated value
         document.getElementById('deathCounter').textContent = deathCounter.toLocaleString();
 
-        // Repeat the update every half a second
+
         setTimeout(updateDeathCounter, 500);
     }
 
-    // Start updating death counter
+
     updateDeathCounter();
 </script>
 
-<button onclick="" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more live counters</button>
+<button onclick="window.location.href='live.html'" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more live counters</button>
 
         
         </div>
 
-        <!-- Add this where you want the divider to appear -->
-<hr class="divider">
+        <div id="newsletter" class="featured-content" style="align-items: center; text-align: center; margin-top: 150px;">
+            <h2><span>Subscribe</span> for daily data insights.</h2>
+            <div class="search-container" style="margin-bottom: 150px; display: flex; justify-content: center;">
+                <button type="button" class="search-button" onclick="window.open('https://forms.gle/Gvijup1Z6T9d44oo7', '_blank')">Get newsletter</button>
+
+            </div>
+        </div>
+        
+        
+    <script>
+        var emailList = []; // Array to store email addresses
+    
+        function storeEmail() {
+            var email = document.getElementById('emailInput').value;
+            if (validateEmail(email)) {
+                emailList.push(email);
+                console.log("Email added: " + email);
+                // You can do further processing or store it wherever needed
+            } else {
+                alert("Please enter a valid email address");
+            }
+        }
+    
+        // Function to validate email format
+        function validateEmail(email) {
+            // Basic email format validation
+            var regex = /\S+@\S+\.\S+/;
+            return regex.test(email);
+        }
+    </script>
+        
+
+</div>
+
+
+<hr class="divider" style="margin-top: 150px;">
 
 
 
-<!-- Place this code at the end of each HTML page, just before the closing </body> tag -->
+
 <footer>
 
 
-        <p>C L E A N S T A T S</p>
-            <h3>&copy; 2023 CleanStats. All rights reserved.</h3>
+        <p>S T A T G R A M</p>
+        <h3>&copy; 2023 CleanStats. All rights reserved.</h3>
 
 </footer>
 
@@ -465,5 +595,36 @@ interval = setInterval(updateRole, 100); // Typing speed
 
         </script>
 
+<script>
+                      
+            
+    function showSection(section) {
+        document.getElementById(`${section}-section`).style.display = 'block';
+    }
+
+    function scrollToSection(section) {
+        const sectionElement = document.getElementById(`${section}-section`);
+        if (sectionElement) {
+            sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
+<script>
+function toggleDescription(element) {
+element.classList.toggle("active");
+}
+
+function showSection(section) {
+document.getElementById(`${section}-section`).style.display = 'block';
+}
+
+function scrollToSection(section) {
+const sectionElement = document.getElementById(`${section}-section`);
+if (sectionElement) {
+sectionElement.scrollIntoView({ behavior: 'smooth' });
+}
+}
+</script>
 
         
