@@ -170,6 +170,22 @@ footer {
     display: inline-block; /* Ensure the gradient is applied only to the text, not the entire container */
 }
 
+@font-face {
+    font-family: 'Thesignature';
+    src: url('./Thesignature.ttf') format('truetype'), 
+         url('./Thesignature.otf') format('opentype'); 
+  }
+
+.search-text h2 span{
+    font-family: 'Thesignature','Satoshi';
+}
+
+.featured-content h2 span{
+    font-family: 'Thesignature','Satoshi';
+}
+
+
+
 .container h2 .gradient-text {
     background: linear-gradient(45deg, var(--slateful), #f8f8da); /* Purple gradient */
     -webkit-background-clip: text;
