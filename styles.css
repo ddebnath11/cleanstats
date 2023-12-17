@@ -1319,3 +1319,62 @@ button {
 .button-fullview {
     margin-top: 15px; /* Adjust margin as needed */
 }
+
+.search-container {
+    display: flex;
+    align-items: center;
+  }
+
+.rounded-search-bar {
+    width: 70%;
+    padding: 35px;
+    border: 4px solid #f4f4d5;
+    border-radius: 60px;
+    outline: none;
+    transition: border-color 0.3s, transform 0.3s;
+    background-color: #111111;
+    color:var(--slateful);
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .rounded-search-bar:focus {
+    border-color: #f4f4d5;
+
+  }
+
+  .search-button {
+    border: none;
+    background-color: #f4f4d5;
+    color: #1a1a1a;
+    padding: 35px;
+    border-radius: 60px;
+    margin-left: 10px;
+    width: 20%;
+    cursor: pointer;
+    font-size:30px ;
+  }
+
+  .search-terms {
+    font-size: 30px;
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typewriter 4s steps(20, end) infinite, blink-caret 0.8s step-end infinite;
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: #f4f4d5;
+    }
+  }
