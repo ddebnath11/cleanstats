@@ -1,426 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/9ca22fae96.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-    <link rel="icon" type="image/png" href="fav.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&family=Poppins:wght@600&display=swap');
     </style>
     <title>StatGram</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="static/js/main.js"></script>
-   
+    <script src="loaded.js"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
 </head>
 
-
+<body>
     <div class="container">
-
-
-
-
+        <div class="loading-screen" id="loadingScreen">
+            <div class="spinner"></div>
+            
+            </div>
         <nav id="navbar">
             <ul>
                 <li style="font-weight: 100;"><a href="home.html">S T A T G R A M</a></li>
-                <li class="active"><a href="home.html"> HOME</a></li>
-                <li><a href="explore.html">EXPLORE</a></li>
+                <li ><a href="home.html"> HOME</a></li>
+                <li class="active"><a href="explore.html">EXPLORE</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">CHARTS</a>
                     <div class="dropdown-content">
                         <a href="line.html">LINE GRAPH<i class="fi fi-ss-chart-line-up"></i></a>
                         <a href="pie.html">PIE CHART   <i class="fi fi-ss-chart-pie-alt"></i></a>
                         <a href="bar.html">BAR GRAPH  <i class="fi fi-ss-stats"></i></a>
-                     
+                        <!-- Add more chart types as needed -->
                     </div>
                 </li>
-                <li><a href="maps.html">INFOGRAPHICS</a></li>
+                <li><a href="maps.html">MAPS</a></li>
                 <li><a href="live.html">LIVE</a></li>
                 <li><a href="about.html">ABOUT</a></li>
             </ul>
         </nav>
-         <div class="content" id="content">
-            <div class="fab" onclick="scrollToSection('create')">
-                + Create A Chart
-               
-            </div>
-        
-
-          
-            
+        <div class="content" id="content">
             
 
-          
-          <h2>Exploring the beauty<br>of <span id="role">data</span>●</h2>
-
-          
-
-          <canvas id="myChart" width="1360px" height="350px"></canvas>
-
-
-
-  <script>
-    function getRandomData() {
- 
-        return Array.from({ length: 5 }, () => Math.floor(Math.random() * 50) + 1);
-    }
-
-    function updateChart(chart, data) {
-        chart.data.datasets[0].data = data;
-        chart.update();
-    }
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: Array.from({ length: 5 }, (_, i) => ''),
-                datasets: [{
-                    data: [10, 20, 15, 25, 18],
-                    borderColor: '#f5f5d3',
-                    borderWidth: 4,
-                    pointBackgroundColor: '#f5f5d3',
-                    pointRadius: 6,
-                    fill: false,
-                }],
-            },
-            options: {
-                responsive: false, 
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        display: false, 
-                    },
-                    y: {
-                        display: false, 
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false, 
-                    }
-                },
-                elements: {
-                    line: {
-                        tension: 0.4, 
-                    }
-                }
-            },
-        });
-
-
-    setInterval(() => {
-        updateChart(myChart, getRandomData());
-    }, 4000);
-</script>
-
-
-
-<script>
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    function createLineChart(canvasId, data) {
-        const ctx = document.getElementById(canvasId).getContext('2d');
-        const datasets = data.datasets.map(dataset => ({
-            ...dataset,
-            borderColor: getRandomColor(),
-        }));
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                ...data,
-                datasets,
-            },
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
-                elements: {
-                    line: {
-                        tension: 0.4,
-                    },
-                },
+            <div class="wide-container">
+    
                
-            },
-        });
-    }
-</script>
+                <div class="categories">
+                    <span class="category" data-cat="All">All</span>
+                    <span class="category" data-cat="Demographics">Demographics</span>
+                    <span class="category" data-cat="Economy">Economy</span>
+                    <span class="category" data-cat="Environment">Environment</span>
+                    <span class="category" data-cat="Business">Business</span>
+                    <span class="category" data-cat="Technology">Technology</span>
+                    <span class="category" data-cat="Science">Science</span>
+                    <span class="category" data-cat="Health">Health</span>
+                    <span class="category" data-cat="Education">Education</span>
+                    <span class="category" data-cat="Social">Social</span>
+                    <span class="category" data-cat="Politics">Politics</span>
+                    <span class="category" data-cat="Entertainment">Entertainment</span>
+                    <span class="category" data-cat="Internet">Internet</span>
+                </div>
 
 
 
-<p> Elevate your data experience with our minimalist and elegant data visualization platform. Discover a myriad of charts, effortlessly analyze trends, and create customized visualizations. Immerse yourself in the seamless blend of aesthetics and insights, making data exploration an elegant and refined experience with StatGram.</p>
+                  
+                    
+                    
+                </div>
 
-<div class="featured-content" style="text-align: left; margin-top: 35px;">
-    <p style="opacity: 70%; font-size: 20px;">F E A T U R E D </p>
-    <h2 style="font-size: 80px;">Evolution of Music</h2>
-    <p>This line chart illustrates the changing landscape of genres over five decades, revealing the ebb and flow of popularity. From the resounding echoes of Rock in the 1970s to the rhythmic beats of Hip Hop in the 2000s, witness the dynamic shifts in musical preferences.</p>
-
-    <canvas id="musicGenreChart" width="1360" height="650" style="margin-top: 30px;"></canvas>
-
-    <script src="explore.js" style="margin-top: 20px;"></script>
-    <button onclick="" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more in "music"</button>
-    <button onclick="" style="background-color: #111111; color: #f5f5d3; border: 4px solid #f5f5d3; width:auto; padding:16px 26px; margin-top: 20px;" >Explore more data</button>
-
-    <script>
-
-        const lineChartData = {
-            labels: ['1970s', '1980s', '1990s', '2000s', '2010s'],
-            datasets: [
-                {
-                    label: 'Rock',
-                    data: [500, 600, 400, 300, 200],
-                    borderColor: 'red',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Pop',
-                    data: [200, 300, 500, 700, 600],
-                    borderColor: 'blue',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Hip Hop',
-                    data: [100, 200, 400, 800, 1000],
-                    borderColor: 'green',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Country',
-                    data: [50, 100, 150, 200, 250],
-                    borderColor: 'orange',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Electronic',
-                    data: [300, 400, 300, 200, 100],
-                    borderColor: 'purple',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'R&B',
-                    data: [120, 150, 180, 200, 250],
-                    borderColor: 'brown',
-                    borderWidth: 2,
-                    fill: false,
-                },
-
-            ],
-        };
-
-        createLineChart('musicGenreChart', lineChartData);
-    </script>
-</div>
-
-<div class="search-text" style="margin-top: 150px;">
-<h2 style="text-align: left;">A <span class="custom-font">Comprehensive</span> library of data*</h2>
-</div>
-
-<div class="search-container" style="margin-bottom: 150px; align-items: left;">
-
-    <input type="text" class="rounded-search-bar" disabled>
-    <button type="submit" class="search-button" onclick="window.location.href='explore.html'">Explore</button>
-
-  </div>
-
-  <script>
-    const searchInput = document.querySelector('.rounded-search-bar');
-    const terms = ['Global Population Growth Over the Decades', 'Population Trends in Top Indian States', 'GDP Growth Of Top 10 Countries By GDP', 'Religion Distribution In India', 'Top 10 Indian States By GDP'];
-    let termIndex = 0;
-    let letterIndexa = 0;
-    let cursorVisible = true;
-  
-    function updateSearchValue() {
-      const currentTerm = terms[termIndex];
-      const displayedTerm = currentTerm.substring(0, letterIndexa);
-  
-      searchInput.value = displayedTerm + (cursorVisible ? '|' : '');
-  
-      letterIndexa++;
-  
-      if (letterIndexa > currentTerm.length + 1) {
-        termIndex = (termIndex + 1) % terms.length;
-        letterIndexa = 0;
-      }
-  
-      cursorVisible = !cursorVisible;
-    }
-  
-    setInterval(updateSearchValue, 100); 
-  </script>
-  
-  
-  <div class="featured-content" id="create-section" style="text-align: right; margin-top: 35px; margin-bottom: 150px;">
-    <h2><span>Create Your Own</span> Charts.</h2>
-    <div class="card-container" style="text-align: left;">
-        
-        <div class="card" onclick="window.location.href='line.html'">
-            <img src="linegraph.png" alt="Image 1">
-              <div class="card-content">
-                  <h3>Beautiful line graphs.</h3>
-                  <p>LINE GRAPHS</p>
-              </div>
-          </div>
-      
-          
-      
-          
-      
-          <div class="card" onclick="window.location.href='pie.html'">
-            <img src="pie.png" alt="Image 1">
-              <div class="card-content">
-                  <h3>Have some pie!</h3>
-                  <p>PIE CHARTS</p>
-              </div>
-          </div>
-
-
-
-          
-
+                <div class="wide-container">
     
+               
+                    <div class="search-filters">
+                        <span class="search-filter" >"Global"</span>
+                        <span class="search-filter" >"India"</span>
+                        <span class="search-filter" >"GDP"</span>
+                        <span class="search-filter" >"Top 10"</span>
+                        
+                    </div>
+    
+    
+    
+                      
+                        
+                        
+                    </div>
+                
 
-      
-        <div class="card" onclick="window.location.href='bar.html'">
-            <img src="bargraph.png" alt="Image 1">
-            <div class="card-content">
-                <h3>Who's taller?</h3>
-                <p>BAR GRAPHS</p>
+                
             </div>
-        </div>
-    
-      
+            
+            
+            
+            <div class="wide-container">
+                <p id="chartCount" style="font-size: 25px; font-weight: 600;"></p>
 
-        </div>
-        </div>
-
-        <div class="featured-content"  id="maps-section" style="margin-top: 150px;">
-            <h2>We <span>Tell Stories</span> Visually</h2>
-            <p>Most of us are visual learners. That's why we believe in the power of visual storytelling through captivating infographics. Distilling complex information into a seamless blend of images and concise text, we transform raw data into compelling narratives. Our infographics go beyond mere numbers, creating a visual language that resonates, enlightens, and sparks understanding. Whether unraveling economic trends, demystifying scientific discoveries, or shedding light on societal shifts, our visual stories aim to simplify complexity and provide you with a deeper, more intuitive insight into the world around us.</p>
-           
-        </div>
+                <script>
 
 
+                    document.addEventListener('DOMContentLoaded', function () {
+    updateChartCount(); // Call the function once the DOM is loaded
+});
 
+function updateChartCount() {
+    const chartCountElement = document.getElementById('chartCount');
+    const chartContainer = document.querySelector('.allchart-container');
 
-        <div class="featured-content" style="text-align: left; margin-top: 150px;">
-            <h2 style="font-size: 35px;"><span>Around The World</span> each second.</h2>
-            <p>Live world population</p>
-            <h2 id="worldPopulation" style="font-size: 150px;"></h2>
+    if (chartCountElement && chartContainer) {
+        const chartCount = chartContainer.querySelectorAll('.achart').length;
+        chartCountElement.textContent = `${chartCount}`;
+    }
+}
+                </script>
+                <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
+                
+                    fdprocessedid="00wbidm" style="font-weight: 700;">
+                   
+            </div>
 
-            <p>Births since you opened this page:</p>
-            <h2 id="birthCounter" style="font-size: 150px;">0</h2>
-        
             <script>
+                document.addEventListener('DOMContentLoaded', function () {
+    const compareButton = document.getElementById('compareButton');
 
-                let worldPopulation = 8077972111;
-                let birthCounter = 0;
-        
+    compareButton.addEventListener('click', function () {
+        window.open('create.html', '_blank');
+    });
+});
 
-                function updateWorldPopulation() {
-
-                    worldPopulation += Math.floor(Math.random() * 100) - 50;
-        
-
-                    document.getElementById('worldPopulation').textContent = `${worldPopulation}`;
-                }
-        
-
-                setInterval(updateWorldPopulation, 500);
-        
-
-                updateWorldPopulation();
-
-
-                function updateBirthCounter() {
-
-        birthCounter += 2;
-
-
-        document.getElementById('birthCounter').textContent = birthCounter.toLocaleString();
-
-
-        setTimeout(updateBirthCounter, 500);
-    }
-
-    
-    updateBirthCounter();
             </script>
 
-<p>Deaths since you opened this page:</p>
-<h2 id="deathCounter" style="font-size: 150px;">0</h2>
+            <script>
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const chartSearchInput = document.getElementById('chartSearchInput');
+    const chartContainers = document.querySelectorAll('.achart');
+    const notFoundMessage = document.createElement('p');
+    notFoundMessage.textContent = 'Sorry. We could not find that chart. ';
+    const contributeLink = document.createElement('a');
+const updatepageLink = document.createElement('a');
+contributeLink.textContent = 'Contribute a chart';
+updatepageLink.textContent = 'Reset search results';
+contributeLink.href = 'contribution.html'; // Replace 'contribution.html' with the appropriate link
+updatepageLink.href = 'explore.html';
+contributeLink.style.color = 'blue';
+updatepageLink.style.color = 'blue';
+contributeLink.style.textDecoration = 'underline';
+
+notFoundMessage.appendChild(contributeLink);
+notFoundMessage.appendChild(document.createElement('br')); // Add a line break
+notFoundMessage.appendChild(updatepageLink);
+
+    let invalidSearchTerm = false; // Flag to track invalid search term
+
+    if (chartSearchInput) {
+        chartSearchInput.addEventListener('input', function () {
+            const searchTerm = chartSearchInput.value.trim().toLowerCase();
+            let found = false;
+
+            chartContainers.forEach(function (chartContainer) {
+                const chartTitle = chartContainer.querySelector('h1').textContent.toLowerCase();
+
+                if (chartTitle.includes(searchTerm)) {
+                    chartContainer.style.display = 'block';
+                    found = true;
+
+                } else {
+                    chartContainer.style.display = 'none';
+                    
+
+                   
+
+                }
+            });
+
+            if (!found) {
+                if (!invalidSearchTerm) {
+                    // Update only if the previous search term was valid
+                    const dynamicChartContainer = document.getElementById('dynamicChartContainer');
+                    dynamicChartContainer.appendChild(notFoundMessage);
+                }
+                invalidSearchTerm = true;
+            } else {
+                invalidSearchTerm = false;
+                notFoundMessage.style.display = 'none';
+            }
+        });
+    }
+});
 
 
 
-<script>
-    let deathCounter = 0;
 
-    function updateDeathCounter() {
+    // ... (your existing code)
 
-        deathCounter += 1;
+    const searchFilters = document.querySelectorAll('.search-filter');
 
-        document.getElementById('deathCounter').textContent = deathCounter.toLocaleString();
+if (searchFilters) {
+    searchFilters.forEach(function (filter) {
+        filter.addEventListener('click', function () {
+            const searchTerm = filter.textContent.replace(/"/g, ''); // Remove double quotes if present
+            chartSearchInput.value = searchTerm;
+
+            // Manually trigger the input event on the search input to perform search
+            const event = new Event('input', { bubbles: true });
+            chartSearchInput.dispatchEvent(event);
+        });
+    });
+}
 
 
-        setTimeout(updateDeathCounter, 500);
+
+
+            </script>
+
+            <div id="dynamicChartContainer" class="allchart-container">
+
+                <div id="full-view" class="full-view">
+                    <div class="close-button">
+                    <span id="closeFullView" class="close">&times;</span>
+                    </div>
+                    <div id="fullChartContainer">
+                        <canvas id="fullChart" width="1360" height="600"></canvas>
+                    </div>
+                    <div class="button-fullview" style="display: flex; gap: 10px;">
+                        <button class="button"  id="downloadChart" style="width: 80%; font-size: 15px;">Download</button>
+                    </div>
+                    
+                </div>
+
+              </div>
+
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const chartData = {};
+                    let activeChart = null; // To keep track of the active chart instance
+        
+                    const charts = document.querySelectorAll('.achart');
+                    const fullView = document.getElementById('full-view');
+                    const fullChart = document.getElementById('fullChart');
+                    const closeFullView = document.getElementById('closeFullView');
+        
+                    function disableScroll() {
+                        document.body.style.overflow = 'hidden';
+                    }
+        
+                    // Function to enable scrolling
+                    function enableScroll() {
+                        document.body.style.overflow = '';
+                    }
+        
+                    closeFullView.addEventListener('click', function () {
+                        enableScroll(); // Enable scrolling when the full-view window is closed
+                        fullView.style.right = '-100%';
+                    });
+        
+                    fullView.addEventListener('transitionend', function () {
+                        if (fullView.style.right === '0px') {
+                            disableScroll(); // Disable scrolling when the full-view window is open
+                        }
+                    });
+        
+                    charts.forEach(chart => {
+                        chart.addEventListener('click', function () {
+                            const chartId = chart.querySelector('canvas').id;
+                            const clickedChart = chartData[chartId];
+        
+                            if (clickedChart) {
+    if (activeChart) {
+        activeChart.destroy(); // Destroy the active chart instance
     }
 
-
-    updateDeathCounter();
-</script>
-
-<button onclick="window.location.href='live.html'" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more live counters</button>
-
-        
-        </div>
-
-        <div id="newsletter" class="featured-content" style="align-items: center; text-align: center; margin-top: 150px;">
-            <h2><span>Subscribe</span> for daily data insights.</h2>
-            <div class="search-container" style="margin-bottom: 150px; display: flex; justify-content: center;">
-                <button type="button" class="search-button" onclick="window.open('https://forms.gle/Gvijup1Z6T9d44oo7', '_blank')">Get newsletter</button>
-
-            </div>
-        </div>
-        
-        
-    <script>
-        var emailList = []; // Array to store email addresses
+    const ctx = fullChart.getContext('2d');
     
-        function storeEmail() {
-            var email = document.getElementById('emailInput').value;
-            if (validateEmail(email)) {
-                emailList.push(email);
-                console.log("Email added: " + email);
-                // You can do further processing or store it wherever needed
-            } else {
-                alert("Please enter a valid email address");
-            }
+    if (clickedChart.type === 'pie') {
+        fullChart.width = 600;
+        fullChart.height = 600;
+    } else {
+        fullChart.width = 1360;
+        fullChart.height = 600;
+    }
+
+    activeChart = new Chart(ctx, {
+        type: clickedChart.type,
+        data: clickedChart.data,
+        options: clickedChart.options,
+    });
+
+    fullView.style.right = '0';
+}
+
+                        });
+                    });
+        
+                    for (const chartId in linechartData) {
+        if (linechartData.hasOwnProperty(chartId)) {
+            chartData[chartId] = {
+                type: 'line',
+                data: linechartData[chartId],
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            tension: 0.4,
+                        },
+                    },
+                    // Add more chart options here
+                },
+            };
         }
+    }
+        
+                    for (const chartId in barChartData) {
+                        if (barChartData.hasOwnProperty(chartId)) {
+                            chartData[chartId] = {
+                                type: 'bar',
+                                data: barChartData[chartId],
+                                options: {
+                                    responsive: false,
+                                    maintainAspectRatio: false,
+                                    backgroundColor: getRandomColor(), // Background color (adjust as needed)
+                                    borderRadius: 60, // Border radius (adjust as needed)
+                                    // Add more chart options here
+                                },
+                            };
+                        }
+                    }
+        
+                    for (const chartId in pieChartData) {
+                        if (pieChartData.hasOwnProperty(chartId)) {
+                            chartData[chartId] = {
+                                type: 'pie',
+                                data: pieChartData[chartId],
+                                options: {
+                                    responsive: false,
+                                    maintainAspectRatio: false,
+                                    backgroundColor: getRandomColors(5), // Adjust data.length as needed
+                                    borderWidth: 2,
+            borderColor: '#111111',
+                                    // Add more chart options here
+                                },
+                            };
+                        }
+                    }
+                });
+
+                document.getElementById('downloadChart').addEventListener('click', function () {
+    const canvas = document.getElementById('fullChart');
+    const image = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = 'full_chart.png';
+    link.click();
+});
+
+document.getElementById('changeThemeButton').addEventListener('click', function () {
+    if (activeChart) {
+        changeChartTheme(activeChart);
+    }
+});
+
+function changeChartTheme(chart) {
+    const datasets = chart.data.datasets;
+    const newColors = generateRandomColors(datasets[0].data.length);
+
+    datasets.forEach((dataset, index) => {
+        dataset.backgroundColor = newColors[index];
+        dataset.borderColor = newColors[index].replace('0.2', '1'); // Adjust alpha for border
+    });
+
+    chart.update();
+}
+
+// Function to generate random colors
+function generateRandomColors(count) {
+    const colors = [];
+    for (let i = 0; i < count; i++) {
+        const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Generate random color
+        colors.push(color);
+    }
+    return colors;
+}
+            </script>
+
     
-        // Function to validate email format
-        function validateEmail(email) {
-            // Basic email format validation
-            var regex = /\S+@\S+\.\S+/;
-            return regex.test(email);
-        }
-    </script>
         
 
-</div>
+        <script>
 
+function getRandomColor() {
+    const lightLetters = '89ABCDEF'; // Use lighter hexadecimal values
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += lightLetters[Math.floor(Math.random() * lightLetters.length)];
+    }
+    return color;
+}
+
+
+function createChart(canvasId, data) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  return new Chart(ctx, {
+      type: 'line', 
+      data: data,
+      options: {
+          responsive: false, // Adjust as needed
+          maintainAspectRatio: false,
+          
+          // Add more chart options here
+      },
+      elements: {
+            line: {
+                tension: 0.4,
+            },
+        },
+  });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    // Loop through the linechartData object
+    for (const chartId in linechartData) {
+        if (linechartData.hasOwnProperty(chartId)) {
+            createChart(chartId, linechartData[chartId]);
+        }
+    }
+
+    // Rendering bar charts
+for (const chartId in barChartData) {
+    if (barChartData.hasOwnProperty(chartId)) {
+        createBarChart(chartId, barChartData[chartId].labels, barChartData[chartId].datasets);
+    }
+}
+
+// Rendering pie charts
+for (const chartId in pieChartData) {
+    if (pieChartData.hasOwnProperty(chartId)) {
+        createPieChart(chartId, pieChartData[chartId].labels, pieChartData[chartId].data);
+    }
+}
+
+
+});
+
+
+
+        </script>
 
 <hr class="divider" style="margin-top: 150px;">
 
@@ -443,175 +473,639 @@
 </footer>
 
 
+         
+        
+    </div>
 
-       
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+function shortenURL(url, maxLength) {
+            if (url.length > maxLength) {
+                return url.substring(0, maxLength - 3) + "...";
+            }
+            return url;
+        }
+
+        const dynamicChartContainer = document.getElementById('dynamicChartContainer');
+
         
 
-     
 
-     
-      
-          
-
-      
-
-      
-
-
-   
-
-       
-          
-          
-          
-
-        
-
-        
+        const charts = [
+    /*general*/
+    {
+title: 'Population Growth In The Most Populated Countries',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'worldPop',
+src: 'https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population',
+lu : 'December 2023'
+},
 
 
+{
+title: 'Social Media Trends Last Month',
+cat: 'Internet',
+type: 'Line Chart',
+id: 'smlastmonth',
+src:'https://trends.google.com/trends/explore?date=today%201-m&q=Instagram,TikTok,Facebook,Twitter&hl=en',
+lu : 'December 2023'
+},
+{
+title: 'Global Population Growth Over the Decades',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'popGrowthChart',
+src:'https://ourworldindata.org/population-growth-over-time',
+lu : 'December 2023'
+},
+{
+title: 'GDP Growth Of Top 10 Countries By GDP',
+cat: 'Economy',
+type: 'Line Chart',
+id: 'worldGDPChart',
+src:'https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)',
+lu : 'December 2023'
+},
+{
+title: 'Population Trends in Top Indian States',
+cat: 'Demographics',
+type: 'Line Chart',
+id: 'indStatePopChart',
+src:'https://en.wikipedia.org/wiki/List_of_states_in_India_by_past_population',
+lu : 'December 2023'
+},
+{
+title: 'Literacy Rate Across Indian States',
+cat: 'Demographics',
+type: 'Bar Chart',
+id: 'literacyratesInd',
+src:'https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_literacy_rate',
+lu : 'December 2023'
+},
+{
+title: 'Religion Distribution In India',
+cat: 'Demographics',
+type: 'Pie Chart',
+id: 'religionIndiaChart',
+src:'https://en.wikipedia.org/wiki/Religion_in_India',
+lu : 'December 2023'
+},
 
 
-        
+{
+    title: 'Top 10 Population Density In Indian States',
+    cat: 'Demographics',
+    type: 'Bar Chart',
+    id: 'populationDensity',
+    src:'https://testbook.com/static-gk/most-populated-state-in-india#:~:text=The%20state%20with%20the%20highest,lowest%20population%20density%20is%20Sikkim.',
+lu : 'December 2023'
+},
+{
+    title: 'Top 10 Indian States By GDP',
+    cat: 'Economy',
+    type: 'Bar Chart',
+    id: 'indstateGDP',
+src:'https://www.forbesindia.com/article/explainers/gdp-of-indian-states-union-territories/88157/1',
+lu : 'December 2023'
+},
+{
+    title: 'Monthly Inflation Rate Of India 2022 ',
+    cat: 'Economy',
+    type: 'Bar Chart',
+    id: 'indInf2022',
+src:'https://www.forbes.com/advisor/in/personal-finance/inflation-rate-in-india/',
+lu : 'December 2023'
+},
+{
+    title: 'Unemployment Rate in India Year Wise',
+    cat: 'Economy',
+    type: 'Line Chart',
+    id: 'indUnemploymentYear',
+src:'https://www.adda247.com/school/unemployment-rate-in-india-2023/',
+lu : 'December 2023'
+},
+{
+    title: 'Unemployment Rates in Indian States',
+    cat: 'Economy',
+    type: 'Bar Chart',
+    id: 'indStateUnemployment',
+src:'https://www.adda247.com/school/unemployment-rate-in-india-2023/',
+lu : 'December 2023'
+},
+{
+    title: 'Top 10 Global External Debts',
+    cat: 'Economy',
+    type: 'Bar Chart',
+    id: 'worldDebts',
+src:'https://en.wikipedia.org/wiki/List_of_countries_by_external_debt',
+lu : 'December 2023'
+},
+{
+    title: 'Global GDP Shares By Continent',
+    cat: 'Economy',
+    type: 'Pie Chart',
+    id: 'continentGDP',
+src:'https://en.wikipedia.org/wiki/List_of_continents_by_GDP',
+lu : 'December 2023'
+},
+{
+    title: 'GDP Growth Of India Yearly',
+    cat: 'Economy',
+    type: 'Line Chart',
+    id: 'indGDPYearly',
+src:'https://www.forbesindia.com/article/explainers/gdp-india/85337/1',
+lu : 'December 2023'
+},
+{
+    title: 'India Foreign Trade Figures Yearly',
+    cat: 'Economy',
+    type: 'Line Chart',
+    id: 'indFTYearly',
+src:'https://en.wikipedia.org/wiki/Foreign_trade_of_India',
+lu : 'December 2023'
+},
 
-          
-            
-        
+{
+    title: 'Most Polluted Countries Globally',
+    cat: 'Environment',
+    type: 'Bar Chart',
+    id: 'polglobal',
+src:'https://en.wikipedia.org/wiki/List_of_countries_by_air_pollution',
+lu : 'December 2023'
+},
 
-        
+{
+    title: 'Most Polluted Cities In India',
+    cat: 'Environment',
+    type: 'Bar Chart',
+    id: 'polindcity',
+src:'https://www.jagranjosh.com/general-knowledge/most-polluted-cities-in-india-1699446504-1',
+lu : 'December 2023'
+},
+
+{
+    title: 'CO2 Emissions By Continent',
+    cat: 'Environment',
+    type: 'Pie Chart',
+    id: 'C02Continent',
+src:'https://www.visualcapitalist.com/carbon-emissions-by-country-2022/',
+lu : 'December 2023'
+},
+
+{
+    title: 'Global Greenhouse Gas Emissions By Sector ',
+    cat: 'Environment',
+    type: 'Pie Chart',
+    id: 'sectorpolglobal',
+src:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fourworldindata.org%2Femissions-by-sector&psig=AOvVaw0uUltm9MSVCLZFAnCHXHl0&ust=1702969172352000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqFwoTCNC349a0mIMDFQAAAAAdAAAAABAR',
+lu : 'December 2023'
+},
+
+{
+    title: 'Top 10 Companies By Market Cap',
+    cat: 'Business',
+    type: 'Bar Chart',
+    id: 'T10CompaniesMarketCap',
+src:'https://www.forbesindia.com/article/explainers/top-10-largest-companies-world-market-cap/86341/1',
+lu : 'December 2023'
+},
+
+{
+    title: 'Top 10 Richest People Globally',
+    cat: 'Business',
+    type: 'Bar Chart',
+    id: 'richestPplGlobal',
+src:'https://www.forbesindia.com/article/explainers/top-10-richest-people-world/85541/1',
+lu : 'December 2023'
+},
+
+{
+    title: 'Elon Musk Net Worth Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'muskNetWorth',
+src:'https://www.forbes.com/profile/elon-musk/?list=rtb/&sh=6668472f7999',
+lu : 'December 2023'
+},
+
+{
+    title: 'Mukesh Ambani Net Worth Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'ambaniNetWorth',
+src:'https://www.forbes.com/profile/mukesh-ambani/?list=rtb/&sh=7fb93df0214c',
+lu : 'December 2023'
+},
+
+{
+    title: 'Market Caps Of Elon Musk Companies',
+    cat: 'Business',
+    type: 'Pie Chart',
+    id: 'muskCompanies',
+src:'https://www.madisontrust.com/information-center/visualizations/everything-elon-musk-owns/',
+lu : 'December 2023'
+},
+
+{
+    title: 'Apple Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'appleValueGrowth',
+src:'https://companiesmarketcap.com/apple/marketcap/',
+lu : 'December 2023'
+},
+
+{
+    title: 'Google Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'googleValueGrowth',
+src:'https://companiesmarketcap.com/alphabet-google/marketcap/',
+lu : 'December 2023'
+},
+
+{
+    title: 'Facebook Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'fbValueGrowth',
+src: 'https://companiesmarketcap.com/facebook/marketcap/',
+lu : 'December 2023'
+},
+
+{
+    title: 'Microsoft Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'microsoftValueGrowth',
+src: 'https://companiesmarketcap.com/microsoft/marketcap/',
+lu : 'December 2023'
+},
+
+
+{
+    title: 'Revenue Growth Of Apple Last 10 Years',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'appleRevGrowth',
+src: 'https://companiesmarketcap.com/apple/revenue/',
+lu : 'December 2023'
+},
 
 
 
-        
-
-        
-
-        
-        
-
-
-        <script>
 
 
 
-            const roles = ['data','graphs', 'statistics', 'analyses']; // Define the roles
+];
 
-let index = 0;
-let letterIndex = 0;
-let direction = 'forward';
-let interval;
+function shuffleCharts(array) {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
 
-function updateRole() {
-  const roleSpan = document.getElementById('role');
-  const currentRole = roles[index];
-  
-  if (direction === 'forward') {
-    roleSpan.textContent = currentRole.substring(0, letterIndex);
-    letterIndex++;
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
 
-    if (letterIndex > currentRole.length) {
-      direction = 'backward';
-      setTimeout(() => {
-        clearInterval(interval);
-        interval = setInterval(updateRole, 100); // Change text every 1 second
-      }, 2000); // Wait for 2 seconds before starting the backward animation
+        // Swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
-  } else {
-    roleSpan.textContent = currentRole.substring(0, letterIndex);
-    letterIndex--;
 
-    if (letterIndex === 0) {
-      direction = 'forward';
-      index = (index + 1) % roles.length; // Move to the next role
-    }
-  }
+    return array;
 }
 
-interval = setInterval(updateRole, 100); // Typing speed
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Before shuffling:', charts); // Log the initial order before shuffling
+    shuffleCharts(charts);
+    console.log('After shuffling:', charts); // Log the shuffled order
+
+    // Use the shuffled charts array in your code
+});
 
 
-           
+ 
+charts.forEach(chart => {
+            const chartContainer = document.createElement('div');
+            chartContainer.className = 'achart';
+
+            const titleElement = document.createElement('h1');
+            titleElement.textContent = chart.title;
+
+            const catElement = document.createElement('p');
+            catElement.textContent = chart.cat;
+
+            const srcElement = document.createElement('p');
+            const shortenedSrc = shortenURL(chart.src, 30); 
+            srcElement.textContent = shortenedSrc;
+            srcElement.style.cursor = 'pointer'; 
+
+            const luElement = document.createElement('p');
+            luElement.textContent = chart.lu;
+
+            const canvasElement = document.createElement('canvas');
+            canvasElement.id = chart.id;
+            canvasElement.width = 400;
+            canvasElement.height = 400;
+
+            chartContainer.appendChild(titleElement);
+            chartContainer.appendChild(catElement);
+            chartContainer.appendChild(srcElement);
+            chartContainer.appendChild(luElement);
+            chartContainer.appendChild(canvasElement);
+
+            srcElement.addEventListener('click', function() {
+                window.open(chart.src, '_blank'); // Open link in a new tab
+            });
+
+         
+
+// Create a download icon element
+const downloadIcon = document.createElement('i');
+downloadIcon.className = 'fas fa-download';
+downloadIcon.style.color = '#f4f4d5'; // Change color or add styles as needed
+downloadIcon.style.marginBottom = '10px'; // Adjust margin from bottom
+downloadIcon.style.marginLeft = '20px'; // Adjust spacing or add styles as needed
 
 
+        // Append the icons to the chart container
+
+        chartContainer.appendChild(downloadIcon);
+
+        downloadIcon.addEventListener('click', function () {
+            // Get the canvas element of the specific chart
+            const canvas = document.getElementById(chart.id);
 
 
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png'); // Convert the canvas to PNG image data
+            downloadLink.download = `${chart.title}.png`; // Set the filename for the downloaded image
+            downloadLink.click(); // Simulate a click to trigger the download
+        });
 
-            // NAV BAR HIDE
-            let lastScrollTop = 0;
+        // Attach click event listeners for the icons
+      
+
+        downloadIcon.addEventListener('click', function() {
+            // Implement download functionality here
+            // Example: Trigger a download action for the chart
+            console.log('Downloading...');
+        });
         
-            document.addEventListener('scroll', handleNavbarScroll);
-        
-            function handleNavbarScroll() {
-                const navbar = document.getElementById('navbar');
-                const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-        
-                if (scrollPosition > lastScrollTop) {
-                    navbar.style.top = '-80px'; // Scroll down, hide the navbar
+    
+            dynamicChartContainer.appendChild(chartContainer);
+        });
+    
+        // Get all category elements
+        var categories = document.querySelectorAll('.category');
+    
+        categories.forEach(function(category) {
+            category.addEventListener('click', function() {
+                var selectedCategory = this.getAttribute('data-cat');
+    
+                // Remove bold style from all categories
+                categories.forEach(function(cat) {
+                    cat.style.fontWeight = 'normal';
+                });
+    
+                // Bold the selected category
+                this.style.fontWeight = '800';
+    
+                // Hide all charts
+                hideAllCharts();
+    
+                // Show charts for the selected category
+                if (selectedCategory === 'All') {
+                    showAllCharts();
                 } else {
-                    navbar.style.top = '60px'; // Scroll up, show the navbar
+                    showChartsByCategory(selectedCategory);
                 }
-        
-                lastScrollTop = scrollPosition;
-            }
+            });
+        });
+    
+        // Function to hide all charts
+        function hideAllCharts() {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                chart.style.display = 'none';
+            });
+        }
+    
+        // Function to show charts for a specific category
+        function showChartsByCategory(category) {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                const chartCat = chart.querySelector('p').textContent;
+                if (chartCat === category) {
+                    chart.style.display = 'block';
+                }
+            });
+        }
+    
+        // Function to show all charts
+        function showAllCharts() {
+            var charts = document.querySelectorAll('#dynamicChartContainer .achart');
+            charts.forEach(function(chart) {
+                chart.style.display = 'block';
+            });
+        }
+    </script>
+    
+    
+    
+
+
+
+
+
+
+    <script>
+        function createLineChart(labels, datasets) {
+            return {
+                labels: labels,
+                datasets: datasets.map(dataset => ({
+                    label: dataset.label,
+                    data: dataset.data,
+                    borderColor: getRandomColor(),
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4,
+                })),
+                elements: {
+                    line: {
+                        tension: 0.4,
+                    },
+                },
+            };
+        }
+    
+        function createBarChart(canvasId, labels, data) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const chartData = {
+        labels: labels,
+        datasets: data.map(dataset => ({
+            label: dataset.label,
+            data: dataset.data,
+            backgroundColor: getRandomColor(),
+            borderWidth: 1,
+            borderRadius: 60,
+            borderColor: '#111111',
+
+        })),
+    };
+    return new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            responsive: false, // Adjust as needed
+            maintainAspectRatio: false,
+            // Add more chart options here
+        },
+    });
+}
+
+function createPieChart(canvasId, labels, data) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const chartData = {
+        labels: labels,
+        datasets: [{
+            data: data,
+            backgroundColor: getRandomColors(data.length),
+            borderWidth: 1,
+            borderColor: '#111111',
+        }],
+    };
+    return new Chart(ctx, {
+        type: 'pie',
+        data: chartData,
+        options: {
+            responsive: false, // Adjust as needed
+            maintainAspectRatio: false,
+            // Add more chart options here
+        },
+    });
+}
+
+function getRandomColor() {
+    const minBrightness = 150; // Adjust as needed for lighter colors
+    const maxBrightness = 255; // Maximum brightness for lighter colors
+
+    const r = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+    const g = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+    const b = Math.floor(Math.random() * (maxBrightness - minBrightness)) + minBrightness;
+
+    return '#' + rgbToHex(r, g, b);
+}
+
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+
+    function getRandomColors(count) {
+        // Return an array of random colors in hexadecimal format
+        const colors = [];
+        for (let i = 0; i < count; i++) {
+            colors.push(getRandomColor());
+        }
+        return colors;
+    }
 
         </script>
 
-<script>
-                      
+        <script src="explore.js"></script>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
-    function showSection(section) {
-        document.getElementById(`${section}-section`).style.display = 'block';
-    }
-
-    function scrollToSection(section) {
-        const sectionElement = document.getElementById(`${section}-section`);
-        if (sectionElement) {
-            sectionElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-</script>
-
-<script>
-function toggleDescription(element) {
-element.classList.toggle("active");
-}
-
-function showSection(section) {
-document.getElementById(`${section}-section`).style.display = 'block';
-}
-
-function scrollToSection(section) {
-const sectionElement = document.getElementById(`${section}-section`);
-if (sectionElement) {
-sectionElement.scrollIntoView({ behavior: 'smooth' });
-}
-}
-</script>
-
-<div class="phone-message" id="phoneMessage">
-    <p>This site is better experienced on a laptop or desktop.</p>
-    <button id="proceedButton">Proceed</button>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Check if the site is viewed on a phone
-    if (window.innerWidth <= 768) {
-        // Display the phone message
-        document.getElementById('phoneMessage').style.display = 'block';
-    }
-
-    // Attach a click event to the "Proceed" button
-    document.getElementById('proceedButton').addEventListener('click', function () {
-        // You can customize this part to redirect to the main content or take other actions
-        document.getElementById('phoneMessage').style.display = 'none';
-    });
-});
-
-</script>
-
-
-
+</body>
+</html>
 
         
