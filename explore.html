@@ -120,7 +120,7 @@ function updateChartCount() {
                 <input type="text" id="chartSearchInput" class="dest-input" placeholder="&#x1F50D; SEARCH ANY CHART OF ANY TOPIC..."
                 
                     fdprocessedid="00wbidm" style="font-weight: 700;">
-                    <button class="button" style="width:30%; background-color: #f4f4d5; font-weight: 700;" id="compareButton">+ Create A Chart</button>
+                   
             </div>
 
             <script>
@@ -230,7 +230,6 @@ if (searchFilters) {
                     </div>
                     <div class="button-fullview" style="display: flex; gap: 10px;">
                         <button class="button"  id="downloadChart" style="width: 80%; font-size: 15px;">Download</button>
-                        <button class="button" id="changeThemeButton" style="width: 90%; font-size: 15px;">🖌️</button>
                     </div>
                     
                 </div>
@@ -453,6 +452,26 @@ for (const chartId in pieChartData) {
 
         </script>
 
+<hr class="divider" style="margin-top: 150px;">
+
+
+
+
+<footer>
+    <p>S T A T G R A M</p>
+    <h3>A Comprehensive Library Of Data</h3>
+    
+    <!-- Links -->
+    <h3><a href="https://forms.gle/FH5yvnj7N7XK5wJR7" style="color: #f4f4d5;">Contribute</a></h3>
+    <h3><a href="https://forms.gle/Gvijup1Z6T9d44oo7" style="color: #f4f4d5;">Newsletter</a></h3>
+    <h3><a href="" style="color: #f4f4d5;">Report Issue</a></h3>
+    <h3><a href="about.html" style="color: #f4f4d5;">About Us</a></h3>
+
+    <p>FOLLOW US</p>
+    <h3><a href="https://www.instagram.com/stat.gram/" style="color: #f4f4d5;">Instagram</a></h3>
+
+</footer>
+
 
          
         
@@ -647,6 +666,122 @@ src:'https://www.forbesindia.com/article/explainers/gdp-india/85337/1'
     id: 'indFTYearly',
 src:'https://en.wikipedia.org/wiki/Foreign_trade_of_India'
 },
+
+{
+    title: 'Most Polluted Countries Globally',
+    cat: 'Environment',
+    type: 'Bar Chart',
+    id: 'polglobal',
+src:'https://en.wikipedia.org/wiki/List_of_countries_by_air_pollution'
+},
+
+{
+    title: 'Most Polluted Cities In India',
+    cat: 'Environment',
+    type: 'Bar Chart',
+    id: 'polindcity',
+src:'https://www.jagranjosh.com/general-knowledge/most-polluted-cities-in-india-1699446504-1'
+},
+
+{
+    title: 'CO2 Emissions By Continent',
+    cat: 'Environment',
+    type: 'Pie Chart',
+    id: 'C02Continent',
+src:'https://www.visualcapitalist.com/carbon-emissions-by-country-2022/'
+},
+
+{
+    title: 'Global Greenhouse Gas Emissions By Sector ',
+    cat: 'Environment',
+    type: 'Pie Chart',
+    id: 'sectorpolglobal',
+src:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fourworldindata.org%2Femissions-by-sector&psig=AOvVaw0uUltm9MSVCLZFAnCHXHl0&ust=1702969172352000&source=images&cd=vfe&opi=89978449&ved=0CBEQjhxqFwoTCNC349a0mIMDFQAAAAAdAAAAABAR'
+},
+
+{
+    title: 'Top 10 Companies By Market Cap',
+    cat: 'Business',
+    type: 'Bar Chart',
+    id: 'T10CompaniesMarketCap',
+src:'https://www.forbesindia.com/article/explainers/top-10-largest-companies-world-market-cap/86341/1'
+},
+
+{
+    title: 'Top 10 Richest People Globally',
+    cat: 'Business',
+    type: 'Bar Chart',
+    id: 'richestPplGlobal',
+src:'https://www.forbesindia.com/article/explainers/top-10-richest-people-world/85541/1'
+},
+
+{
+    title: 'Elon Musk Net Worth Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'muskNetWorth',
+src:'https://www.forbes.com/profile/elon-musk/?list=rtb/&sh=6668472f7999'
+},
+
+{
+    title: 'Mukesh Ambani Net Worth Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'ambaniNetWorth',
+src:'https://www.forbes.com/profile/mukesh-ambani/?list=rtb/&sh=7fb93df0214c'
+},
+
+{
+    title: 'Market Caps Of Elon Musk Companies',
+    cat: 'Business',
+    type: 'Pie Chart',
+    id: 'muskCompanies',
+src:'https://www.madisontrust.com/information-center/visualizations/everything-elon-musk-owns/'
+},
+
+{
+    title: 'Apple Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'appleValueGrowth',
+src:'https://companiesmarketcap.com/apple/marketcap/'
+},
+
+{
+    title: 'Google Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'googleValueGrowth',
+src:'https://companiesmarketcap.com/alphabet-google/marketcap/'
+},
+
+{
+    title: 'Facebook Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'fbValueGrowth',
+src: 'https://companiesmarketcap.com/facebook/marketcap/'
+},
+
+{
+    title: 'Microsoft Market Valuation Growth',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'microsoftValueGrowth',
+src: 'https://companiesmarketcap.com/microsoft/marketcap/'
+},
+
+
+{
+    title: 'Revenue Growth Of Apple Last 10 Years',
+    cat: 'Business',
+    type: 'Line Chart',
+    id: 'appleRevGrowth',
+src: 'https://companiesmarketcap.com/apple/revenue/'
+},
+
+
+
 
 
 
@@ -863,7 +998,7 @@ function createPieChart(canvasId, labels, data) {
         datasets: [{
             data: data,
             backgroundColor: getRandomColors(data.length),
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: '#111111',
         }],
     };
@@ -911,6 +1046,8 @@ function rgbToHex(r, g, b) {
         </script>
 
         <script src="explore.js"></script>
+
+
         
 
 
