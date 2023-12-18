@@ -6,7 +6,7 @@ const linechartData = {
         ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
         [
             { label: 'India', data:  [1117415123, 1136264583, 1154638713, 1172373788, 1189691809, 1206734806, 1223640160, 1240613620, 1257621191, 1274487215, 1291132063, 1307246509, 1322866505, 1338636340, 1354195680, 1369003306, 1383112050, 1396387127, 1407563842, 1417173173, 1428627663] },
-            { label: 'China', data:  [1288873367, 1296816711, 1348887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1425893465, 1425887337, 1425671352] },
+            { label: 'China', data:  [1288873367, 1296816711, 1304887562, 1313086567, 1321513224, 1330167148, 1339125595, 1348191368, 1357195481, 1366560818, 1376100308, 1385189668, 1393715448, 1401889681, 1410275957, 1417069468, 1421864031, 1429929781, 1435893465, 1441887337, 1445671352] },
             { label: 'USA', data:  [291109820, 293947885, 296842670, 299753098, 302743399, 305694910, 308512035, 311182845, 313876608, 316651321, 319375166, 322033964, 324607776, 327210198, 329791231, 332140037, 334319671, 335942003, 336997624, 338289857, 339996563] },
             { label: 'Indonesia', data:  [223080121, 225938595, 228805144, 231797427, 234858289, 237936543, 240981299, 244016173, 247099697, 250222695, 253275918, 256229761, 259091970, 261850182, 264498852, 267066843, 269582878, 271857970, 273753191, 275501339, 277534122] }
         ]
@@ -108,7 +108,67 @@ indFTYearly: createLineChart(
         { label: 'Export', data: [36.3, 43.1, 42.5, 44.5, 48.3, 57.24, 69.18, 76.23, 112.0, 176.4, 168.2, 201.1, 299.4, 298.4, 313.2, 318.2, 310.3, 262.3, 275.8, 303.52, 330.07, 314.31, 420, 676.53, 770.18] },
         { label: 'Import', data: [50.2, 60.8, 54.5, 53.8, 61.6, 74.15, 89.33, 113.1, 100.9, 305.5, 274.3, 327.0, 461.4, 500.4, 467.5, 462.9, 447.9, 381, 384.3, 465.58, 514.07, 467.19, 612, 760.06, 892.18] }
     ]
-)
+),
+
+muskNetWorth: createLineChart(
+    ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    [
+        { label: 'Elon Musk', data: [8.4, 12.0, 10.7, 13.9, 19.9, 22.3, 24.6, 151.0, 219.0, 180.0] }
+    ]
+),
+
+ambaniNetWorth: createLineChart(
+    ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    [
+        { label: 'Mukesh Ambani', data: [18.6, 21, 19.3, 23.2, 40.1, 50, 36.8, 85, 91, 83] }
+    ]
+),
+
+appleValueGrowth: createLineChart(
+    ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    [
+        { label: 'Market Cap', data: [0.00771, 0.00516, 0.00788, 0.02605, 0.06079, 0.07298, 0.17403, 0.07599, 0.19098, 0.29709, 0.37751, 0.49969, 0.50074, 0.64312, 0.58361, 0.60896, 0.86088, 0.74607, 1.287, 2.255, 2.901, 2.066, 3.072] }
+    ]
+),
+
+googleValueGrowth:createLineChart(
+    ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    [
+        { label: 'Market Cap', data: [0.3595, 0.52816, 0.53906, 0.72945, 0.72355, 0.92113, 1.185, 1.917, 1.145, 1.666] }
+    ]
+),
+
+fbValueGrowth: createLineChart(
+    ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+    [
+        { label: 'Market Cap', data: [0.06314, 0.13919, 0.21673, 0.29660, 0.33159, 0.51275, 0.37413, 0.58537, 0.77803, 0.93564, 0.54544] }
+    ]
+),
+
+microsoftValueGrowth: createLineChart(
+    ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+    [
+        { label: 'Market Cap', data: [0.35805, 0.27663, 0.29529, 0.29071, 0.27154, 0.29194, 0.33211, 0.17292, 0.26855, 0.23452, 0.21838, 0.22366, 0.31050, 0.38172, 0.43967, 0.48316, 0.65990, 0.78036, 1.200, 1.681, 2.522, 1.787, 2.755] },
+        
+   
+    ]
+),
+
+appleRevGrowth: createLineChart(
+    [
+        '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'
+    ],
+    [
+        { label: 'Apple Revenue Figures', data: [5.73, 5.83, 6.74, 9.76, 16.19, 20.68, 26.49, 33.03, 42.05, 76.28, 127.84, 164.68, 173.99, 199.80, 234.98, 218.11, 239.17, 261.61, 267.68, 294.13, 378.32, 387.53, 383.28] }
+    ]
+),
+
+
+
+
+
+
+
 
 
 
@@ -182,7 +242,60 @@ worldDebts: {
     datasets: [
         { label: 'External Debt (in billions)', data: [32.9, 8.7, 4.34, 3.79, 3.28, 3.26, 3.1, 2.81, 2.65, 2.45, 2.3, 1.9, 1.82, 1.67, 1.49, 1.03, 0.88, 0.815, 0.738, 0.665] }
     ]
+},
+
+polglobal: {
+    labels: [
+        'Chad', 'Iraq', 'Pakistan', 'Bahrain', 'Bangladesh', 'Burkina Faso', 'Kuwait', 'India', 'Egypt', 'Tajikistan', 'United Arab Emirates', 'Sudan', 'Rwanda', 'Qatar', 'Saudi Arabia', 'Nepal', 'Uganda', 'Nigeria', 'Bosnia and Herzegovina', 'Uzbekistan'
+    ],
+    datasets: [
+        { label: 'µg/m³', data: [89.7, 80.1, 70.9, 66.6, 65.8, 63, 55.8, 53.3, 46.5, 46, 45.9, 44.6, 44, 42.5, 41.5, 40.1, 39.6, 36.9, 33.6, 33.5] }
+    ]
+},
+
+polindcity: {
+    labels: [
+        'Delhi', 'Faridabad', 'Begusarai', 'Bahadurgarh', 'Bhiwadi', 'Bikaner', 'Noida', 'Dholpur', 'Hanumangarh', 'Greater Noida'
+    ],
+    datasets: [
+        { label: 'Index Value', data: [398, 393, 389, 388, 366, 363, 358, 356, 353, 352] }
+    ]
+},
+
+T10CompaniesMarketCap: {
+    labels: ['Apple', 'Microsoft', 'Saudi Aramco', 'Alphabet (Google)', 'Amazon', 'Nvidia', 'Meta Platforms', 'Berkshire Hathaway', 'Tesla', 'Eli Lilly'],
+    datasets: [
+        { label: 'Market Cap', data: [2974000000000, 2783000000000, 2145000000000, 1658000000000, 1519000000000, 1156000000000, 834760000000, 777300000000, 759220000000, 554430000000] }
+    ]
+},
+
+richestPplGlobal: {
+    labels: [
+        'Elon Musk', 
+        'Bernard Arnault & family', 
+        'Jeff Bezos', 
+        'Larry Ellison', 
+        'Warren Buffett', 
+        'Bill Gates', 
+        'Mark Zuckerberg', 
+        'Larry Page', 
+        'Steve Ballmer', 
+        'Sergey Brin'
+    ],
+    datasets: [
+        {
+            label: 'Net Worth (in $ Billions)',
+            data: [245.1, 196.9, 168.2, 145.3, 119.5, 117.2, 115.3, 112.3, 111.0, 107.8],
+        }
+    ]
 }
+
+
+
+
+
+
+
 
 
 
@@ -198,15 +311,34 @@ worldDebts: {
             data: [79.8, 14.2, 2.3, 1.7, 2]
         },
 
-        sampleIndiaChart: {
-            labels: ['Hinduism', 'Islam', 'Christian', 'Sikh', 'Others'],
-            data: [79.8, 14.2, 2.3, 1.7, 2]
-        },
 
         continentGDP: {
             labels: ['Asia', 'North America', 'Europe', 'South America', 'Africa', 'Oceania'],
             data: [38435, 31603, 25440, 4100, 2858, 1979]
+        },
+
+        C02Continent:{
+            labels: ['Asia', 'North America', 'Europe', 'South America', 'Africa', 'Oceania', 'Other'],
+            data: [42.8, 15.7, 6.6, 1.3, 1.2, 1.1, 21.7]
+        },
+
+        sectorpolglobal: {
+            labels: ['Electricity and Heat Production', 'Industry', 'Agriculture, Forestry, and Other Land Use', 'Transportation', 'Buildings', 'Other Energy'],
+            data: [23, 24, 22, 15, 6, 10]
+        },
+
+        muskCompanies: {
+            labels: ['Tesla', 'SpaceX', 'X (formerly Twitter)', 'The Boring Company', 'Neuralink'],
+            data: [770.2, 150, 15, 5.7, 5]
         }
+        
+
+
+        
+
+        
+        
+
         
 
 
@@ -217,31 +349,30 @@ worldDebts: {
 
 
    
-   
+    function getChartIDs(data) {
+        return Object.keys(data);
+    }
+    
+
+    const chartIDs = {
+        linechart: getChartIDs(linechartData),
+        barchart: getChartIDs(barChartData),
+        piechart: getChartIDs(pieChartData)
+    };  
    
  
 
-const linechartIDs = ['worldPop', 'smlastmonth', 'indInf2022', 'indUnemploymentYear', 'indGDPYearly', 'indFTYearly'];
-linechartIDs.forEach(initialID => {
-  createLineChart(initialID, linechartData[initialID].labels, linechartData[initialID].datasets);
-});
 
+    chartIDs.linechart.forEach(initialID => {
+        createLineChart(initialID, linechartData[initialID].labels, linechartData[initialID].datasets);
+    });
     
-    
-    
-    
- 
-const barChartIDs = ['literacyratesInd', 'populationDensity', 'indstateGDP', 'indStateUnemployment', 'worldDebts'];
-barChartIDs.forEach(initialID => {
-  createBarChart(initialID, barChartData[initialID].labels, barChartData[initialID].datasets);
-});
 
-    /*createBarChart('worldDebts', barChartData.worldDebts.labels, barChartData.worldDebts.datasets);*/
-   
-  // Assuming pieChartData is an object with properties for each ID
-const pieChartIDs = ['religionIndiaChart', 'continentGDP'];
+    chartIDs.barchart.forEach(initialID => {
+        createBarChart(initialID, barChartData[initialID].labels, barChartData[initialID].datasets);
+    });
+    
 
-// Loop through each ID and create a pie chart
-pieChartIDs.forEach(initialID => {
-  createPieChart(initialID, pieChartData[initialID].labels, pieChartData[initialID].data);
-});
+    chartIDs.piechart.forEach(initialID => {
+        createPieChart(initialID, pieChartData[initialID].labels, pieChartData[initialID].data);
+    });
