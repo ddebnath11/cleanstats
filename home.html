@@ -37,7 +37,7 @@
                      
                     </div>
                 </li>
-                <li><a href="maps.html">MAPS</a></li>
+                <li><a href="maps.html">INFOGRAPHICS</a></li>
                 <li><a href="live.html">LIVE</a></li>
                 <li><a href="about.html">ABOUT</a></li>
             </ul>
@@ -308,55 +308,9 @@
         </div>
 
         <div class="featured-content"  id="maps-section" style="margin-top: 150px;">
-            <h2>Maps that <span>Tell Stories</span></h2>
-            <p>Dive into our world of color-coded maps, unraveling intricate global data at your fingertips. Explore an array of insights, trends, and statistics encapsulated in vivid cartography. Experience an immersive journey through our collection, decoding the world's complexities with ease.</p>
-            <h2 style="font-size: 80px;">G20 Members</h2>
-            <div id="regions_div" style="width: 1360; height: 900px;"></div>
-            <button onclick="window.location.href='maps.html'" style="background-color: #f5f5d3; color: #111111; width:auto; padding:16px 26px; margin-top: 20px;" >View more maps</button>
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-              google.charts.load('current', {
-                'packages':['geochart'],
-                // Note: you don't need to specify a callback to draw the chart as it will be drawn in the script
-              });
-          
-              google.charts.setOnLoadCallback(drawRegionsMap);
-          
-              function drawRegionsMap() {
-                var data = google.visualization.arrayToDataTable([
-                  ['Country', { role: 'style' }],
-                  ['Argentina', '#f4f4d5'],
-                  ['Australia', '#f4f4d5'],
-                  ['Brazil', '#f4f4d5'],
-                  ['Canada', '#f4f4d5'],
-                  ['China', '#f4f4d5'],
-                  ['France', '#f4f4d5'],
-                  ['Germany', '#f4f4d5'],
-                  ['India', '#f4f4d5'],
-                  ['Indonesia', '#f4f4d5'],
-                  ['Italy', '#f4f4d5'],
-                  ['Japan', '#f4f4d5'],
-                  ['Mexico', '#f4f4d5'],
-                  ['Russia', '#f4f4d5'],
-                  ['Saudi Arabia', '#f4f4d5'],
-                  ['South Africa', '#f4f4d5'],
-                  ['South Korea', '#f4f4d5'],
-                  ['Turkey', '#f4f4d5'],
-                  ['United Kingdom', '#f4f4d5'],
-                  ['United States', '#f4f4d5'],
-                ]);
-          
-                var options = {
-        backgroundColor: '#111111', 
-        colorAxis: { colors: ['#f4f4d5'] }, 
-        defaultColor: '#fafaa7',
-      };
-          
-                var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-          
-                chart.draw(data, options);
-              }
-            </script>
+            <h2>We <span>Tell Stories</span> Visually</h2>
+            <p>Most of us are visual learners. That's why we believe in the power of visual storytelling through captivating infographics. Distilling complex information into a seamless blend of images and concise text, we transform raw data into compelling narratives. Our infographics go beyond mere numbers, creating a visual language that resonates, enlightens, and sparks understanding. Whether unraveling economic trends, demystifying scientific discoveries, or shedding light on societal shifts, our visual stories aim to simplify complexity and provide you with a deeper, more intuitive insight into the world around us.</p>
+           
         </div>
 
 
@@ -371,7 +325,7 @@
             <h2 id="birthCounter" style="font-size: 150px;">0</h2>
         
             <script>
-                // Initial world population count
+
                 let worldPopulation = 8077972111;
                 let birthCounter = 0;
         
@@ -474,12 +428,20 @@
 
 
 <footer>
+    <p>S T A T G R A M</p>
+    <h3>A Comprehensive Library Of Data</h3>
+    
+    <!-- Links -->
+    <h3><a href="https://forms.gle/FH5yvnj7N7XK5wJR7" style="color: #f4f4d5;">Contribute</a></h3>
+    <h3><a href="https://forms.gle/Gvijup1Z6T9d44oo7" style="color: #f4f4d5;">Newsletter</a></h3>
+    <h3><a href="/report-issue" style="color: #f4f4d5;">Report Issue</a></h3>
+    <h3><a href="about.html" style="color: #f4f4d5;">About Us</a></h3>
 
-
-        <p>S T A T G R A M</p>
-        <h3>&copy; 2023 CleanStats. All rights reserved.</h3>
+    <p>FOLLOW US</p>
+    <h3><a href="https://www.instagram.com/stat.gram/" style="color: #f4f4d5;">Instagram</a></h3>
 
 </footer>
+
 
 
        
@@ -648,5 +610,8 @@ sectionElement.scrollIntoView({ behavior: 'smooth' });
 });
 
 </script>
+
+
+
 
         
