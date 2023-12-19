@@ -39,7 +39,6 @@
                         <!-- Add more chart types as needed -->
                     </div>
                 </li>
-                <li><a href="maps.html">MAPS</a></li>
                 <li><a href="live.html">LIVE</a></li>
                 <li><a href="about.html">ABOUT</a></li>
             </ul>
@@ -56,14 +55,11 @@
                     <span class="category" data-cat="Economy">Economy</span>
                     <span class="category" data-cat="Environment">Environment</span>
                     <span class="category" data-cat="Business">Business</span>
-                    <span class="category" data-cat="Technology">Technology</span>
-                    <span class="category" data-cat="Science">Science</span>
                     <span class="category" data-cat="Health">Health</span>
-                    <span class="category" data-cat="Education">Education</span>
                     <span class="category" data-cat="Social">Social</span>
-                    <span class="category" data-cat="Politics">Politics</span>
                     <span class="category" data-cat="Entertainment">Entertainment</span>
                     <span class="category" data-cat="Internet">Internet</span>
+                    <span class="category" data-cat="Sports">Sports</span>
                 </div>
 
 
@@ -77,10 +73,13 @@
     
                
                     <div class="search-filters">
-                        <span class="search-filter" >"Global"</span>
-                        <span class="search-filter" >"India"</span>
-                        <span class="search-filter" >"GDP"</span>
-                        <span class="search-filter" >"Top 10"</span>
+                        <span class="search-filter" >Global</span>
+                        <span class="search-filter" >Indian States</span>
+                        <span class="search-filter" >GDP</span>
+                        <span class="search-filter" >Top 10</span>
+                        <span class="search-filter" >Apple</span>
+                        <span class="search-filter" >Google</span>
+                        <span class="search-filter" >CWC</span>
                         
                     </div>
     
@@ -293,7 +292,10 @@ if (searchFilters) {
     });
 
     fullView.style.right = '0';
+
+    
 }
+
 
                         });
                     });
@@ -341,7 +343,7 @@ if (searchFilters) {
                                 options: {
                                     responsive: false,
                                     maintainAspectRatio: false,
-                                    backgroundColor: getRandomColors(5), // Adjust data.length as needed
+                                    backgroundColor: getRandomColors(data.length), // Adjust data.length as needed
                                     borderWidth: 2,
             borderColor: '#111111',
                                     // Add more chart options here
@@ -809,6 +811,225 @@ lu : 'December 2023'
 src: 'https://companiesmarketcap.com/apple/revenue/',
 lu : 'December 2023'
 },
+
+{
+    title: 'Peer Reviewed Studies On AI',
+    cat: 'Science',
+    type: 'Bar Chart',
+    id: 'AIStudies',
+src: 'https://www.jair.org/',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Global Innovation Index Ranks',
+    cat: 'Science',
+    type: 'Line Chart',
+    id: 'IndInnovationRank',
+src: 'https://www.wipo.int/edocs/pubdocs/en/wipo_pub_2000_2022/in.pdf',
+lu : 'December 2023'
+},
+
+{
+    title: 'All major areas of AI application seeing growth',
+    cat: 'Science',
+    type: 'Line Chart',
+    id: 'AIApplications',
+src: 'https://ideas.newsrx.com/blog/six-graphs-about-this-year-in-technology-research',
+lu : 'December 2023'
+},
+
+{
+    title: 'Top 10 Global COVID-19 Cases',
+    cat: 'Health',
+    type: 'Bar Chart',
+    id: 'GlobalCOVID19',
+src: 'https://covid19.who.int/table',
+lu : 'December 2023'
+},
+
+{
+    title: 'States In India By COVID-19 Cases',
+    cat: 'Health',
+    type: 'Bar Chart',
+    id: 'IndStateCOVID19',
+src: 'https://www.kaggle.com/code/imdevskp/covid-19-in-india',
+lu : 'December 2023'
+},
+
+{
+    title: 'CWC 2023 Best Win Percentages',
+    cat: 'Sports',
+    type: 'Bar Chart',
+    id: 'CWC23BestWinPercent',
+src: 'https://www.cricketworldcup.com/tournament-stats/teams/best-win-percentage',
+lu : 'December 2023'
+},
+
+{
+    title: 'Most Runs Scored In CWC 2023',
+    cat: 'Sports',
+    type: 'Bar Chart',
+    id: 'CWC23BestRuns',
+src: 'https://www.cricketworldcup.com/tournament-stats/players/most-runs',
+lu : 'December 2023'
+},
+
+{
+    title: 'Most Sixes Scored In CWC 2023',
+    cat: 'Sports',
+    type: 'Bar Chart',
+    id: 'CWC23MostSixes',
+src: 'https://www.cricketworldcup.com/tournament-stats/players/most-sixes',
+lu : 'December 2023'
+},
+
+{
+    title: 'Most Fours Scored In CWC 2023',
+    cat: 'Sports',
+    type: 'Bar Chart',
+    id: 'CWC23MostFours',
+src: 'https://www.cricketworldcup.com/tournament-stats/players/most-fours',
+lu : 'December 2023'
+},
+
+{
+    title: 'Global Life Expectancy Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'globalLifeExpectancy',
+src: 'https://www.macrotrends.net/countries/WLD/world/life-expectancy#:~:text=The%20current%20life%20expectancy%20for,a%200.24%25%20increase%20from%202021.',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Life Expectancy Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'IndLifeExpectancy',
+src: 'https://www.macrotrends.net/countries/WLD/world/life-expectancy#:~:text=The%20current%20life%20expectancy%20for,a%200.24%25%20increase%20from%202021.',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Birth Rates Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'IndBirthRates',
+src: 'https://www.macrotrends.net/countries/IND/india/birth-rate',
+lu : 'December 2023'
+},
+
+{
+    title: 'Global Birth Rates Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'globalBirthRates',
+src: 'https://www.macrotrends.net/countries/IND/india/birth-rate',
+lu : 'December 2023'
+},
+
+{
+    title: 'Global Death Rates Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'globalDeathRates',
+src: 'https://www.macrotrends.net/countries/WLD/world/death-rate',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Death Rates Over Time',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'IndDeathRates',
+src: 'https://www.macrotrends.net/countries/IND/india/death-rate',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Healthcare Spending Per Capita',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'IndHealthSpending',
+src: 'https://www.macrotrends.net/countries/IND/india/healthcare-spending',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Maternal Mortality Rate',
+    cat: 'Health',
+    type: 'Line Chart',
+    id: 'IndMMRate',
+src: 'https://www.macrotrends.net/countries/IND/india/healthcare-spending',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Poverty Rate Over Time',
+    cat: 'Social',
+    type: 'Line Chart',
+    id: 'IndPovertyRate',
+src: 'https://www.macrotrends.net/countries/IND/india/poverty-rate',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Hunger Statistics',
+    cat: 'Social',
+    type: 'Line Chart',
+    id: 'IndHungerRate',
+src: 'https://www.macrotrends.net/countries/IND/india/hunger-statistics',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Electricity Access',
+    cat: 'Social',
+    type: 'Line Chart',
+    id: 'IndElectricityAccess',
+src: 'https://www.macrotrends.net/countries/IND/india/electricity-access-statistics',
+lu : 'December 2023'
+},
+
+{
+    title: 'India Crime Rates',
+    cat: 'Social',
+    type: 'Line Chart',
+    id: 'IndCrimeRates',
+src: 'https://www.macrotrends.net/countries/IND/india/electricity-access-statistics',
+lu : 'December 2023'
+},
+
+{
+    title: 'Highest Grossing Movies Of All Time',
+    cat: 'Entertainment',
+    type: 'Bar Chart',
+    id: 'MovieGross',
+src: 'https://www.boxofficemojo.com/chart/top_lifetime_gross/?area=XWW',
+lu : 'December 2023'
+},
+
+{
+    title: 'Highest Grossing Directors Of All Time',
+    cat: 'Entertainment',
+    type: 'Bar Chart',
+    id: 'DirectorGross',
+src: 'https://en.wikipedia.org/wiki/List_of_highest-grossing_film_directors',
+lu : 'December 2023'
+},
+
+{
+    title: 'Highest Grossing Actors Of All Time',
+    cat: 'Entertainment',
+    type: 'Bar Chart',
+    id: 'ActorGross',
+src: 'https://en.wikipedia.org/wiki/List_of_highest-grossing_actors',
+lu : 'December 2023'
+},
+
+
+
 
 
 
