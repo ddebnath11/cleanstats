@@ -163,6 +163,168 @@ appleRevGrowth: createLineChart(
     ]
 ),
 
+IndInnovationRank: createLineChart(
+    [
+        '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'
+    ],
+    [
+        { label: 'GII Ranks (India)', data: [66,60,57,52,48,46,40,40] }
+    ]
+),
+
+AIApplications: createLineChart(
+    [
+        '2016', '2017', '2018', '2019', '2020'
+    ],
+    [
+        { label: 'HealthCare', data: [20,30,65,220,400] },
+        { label: 'Manufacturing', data: [25,35,45,175,280] },
+        { label: 'Law', data: [23,33,80,125,290] },
+        { label: 'Finance', data: [15,25,35,60,175] }
+    ]
+),
+   
+globalLifeExpectancy:createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Life Expectancy', data: [
+            45.51, 50.09, 56.49, 60.99, 65.91, 66.20, 69.31, 72.98, 73.16
+        ]}
+    ]
+),
+
+IndLifeExpectancy: createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Life Expectancy', data: [
+            35.21, 41.13, 47.41, 53.47, 57.66, 62.28, 66.43, 69.96, 70.42
+        ]}
+    ]
+),
+
+IndBirthRates:createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Birth Rate', data: [
+            44.175, 42.066, 39.231, 36.216, 31.817, 26.635, 21.508, 17.592, 16.949
+        ]}
+    ]
+),
+
+globalBirthRates: createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Birth Rate', data: [
+            37.844, 35.346, 32.995, 28.192, 21.733, 19.075, 18.682, 17.873, 17.464
+        ]}
+    ]
+),
+
+globalDeathRates: createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Death Rate', data: [
+            20.150, 18.076, 12.898, 10.469, 9.329, 8.647, 8.290, 7.612, 7.711
+        ]}
+    ]
+),
+
+IndDeathRates: createLineChart(
+    /* y axis */ [
+        "1950", "1960", "1970", "1980", "1990", "2000", "2010", "2020", "2023"
+    ],
+    /* x axis */ [
+        { label: 'Death Rate', data: [
+            28.161, 24.703, 17.454, 13.498, 11.007, 8.804, 8.375, 7.309, 7.416
+        ]}
+    ]
+),
+
+IndHealthSpending: createLineChart(
+    /* y axis */ [
+        "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
+        "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", 
+    ],
+    /* x axis */ [
+        { label: 'Per Capita (US $)', data: [
+            18, 20, 20, 22, 25, 27, 29, 36, 38, 38, 45, 48, 49, 56, 57, 60, 57, 58, 61, 57
+        ]},]
+),
+
+IndMMRate: createLineChart(
+    /* y axis */ [
+        "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
+        "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"
+    ],
+    /* x axis */ [
+        { label: 'Per 100K Live Births', data: [
+            384, 371, 329, 315, 301, 286, 248, 234, 221, 207, 179, 170, 162, 154, 135, 128, 121, 119, 116, 116, 103
+        ]}
+    ]
+),
+
+IndPovertyRate: createLineChart(
+    /*y axis*/ [
+        1977, 1983, 1987, 1993, 2004, 2009, 2011, 2015, 2016, 2017, 2018, 2019
+    ],
+    /*x axis*/ [
+        { label: '% Under US $5.50 Per Day', data: [97.70, 97.30, 96.60, 96.60, 94.40, 92.90, 89.90, 88.90, 88.70, 85.30, 82.60, 83.80] }
+    ]
+)
+,
+
+IndHungerRate:createLineChart(
+    /*y axis*/ [
+        2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020
+    ],
+    /*x axis*/ [
+        { label: '% of Population', data: [18.40, 20.10, 21.50, 22.10, 21.60, 22.10, 19.60, 17.50, 16.60, 16.30, 15.90, 15.40, 14.90, 14.80, 14.50, 13.90, 13.20, 13.30, 14.60, 16.30] }
+    ]
+),
+
+IndElectricityAccess: createLineChart(
+    /*y axis*/ [
+        1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021
+    ],
+    /*x axis*/ [
+        { label: '% of Population', data: [50.90, 49.81, 51.41, 53.00, 54.59, 56.18, 60.10, 60.29, 62.01, 62.30, 65.41, 64.40, 68.84, 67.90, 72.34, 74.12, 75.00, 76.30, 79.52, 79.90, 83.13, 85.13, 88.00, 89.59, 91.79, 95.70, 95.89, 96.50, 99.57] }
+    ]
+),
+
+IndCrimeRates:createLineChart(
+    /*x axis*/ [
+        1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021
+    ],
+    /*y axis*/ [
+        {
+            label: '% of Population',
+            data: [5.07, 5.46, 5.47, 5.18, 5.02, 4.81, 4.77, 4.73, 4.83, 4.59, 4.55, 4.30, 4.16, 3.97, 4.09, 3.91, 3.84, 3.81, 3.81, 3.74, 3.74, 3.79, 3.73, 3.55, 3.62, 3.35, 3.16, 3.03, 2.99, 2.93, 2.91, 2.94]
+        }
+    ]
+)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -288,7 +450,229 @@ richestPplGlobal: {
             data: [245.1, 196.9, 168.2, 145.3, 119.5, 117.2, 115.3, 112.3, 111.0, 107.8],
         }
     ]
-}
+},
+
+AIStudies: {
+    labels: [
+        '2016', 
+        '2017', 
+        '2018', 
+        '2019', 
+        '2020', 
+    ],
+    datasets: [
+        {
+            label: 'Peer Reviewed Researches on AI',
+            data: [1100,1500,1800,5000,8500],
+        }
+    ]
+},
+
+GlobalCOVID19: {
+    labels: [
+        'USA','China','India','France','Germany','Brazil', 'Korea', 'Japan','Italy','UK'
+    ],
+    datasets: [
+        {
+            label: 'COVID-19 Cases',
+            data: [103437000,99321000,45003000,38997500,38437760, 37519960, 34571800,33803500,26387000,24812580],
+        }
+    ]
+},
+
+CWC23BestWinPercent: {
+    labels: [
+        'India','Australia','South Africa','New Zealand','Pakistan','Afghanistan', 'England', 'Netherlands','Bangladesh','Sri Lanka'
+    ],
+    datasets: [
+        {
+            label: 'Win % in CWC 2023',
+            data: [90.909,81.818,70,50,44.444,44.444,33.333, 22.222,22.222,22.222],
+        }
+    ]
+},
+
+IndStateCOVID19: {
+    "labels": [
+        "Maharashtra", "Delhi", "Tamil Nadu", "Gujarat", "Uttar Pradesh", "Rajasthan", "West Bengal", "Madhya Pradesh", "Haryana", "Karnataka", "Andhra Pradesh", "Telangana", "Bihar", "Jammu and Kashmir", "Assam", "Odisha", "Punjab", "Kerala", "Uttarakhand", "Chhattisgarh", "Jharkhand", "Tripura", "Manipur", "Ladakh", "Goa", "Himachal Pradesh", "Chandigarh", "Puducherry", "Nagaland", "Mizoram", "Arunachal Pradesh", "Dadra", "Sikkim", "Andaman Islands", "Meghalaya", "Lakshadweep"
+    ],
+    "datasets": [
+        {
+            "label": "Confirmed Cases",
+            "data": [132075, 59746, 59377, 27317, 17731, 14930, 13945, 11903, 10635, 9150, 8929, 7802, 7665, 5956, 5586, 5160, 4074, 3173, 2344, 2255, 2089, 1224, 841, 837, 818, 673, 406, 366, 280, 142, 139, 98, 78, 48, 43, 0]
+        }
+    ]
+},
+
+CWC23BestRuns: {
+    labels: [
+        'VIRAT KOHLI', 'Rohit Sharma', 'Quinton de Kock', 'Rachin Ravindra', 'Daryl Mitchell', 'David Warner',
+        'Shreyas Iyer', 'KL Rahul', 'Rassie van der Dussen', 'Mitch Marsh', 'Aiden Markram', 'Dawid Malan',
+        'Glenn Maxwell', 'Mohammad Rizwan', 'Ibrahim Zadran', 'Heinrich Klaasen', 'Sadeera Samarawickrama',
+        'Devon Conway', 'Marnus Labuschagne', 'David Miller', 'Azmat Omarzai', 'Shubman Gill', 'Abdullah Shafique',
+        'Pathum Nissanka', 'Travis Head'
+    ],
+    datasets: [
+        {
+            label: 'Runs Scored',
+            data: [765, 597, 594, 578, 552, 535, 530, 452, 448, 441, 406, 404, 400, 395, 376, 373, 373, 372, 362, 356, 353, 350, 336, 332, 329],
+        }
+    ]
+},
+
+CWC23MostSixes: {
+    labels: [
+        'ROHIT SHARMA', 'Shreyas Iyer', 'David Warner', 'Glenn Maxwell', 'Daryl Mitchell', 'Quinton de Kock',
+        'Mitch Marsh', 'David Miller', 'Heinrich Klaasen', 'Fakhar Zaman', 'Rachin Ravindra', 'Kusal Mendis',
+        'Glenn Phillips', 'Mahmudullah Riyad', 'Travis Head', 'Azmat Omarzai', 'Shubman Gill', 'Ben Stokes',
+        'Charith Asalanka', 'Teja Nidamanuru', 'Virat Kohli', 'KL Rahul', 'Abdullah Shafique', 'Dawid Malan',
+        'Rahmanullah Gurbaz'
+    ],
+    datasets: [
+        {
+            label: 'Number of Sixes',
+            data: [31, 24, 24, 22, 22, 21, 21, 20, 19, 18, 17, 15, 14, 14, 13, 13, 12, 11, 11, 10, 9, 9, 9, 9, 9, 9],
+        }
+    ]
+},
+
+CWC23MostFours: {
+    labels: [
+      'VIRAT KOHLI', 'Rohit Sharma', 'Quinton de Kock', 'Rachin Ravindra', 'Devon Conway',
+      'Dawid Malan', 'David Warner', 'Daryl Mitchell', 'Aiden Markram', 'Pathum Nissanka',
+      'Mitch Marsh', 'Glenn Maxwell', 'Shubman Gill', 'Ibrahim Zadran', 'Rassie van der Dussen',
+      'KL Rahul', 'Mohammad Rizwan', 'Shreyas Iyer', 'Travis Head', 'Abdullah Shafique',
+      'Sadeera Samarawickrama', 'Babar Azam', 'Litton Das', 'Marnus Labuschagne', 'Rahmanullah Gurbaz'
+    ],
+    datasets: [
+      {
+        label: 'Number of Fours',
+        data: [68, 66, 57, 55, 54, 50, 50, 48, 44, 44, 43, 40, 40, 39, 39, 38, 38, 37, 37, 36, 36, 32, 32, 31, 31, 31],
+      },
+    ],
+  },
+
+  MovieGross: {
+    labels: [
+      "Avatar",
+      "Avengers: Endgame",
+      "Avatar: The Way of Water",
+      "Titanic",
+      "Star Wars: Episode VII - The Force Awakens",
+      "Avengers: Infinity War",
+      "Spider-Man: No Way Home",
+      "Jurassic World",
+      "The Lion King",
+      "The Avengers",
+      "Furious 7",
+      "Top Gun: Maverick",
+      "Frozen II",
+      "Barbie",
+      "Avengers: Age of Ultron",
+      "Frozen",
+      "The Super Mario Bros. Movie",
+      "Harry Potter and the Deathly Hallows: Part 2",
+      "Black Panther",
+      "Star Wars: Episode VIII - The Last Jedi"
+    ],
+    "datasets": [
+      {
+        label: "Lifetime Gross",
+        data: [
+            2923706026,
+            2799439100,
+            2320250281,
+            2264743305,
+            2071310218,
+            2052415039,
+            1921847111,
+            1671537444,
+            1663075401,
+            1520538536,
+            1515341399,
+            1495696292,
+            1453683476,
+            1441816150,
+            1405018048,
+            1397042530,
+            1361427971,
+            1356841356,
+            1349926083,
+            1334407706
+        ]
+      }
+    ]
+  },
+
+  DirectorGross:{
+    labels: [
+      "Steven Spielberg",
+      "James Cameron",
+      "Russo brothers",
+      "Peter Jackson",
+      "Michael Bay",
+      "David Yates",
+      "Christopher Nolan",
+      "J. J. Abrams",
+      "Ridley Scott",
+      "Tim Burton"
+    ],
+    datasets: [
+      {
+        label: "Worldwide Box Office",
+        data: [
+          10695971957,
+          8704007200,
+          6834426702,
+          6537860134,
+          6495846196,
+          6346200051,
+          5994588871,
+          4648965502,
+          4498966499,
+          4420589767
+        ]
+      }
+    ]
+  },
+
+  ActorGross: {
+    labels: [
+      "Scarlett Johansson",
+      "Robert Downey Jr.",
+      "Samuel L. Jackson",
+      "Zoe Saldaña",
+      "Chris Pratt",
+      "Vin Diesel",
+      "Chris Hemsworth",
+      "Tom Cruise",
+      "Chris Evans",
+      "Bradley Cooper"
+    ],
+    datasets: [
+      {
+        label: "Worldwide Total",
+        data: [
+          14973199748,
+          14863065910,
+          14376505937,
+          14240098353,
+          13930412487,
+          12094641073,
+          11959862470,
+          11777319499,
+          11277890989,
+          11275037103
+        ]
+      }
+    ]
+  }
+  
+  
+  
+
+
+
 
 
 
