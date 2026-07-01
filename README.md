@@ -1,4 +1,4 @@
-# StatGram 📊 (also known as CleanStats) v1 is no longer maintained
+# 📊 StatGram (also known as CleanStats) v1 is no longer maintained
 
 ## What is StatGram?
 I made this website for a high school exhibition. The site allows users to view data through charts of all types. It also allows them to make their own data visualizations. 
